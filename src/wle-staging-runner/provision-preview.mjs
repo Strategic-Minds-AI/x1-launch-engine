@@ -7,6 +7,7 @@ export const SCOPE = Object.freeze({
   projectName: 'website-launch-engine',
   teamId: 'team_aFdds8lsbHMwe2ip4aQdbQ3d',
   sourceMarker: 'PREMIUM WEBSITE DESIGN DEMO · FICTIONAL SAMPLE BRAND',
+  studioDemoUrl: 'https://website-launch-engine.vercel.app/studio.html',
   syntheticMarker: 'NOT A REAL CONTRACTOR',
 });
 
@@ -30,7 +31,10 @@ export function buildSyntheticPreview(donor, missionId) {
   const html = donor.replace(SCOPE.sourceMarker,
     'X1 FRESH PREVIEW · FICTIONAL SAMPLE BRAND · NOT A CUSTOMER SITE')
     .replace('</body></html>', '<!-- ' + missionId +
-      '; synthetic; noindex; no customer data --></body></html>');
+      '; synthetic; noindex; no customer data --></body></html>')
+    // Standalone preview contains no /studio.html route: link to the existing
+    // explicitly demo-only Studio, rather than shipping dead portal buttons.
+    .replaceAll('href="/studio.html', 'href="' + SCOPE.studioDemoUrl);
   insist(html.includes(missionId) && html.includes('noindex,nofollow'), 'PREVIEW_POLICY_FAILED');
   insist(Buffer.byteLength(html, 'utf8') <= MAX_HTML_BYTES, 'PREVIEW_TOO_LARGE');
   return Object.freeze({
