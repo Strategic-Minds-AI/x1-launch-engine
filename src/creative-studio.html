@@ -167,7 +167,7 @@ form,.fields{display:grid;gap:13px}
   <div class="field"><label for="industry">Industry</label><select id="industry"><option>Professional Services</option><option>Home Services</option><option>Construction</option><option>Epoxy Flooring</option><option>Real Estate</option><option>Roofing</option><option>Medical & Wellness</option><option>Consulting</option><option>Retail</option><option>Other</option></select></div>
   <div class="field"><label for="phone">Business phone</label><input id="phone" inputmode="tel" maxlength="45" placeholder="(772) 209-0266"></div>
   <div class="field"><label for="email">Business email</label><input id="email" type="email" maxlength="100" placeholder="hello@company.com"></div>
-  <div class="field"><label for="website">Website</label><input id="website" type="url" maxlength="190" placeholder="https://company.com"></div>
+  <div class="field"><label for="website">Website</label><input id="website" type="url" inputmode="url" maxlength="190" placeholder="https://company.com" autocomplete="url"></div>
   <div class="field"><label for="location">Service area / address</label><input id="location" maxlength="140" placeholder="City, State"></div>
  </div>
  <div class="fields" style="margin-top:13px"><div class="field"><label for="tagline">Tagline / promise</label><input id="tagline" maxlength="115" placeholder="Describe the real value you provide"></div><div class="field"><label for="about">About your business</label><textarea id="about" maxlength="1300" placeholder="What does your company do? Only verified facts will be reused."></textarea></div><div class="field"><label for="services">Services (separate with commas or new lines)</label><textarea id="services" maxlength="900" placeholder="Design consultation, Installation, Project support"></textarea></div></div>
@@ -194,15 +194,15 @@ form,.fields{display:grid;gap:13px}
  </div>
  <div id="pane-card" class="tab-pane active" role="tabpanel" aria-labelledby="tab-card">
   <div class="section-id">03 / Digital business card</div><h2>Make a lasting introduction.</h2><p>Generate a scannable QR that stays on-device, download your digital card graphic, save a contact file, or open an email or text draft.</p>
-  <div class="field"><label for="qr-mode">QR code contents</label><select id="qr-mode"><option value="website">Business website (when supplied)</option><option value="vcard">Contact card (vCard 3.0)</option></select></div>
-  <div class="notice">A QR containing personal contact details is readable by anyone who scans it. Choose the website option for public-facing cards when possible.</div>
+  <div class="field"><label for="qr-mode">QR code contents</label><select id="qr-mode"><option value="website">HTTPS website (enter it above)</option><option value="vcard">Contact card (vCard 3.0)</option></select></div>
+  <div class="notice"><strong>Privacy choice:</strong> Website QR shares only the HTTPS link you enter. Contact QR includes the personal details on this card, only when you explicitly select that option.</div><p class="hint" id="qr-status" role="status" aria-live="polite">Enter an HTTPS website to generate a public QR.</p>
   <div class="actions">
     <button type="button" class="btn" id="share-email">✉ Email card</button>
     <button type="button" class="btn secondary" id="share-sms">▣ Text card</button>
     <button type="button" class="btn secondary" id="share-copy">Copy details</button>
     <button type="button" class="btn ghost" id="save-vcard">↓ Contact .vcf</button>
     <button type="button" class="btn ghost" id="save-card">↓ Card SVG</button>
-    <button type="button" class="btn ghost" id="save-qr">↓ QR SVG</button>
+    <button type="button" class="btn ghost" id="save-qr" disabled>↓ QR SVG</button>
   </div>
   <p class="hint">Email and SMS open your own composer. No message is sent automatically and this preview does not pretend to host a public card URL.</p>
  </div>
@@ -249,7 +249,7 @@ form,.fields{display:grid;gap:13px}
 </div>
 <div class="workspace-preview">
 <section class="panel">
- <div class="panel-inner preview-label"><div class="section-title"><h2>Live card preview</h2><span class="eyechip">INSTANT RENDER</span></div><p class="help">Your card changes as you edit, without uploading your personal details.</p></div>
+ <div class="panel-inner preview-label"><div class="section-title"><h2>Live card preview</h2><span class="eyechip">INSTANT RENDER</span></div><p class="help">Your card updates instantly in this browser. Nothing is sent to a server.</p></div>
  <div class="artboard">
   <div class="card-stage"><div id="card-preview" class="digital-card">
     <div class="card-top"><div><div id="card-business" class="card-company">YOUR PREMIUM BUSINESS</div><span id="card-tagline" style="color:#c7e6f5;font-size:11px">Your story. Your next opportunity.</span></div><div style="display:flex;align-items:center;gap:8px"><img id="card-portrait" class="card-logo" alt="Selected personal portrait" src="" style="display:none;border-radius:50%;object-fit:cover;border:2px solid #ffffff55"><img id="card-logo" class="card-logo" alt="Logo graphic" src="" style="display:none"></div></div>
