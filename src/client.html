@@ -35,6 +35,17 @@
  @media(max-width:1080px){.creative-entry{min-height:0}.creative-intro{padding:26px}.creative-steps{padding:25px}}
  @media(max-width:720px){.creative-entry{grid-template-columns:1fr;background:#fff}.creative-intro{padding:23px}.creative-steps{padding:22px}.creative-intro h1{font-size:35px}.top-actions{gap:8px}.help-button{font-size:11px;padding:9px 10px}.content.creative-active{padding:15px 12px}}
  @media(max-width:460px){.creative-intro{padding:21px}.creative-intro h1{font-size:clamp(28px,8vw,32px);overflow-wrap:break-word;line-height:1.08}.step-row strong{font-size:13px}.creative-steps{padding:19px}.creative-frame{min-height:1800px}}
+
+ @media(max-width:720px){
+  .nav-container{scrollbar-width:none;overscroll-behavior-inline:contain}
+  .nav-container::-webkit-scrollbar{display:none}
+  body.creative-selected .top{gap:10px;min-height:65px;padding:12px 15px;flex-wrap:nowrap}
+  body.creative-selected .top-left{font-size:17px;white-space:nowrap}
+  body.creative-selected .top-actions{gap:0;flex-wrap:nowrap}
+  body.creative-selected #openCreativeTop,
+  body.creative-selected .top-actions>a.help{display:none}
+  body.creative-selected .top-actions .pill{font-size:10px;padding:6px 9px;white-space:nowrap}
+ }
  </style></head><body><div class="frame"><aside class="aside"><a class="brand" href="/"><em>🚀</em><span>Website<br>Launch Engine<small>STRATEGIC MINDS AI</small></span></a><div class="rail-label">BUSINESS OWNER</div><div class="nav-container"><button type="button" class="side-nav active" data-view="Overview" aria-current="page"><span>▦</span>Overview</button><button type="button" class="side-nav" data-view="My Websites" aria-current="false"><span>◈</span>My Websites</button><button type="button" class="side-nav" data-view="Lead Inbox" aria-current="false"><span>✉</span>Lead Inbox</button><button type="button" class="side-nav" data-view="Onboarding" aria-current="false"><span>▣</span>Onboarding</button><button type="button" class="side-nav" data-view="Approvals" aria-current="false"><span>✓</span>Approvals</button><button type="button" class="side-nav" data-view="Support" aria-current="false"><span>☏</span>Support</button><button type="button" class="side-nav" data-view="Creative Studio" aria-current="false"><span>✦</span>Creative Studio</button></div><div class="aside-bottom">Florida Based · Nationwide Reach<a href="tel:+17722090266">☎ (772) 209-0266</a><a href="/">← Back to Website Launch Engine</a></div></aside><main class="main"><header class="top"><div class="top-left">Client Workspace</div><div class="top-actions"><button type="button" class="help help-button" id="openCreativeTop">Create a business card ✦</button><a href="/" class="help">View public site ↗</a><span class="pill">PREVIEW ONLY</span></div></header><div class="content">
 <section class="creative-workspace" id="creativeWorkspace" hidden aria-label="Business Creative Studio in customer dashboard">
  <div class="creative-entry">
@@ -78,6 +89,7 @@
  function render(view){
   const creative=view==="Creative Studio";
   portalRoot.classList.toggle("creative-active",creative);
+  document.body.classList.toggle("creative-selected",creative);
   creativeWorkspace.hidden=!creative;
   if(creative){
    highlightView(view);
