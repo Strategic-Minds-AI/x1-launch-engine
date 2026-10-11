@@ -31,3 +31,25 @@ test("staging endpoint hostname is pinned",async()=>{
   if(oldUrl)process.env.WLE_STAGING_SUPABASE_URL=oldUrl;else delete process.env.WLE_STAGING_SUPABASE_URL;
   if(oldKey)process.env.WLE_STAGING_SUPABASE_PUBLISHABLE_KEY=oldKey;else delete process.env.WLE_STAGING_SUPABASE_PUBLISHABLE_KEY;
 });
+
+test("production never exposes customer operations, even when configured",async()=>{
+  const env=process.env.VERCEL_ENV,oldUrl=process.env.WLE_PROD_SUPABASE_URL,oldKey=process.env.WLE_PROD_SUPABASE_PUBLISHABLE_KEY;
+  process.env.VERCEL_ENV="production";
+  process.env.WLE_PROD_SUPABASE_URL="https://vgsmyhqqtkkluhypxyua.supabase.co";
+  process.env.WLE_PROD_SUPABASE_PUBLISHABLE_KEY="test-publishable";
+  const previousFetch=globalThis.fetch;
+  globalThis.fetch=async()=>({ok:true});
+  try {
+    const {req,res}=request(); await handler(req,res);
+    assert.equal(res.body.mode,"production_read_only");
+    assert.equal(res.body.supabase,"CONNECTED_PRODUCTION_READ_ONLY");
+    assert.equal(res.body.customerAuth,"DISABLED");
+    assert.equal(res.body.missionSubmission,"DISABLED");
+    assert.equal(res.body.socialPublishing,"DISABLED");
+  } finally {
+    globalThis.fetch=previousFetch;
+    if(env===undefined)delete process.env.VERCEL_ENV;else process.env.VERCEL_ENV=env;
+    if(oldUrl===undefined)delete process.env.WLE_PROD_SUPABASE_URL;else process.env.WLE_PROD_SUPABASE_URL=oldUrl;
+    if(oldKey===undefined)delete process.env.WLE_PROD_SUPABASE_PUBLISHABLE_KEY;else process.env.WLE_PROD_SUPABASE_PUBLISHABLE_KEY=oldKey;
+  }
+});
