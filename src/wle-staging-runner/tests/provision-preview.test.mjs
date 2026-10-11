@@ -6,7 +6,7 @@ import {
 } from '../provision-preview.mjs';
 
 const mission = 'WLE-X1-FRESH-PREVIEW-20261011-002';
-const donor = '<!doctype html><html lang="en"><head><meta name="robots" content="noindex,nofollow"></head><body><p>PREMIUM WEBSITE DESIGN DEMO · FICTIONAL SAMPLE BRAND</p><p>NOT A REAL CONTRACTOR</p></body></html>';
+const donor = '<!doctype html><html lang="en"><head><meta name="robots" content="noindex,nofollow"></head><body><p>PREMIUM WEBSITE DESIGN DEMO · FICTIONAL SAMPLE BRAND</p><p>NOT A REAL CONTRACTOR</p><a href="/studio.html#websites">Demo studio</a></body></html>';
 const sourceBlobSha = 'a'.repeat(40);
 const artifact = buildSyntheticPreview(donor, mission);
 const previewHost = 'website-launch-engine-93x0z77dy-strategic-minds-advisory.vercel.app';
@@ -17,6 +17,8 @@ test('preview remains non-indexed, fictional and byte-hashed', () => {
   assert.match(artifact.html, /NOT A CUSTOMER SITE/);
   assert.match(artifact.html, new RegExp(mission));
   assert.match(artifact.sha256, /^[a-f0-9]{64}$/);
+  assert.match(artifact.html, /href="https:\/\/website-launch-engine\.vercel\.app\/studio\.html#websites"/);
+  assert.doesNotMatch(artifact.html, /href="\/studio\.html/);
 });
 
 for (const [label, html, id] of [
