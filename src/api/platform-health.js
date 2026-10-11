@@ -4,6 +4,7 @@
  * Does NOT confer Railway agent execution authority.
  */
 const stagingHost = "uvdkzsbjackpjvpoxtyk.supabase.co";
+const productionHost = "vgsmyhqqtkkluhypxyua.supabase.co";
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store, max-age=0");
   res.setHeader("X-Content-Type-Options", "nosniff");
@@ -11,9 +12,10 @@ export default async function handler(req, res) {
     res.setHeader("Allow", "GET");
     return res.status(405).json({ ok: false, error: "method_not_allowed" });
   }
+  const isProduction = process.env.VERCEL_ENV === "production";
   const response = {
     service: "website-launch-engine",
-    mode: "staging_read_only",
+    mode: isProduction ? "production_read_only" : "staging_read_only",
     supabase: "NOT_CONFIGURED",
     railway: "ONLINE_WORKERS_NOT_BOUND",
     customerAuth: "DISABLED",
@@ -23,12 +25,12 @@ export default async function handler(req, res) {
     mediaGeneration: "DISABLED",
     productionBackend: "DISABLED"
   };
-  const base = process.env.WLE_STAGING_SUPABASE_URL;
-  const key = process.env.WLE_STAGING_SUPABASE_PUBLISHABLE_KEY;
+  const base = isProduction ? process.env.WLE_PROD_SUPABASE_URL : process.env.WLE_STAGING_SUPABASE_URL;
+  const key = isProduction ? process.env.WLE_PROD_SUPABASE_PUBLISHABLE_KEY : process.env.WLE_STAGING_SUPABASE_PUBLISHABLE_KEY;
   if (!base || !key) return res.status(200).json(response);
   try {
     const url = new URL(base);
-    if (url.hostname !== stagingHost || url.protocol !== "https:" || url.pathname !== "/") {
+    if (url.hostname !== (isProduction ? productionHost : stagingHost) || url.protocol !== "https:" || url.pathname !== "/") {
       response.supabase = "CONFIGURATION_REJECTED";
       return res.status(200).json(response);
     }
@@ -38,7 +40,7 @@ export default async function handler(req, res) {
       redirect: "error",
       signal: AbortSignal.timeout(4000)
     });
-    response.supabase = upstream.ok ? "CONNECTED_STAGING" : "HEALTH_CHECK_FAILED";
+    response.supabase = upstream.ok ? (isProduction ? "CONNECTED_PRODUCTION_READ_ONLY" : "CONNECTED_STAGING") : "HEALTH_CHECK_FAILED";
     return res.status(200).json(response);
   } catch {
     response.supabase = "HEALTH_CHECK_FAILED";
