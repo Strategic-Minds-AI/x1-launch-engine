@@ -1,6 +1,6 @@
 import {test,after} from 'node:test';
 import assert from 'node:assert/strict';
-import {stageConfig,cleanProfile,canWrite,isUuid,checkOrigin} from '../src/api/_internal/wle-customer-session.js';
+import {stageConfig,cleanProfile,canWrite,isUuid,checkOrigin,supa} from '../src/api/_internal/wle-customer-session.js';
 import sessionHandler from '../src/api/client/session.js';
 import loginHandler from '../src/api/client/login.js';
 import draftHandler from '../src/api/client/drafts.js';
@@ -145,4 +145,22 @@ test('user-initiated signout clears cookies, queries provider local-scope revoke
  assert.equal(r.statusCode,200);assert.equal(r.body.remoteSessionRevoked,true);
  assert.equal(calls.filter(x=>x.path==='/auth/v1/logout').length,1);
  const reset=r.getHeader('Set-Cookie');assert.ok(reset.every(x=>x.includes('Max-Age=0')));
+});
+
+test('modern Supabase secret API key uses apikey, never Bearer',async()=>{
+ env(true);
+ process.env.WLE_STAGING_SUPABASE_SERVICE_ROLE_KEY='sb_secret_testing_only_0123456789';
+ let captured;
+ globalThis.fetch=async(_url,options)=>{captured=options.headers;return reply([])};
+ const result=await supa(stageConfig(),'/rest/v1/x1_tenant_memberships?select=tenant_id&limit=0',{privileged:true});
+ assert.equal(result.ok,true);
+ assert.equal(captured.apikey,'sb_secret_testing_only_0123456789');
+ assert.equal(Object.hasOwn(captured,'Authorization'),false);
+});
+test('legacy service_role JWT remains Bearer authenticated',async()=>{
+ env(true);
+ let captured;
+ globalThis.fetch=async(_url,options)=>{captured=options.headers;return reply([])};
+ await supa(stageConfig(),'/rest/v1/x1_tenant_memberships?select=tenant_id&limit=0',{privileged:true});
+ assert.equal(captured.Authorization,'Bearer test-secret-key-0123456789XYZ');
 });
