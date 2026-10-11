@@ -46,7 +46,38 @@
   body.creative-selected .top-actions>a.help{display:none}
   body.creative-selected .top-actions .pill{font-size:10px;padding:6px 9px;white-space:nowrap}
  }
- </style></head><body><div class="frame"><aside class="aside"><a class="brand" href="/"><em>🚀</em><span>Website<br>Launch Engine<small>STRATEGIC MINDS AI</small></span></a><div class="rail-label">BUSINESS OWNER</div><div class="nav-container"><button type="button" class="side-nav active" data-view="Overview" aria-current="page"><span>▦</span>Overview</button><button type="button" class="side-nav" data-view="My Websites" aria-current="false"><span>◈</span>My Websites</button><button type="button" class="side-nav" data-view="Lead Inbox" aria-current="false"><span>✉</span>Lead Inbox</button><button type="button" class="side-nav" data-view="Onboarding" aria-current="false"><span>▣</span>Onboarding</button><button type="button" class="side-nav" data-view="Approvals" aria-current="false"><span>✓</span>Approvals</button><button type="button" class="side-nav" data-view="Support" aria-current="false"><span>☏</span>Support</button><button type="button" class="side-nav" data-view="Creative Studio" aria-current="false"><span>✦</span>Creative Studio</button></div><div class="aside-bottom">Florida Based · Nationwide Reach<a href="tel:+17722090266">☎ (772) 209-0266</a><a href="/">← Back to Website Launch Engine</a></div></aside><main class="main"><header class="top"><div class="top-left">Client Workspace</div><div class="top-actions"><button type="button" class="help help-button" id="openCreativeTop">Create a business card ✦</button><a href="/" class="help">View public site ↗</a><span class="pill">PREVIEW ONLY</span></div></header><div class="content">
+
+/* Customer account gate: reuses the approved WLE white/navy visual; no second admin. */
+body.signin-required{background:#f4f8fd;min-height:100vh}
+body.signin-required .frame{display:none!important}
+.account-gate[hidden]{display:none!important}
+.account-gate{min-height:100vh;display:flex;flex-direction:column}
+.account-gate-header{background:#031327;color:white;padding:23px clamp(22px,5vw,75px);font-size:17px;font-weight:900}
+.account-gate-header small{display:block;font-size:10px;color:#69bff9;letter-spacing:.15em;margin-top:7px}
+.account-gate-inner{width:min(980px,calc(100% - 36px));margin:clamp(28px,7vw,85px) auto;display:grid;grid-template-columns:1fr 1fr;background:white;border:1px solid #d8e5ee;border-radius:16px;overflow:hidden;box-shadow:0 21px 60px #0a294218}
+.account-gate-story{padding:38px;display:flex;flex-direction:column;justify-content:center}
+.account-gate-story h1{font-size:clamp(32px,4vw,53px);line-height:1.03;margin:10px 0;letter-spacing:-.05em}
+.account-gate-story h1 em{font-style:normal;color:#0675f9}
+.account-gate-story p{color:#4e6376;font-size:14px;line-height:1.6}
+.account-gate-login{background:#04172b;color:white;padding:39px}
+.account-gate-login h2{font-size:25px;margin:0 0 8px}
+.account-gate-login p{color:#c1d9ec;font-size:13px;line-height:1.65}
+.account-gate-login label{display:block;font-weight:750;font-size:12px;margin:18px 0 7px}
+.account-gate-login input{width:100%;padding:13px;border:1px solid #5c88aa;border-radius:8px;color:#071b31;background:white;font:inherit}
+.account-gate-login button{width:100%;background:#0675f9;color:white;border:0;border-radius:9px;padding:14px;font-weight:850;margin-top:22px}
+.account-gate-login button[disabled]{opacity:.55}
+.account-gate-error{min-height:20px;color:#ffd2cf!important}
+.account-signout{background:transparent;border:1px solid #c4d9ed;border-radius:6px;padding:8px 10px;color:#175c95;font-size:12px}
+.account-tenant{min-height:36px;border:1px solid #bbd8ee;border-radius:6px;max-width:180px;color:#1a5279;font-size:12px}
+@media(max-width:700px){.account-gate-inner{grid-template-columns:1fr}.account-gate-story,.account-gate-login{padding:28px}.account-gate-inner{margin:22px auto}.account-gate-story h1{font-size:34px}}
+ </style></head><body><section class="account-gate" id="accountGate" hidden aria-label="Secure customer account sign-in">
+<header class="account-gate-header"><a href="/" aria-label="Website Launch Engine home">🚀 Website Launch Engine</a><small>STRATEGIC MINDS AI · CUSTOMER ACCOUNTS</small></header>
+<div class="account-gate-inner">
+ <div class="account-gate-story"><span class="eyebrow">YOUR BUSINESS / YOUR WORKSPACE</span><h1>Everything you need.<br><em>Only your team can access it.</em></h1><p>Sign in to edit your business card, save your brand drafts and review your website projects. This is the same Website Launch Engine workspace, with a secure customer account.</p></div>
+ <div class="account-gate-login"><h2>Customer sign in</h2><p>Use your existing authorized customer account. New accounts are invitation-only during staging.</p>
+ <form id="accountLoginForm" autocomplete="on"><label for="accountEmail">Business email</label><input id="accountEmail" type="email" autocomplete="username" required maxlength="254" placeholder="you@business.com"><label for="accountPassword">Password</label><input id="accountPassword" type="password" autocomplete="current-password" required maxlength="512" placeholder="Your password"><button id="accountLoginButton" type="submit">Sign in securely</button></form>
+ <p class="account-gate-error" id="accountLoginError" role="alert" aria-live="polite"></p><p>Need an account? <a href="tel:+17722090266" style="color:#82d2ff;text-decoration:underline">Call (772) 209-0266</a>.</p></div>
+</div></section><div class="frame"><aside class="aside"><a class="brand" href="/"><em>🚀</em><span>Website<br>Launch Engine<small>STRATEGIC MINDS AI</small></span></a><div class="rail-label">BUSINESS OWNER</div><div class="nav-container"><button type="button" class="side-nav active" data-view="Overview" aria-current="page"><span>▦</span>Overview</button><button type="button" class="side-nav" data-view="My Websites" aria-current="false"><span>◈</span>My Websites</button><button type="button" class="side-nav" data-view="Lead Inbox" aria-current="false"><span>✉</span>Lead Inbox</button><button type="button" class="side-nav" data-view="Onboarding" aria-current="false"><span>▣</span>Onboarding</button><button type="button" class="side-nav" data-view="Approvals" aria-current="false"><span>✓</span>Approvals</button><button type="button" class="side-nav" data-view="Support" aria-current="false"><span>☏</span>Support</button><button type="button" class="side-nav" data-view="Creative Studio" aria-current="false"><span>✦</span>Creative Studio</button></div><div class="aside-bottom">Florida Based · Nationwide Reach<a href="tel:+17722090266">☎ (772) 209-0266</a><a href="/">← Back to Website Launch Engine</a></div></aside><main class="main"><header class="top"><div class="top-left">Client Workspace</div><div class="top-actions"><button type="button" class="help help-button" id="openCreativeTop">Create a business card ✦</button><a href="/" class="help">View public site ↗</a><span class="pill">PREVIEW ONLY</span></div></header><div class="content">
 <section class="creative-workspace" id="creativeWorkspace" hidden aria-label="Business Creative Studio in customer dashboard">
  <div class="creative-entry">
   <div class="creative-intro">
@@ -122,4 +153,4 @@
  });
  const initial=decodeURIComponent(location.hash.slice(1));
  render(initial==="Creative Studio"||Object.hasOwn(views,initial)?initial:"Overview");
- </script></body></html>
+ </script><script defer src="/client-auth.js"></script></body></html>
