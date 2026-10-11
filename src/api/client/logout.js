@@ -1,4 +1,4 @@
-import {common,respond,stageConfig,checkOrigin,clearSession,session} from '../../_internal/wle-customer-session.js';
+import {common,respond,stageConfig,checkOrigin,clearSession,revokeCurrentSession} from '../../_internal/wle-customer-session.js';
 export default async function handler(req,res){
  common(res);
  if(req.method!=='POST'){res.setHeader('Allow','POST');return respond(res,405,'METHOD_NOT_ALLOWED')}
@@ -8,14 +8,12 @@ export default async function handler(req,res){
  // Clear the browser tokens even during provider outages. Revocation failures
  // are NOT proof of a fully terminated remote session.
  try{
-  const who=await session(req,res,conf);
-  if(!who){clearSession(res);return respond(res,200,'SIGNED_OUT_LOCAL')}
-  // A later guarded release must independently test server-side Auth session
-  // revocation before enabling long-lived customer accounts.
+  const revoked=await revokeCurrentSession(req,conf);
   clearSession(res);
-  return respond(res,200,'SIGNED_OUT_LOCAL',{remoteSessionRevoked:false});
+  if(revoked)return respond(res,200,'SIGNED_OUT',{localCookiesCleared:true,remoteSessionRevoked:true});
+  return respond(res,200,'SIGNED_OUT_LOCAL',{localCookiesCleared:true,remoteSessionRevoked:false});
  }catch{
   clearSession(res);
-  return respond(res,503,'REMOTE_SESSION_STATE_UNKNOWN',{localCookiesCleared:true});
+  return respond(res,503,'REMOTE_SESSION_STATE_UNKNOWN',{localCookiesCleared:true,remoteSessionRevoked:false});
  }
 }
