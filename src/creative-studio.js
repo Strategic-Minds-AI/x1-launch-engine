@@ -203,6 +203,29 @@ function shareText(){
  const lines=[get('person')||company(),get('role'),company(),get('phone'),get('email'),safeWebsite()].filter(Boolean);
  return lines.join(' | ');
 }
+$('share-native').addEventListener('click',async()=>{
+ // This is a user-initiated OS share sheet, never an outbound server send.
+ const title='Contact: '+company();
+ if(typeof navigator.share!=='function'){
+  toast('Native sharing is not supported here. Download the contact file instead.');
+  return;
+ }
+ try{
+  const contact=new File([vCard()],[slug(company()),'contact.vcf'].join('-'),{type:'text/vcard'});
+  const files=[contact];
+  if(typeof navigator.canShare==='function'&&navigator.canShare({files})){
+   await navigator.share({title,text:shareText(),files});
+  }else{
+   const payload={title,text:shareText()};
+   if(safeWebsite())payload.url=safeWebsite();
+   await navigator.share(payload);
+  }
+  toast('Shared using your device; no message sent by this website.');
+ }catch(error){
+  if(error?.name==='AbortError')return;
+  toast('Native sharing unavailable. Try Email draft, Text draft, or Contact .vcf.');
+ }
+});
 $('share-email').addEventListener('click',()=>{
  const subject='Business card: '+company(),body=shareText()+'\n\nThis message is a contact introduction; no attachment is sent automatically.';
  location.href='mailto:?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
