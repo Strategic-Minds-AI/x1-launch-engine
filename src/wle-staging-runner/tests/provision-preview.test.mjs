@@ -30,10 +30,10 @@ for (const [label, html, id] of [
 ]) test('rejects ' + label,
   () => assert.throws(() => buildSyntheticPreview(html, id)));
 
-test('request uses correct src-relative path, no target and no alias', () => {
+test('request includes src project root, no target and no alias', () => {
   const req = buildPreviewRequest(artifact, sourceBlobSha);
   assert.equal(req.project, SCOPE.projectId);
-  assert.deepEqual(req.files.map(f => f.file), ['index.html', 'vercel.json']);
+  assert.deepEqual(req.files.map(f => f.file), ['src/index.html', 'src/vercel.json']);
   assert.equal(Object.hasOwn(req, 'target'), false);
   assert.equal(Object.hasOwn(req, 'alias'), false);
   assert.equal(Object.hasOwn(req, 'projectSettings'), false);
@@ -52,7 +52,7 @@ test('single scoped preview POST produces pending validation record', async () =
       calls++;
       assert.equal(url, 'https://api.vercel.com/v13/deployments?teamId=' + SCOPE.teamId);
       assert.equal(options.method, 'POST');
-      assert.equal(JSON.parse(options.body).files[0].file, 'index.html');
+      assert.equal(JSON.parse(options.body).files[0].file, 'src/index.html');
       return new Response(JSON.stringify({ deployment: {
         id: 'dpl_Test1234', url: previewHost, target: null, alias: [], readyState: 'READY',
       } }), { status: 200 });
