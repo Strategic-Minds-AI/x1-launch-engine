@@ -9,10 +9,71 @@
  @media(max-width:1100px){.stats{grid-template-columns:repeat(2,1fr)}.panels{grid-template-columns:1fr}}
  @media(max-width:720px){.frame{grid-template-columns:1fr}.aside{padding:15px}.brand{margin-bottom:6px}.rail-label,.aside-bottom{display:none}.nav-container{display:flex;overflow:auto;gap:6px}.side-nav{white-space:nowrap;min-width:max-content;padding:10px;font-size:12px}.side-nav span{font-size:16px}.hero{flex-direction:column;align-items:start}.hero-badge{align-self:start}.top{min-height:70px}.top-actions{flex-wrap:wrap}}
  @media(max-width:460px){.stats{grid-template-columns:1fr}.top-left{font-size:16px}.content{padding:20px 14px}.hero{padding:24px}.panel{padding:20px}.task{align-items:start;flex-direction:column}}
- </style></head><body><div class="frame"><aside class="aside"><a class="brand" href="/"><em>🚀</em><span>Website<br>Launch Engine<small>STRATEGIC MINDS AI</small></span></a><div class="rail-label">BUSINESS OWNER</div><div class="nav-container"><button type="button" class="side-nav active" data-view="Overview" aria-current="page"><span>▦</span>Overview</button><button type="button" class="side-nav" data-view="My Websites" aria-current="false"><span>◈</span>My Websites</button><button type="button" class="side-nav" data-view="Lead Inbox" aria-current="false"><span>✉</span>Lead Inbox</button><button type="button" class="side-nav" data-view="Onboarding" aria-current="false"><span>▣</span>Onboarding</button><button type="button" class="side-nav" data-view="Approvals" aria-current="false"><span>✓</span>Approvals</button><button type="button" class="side-nav" data-view="Support" aria-current="false"><span>☏</span>Support</button><a class="side-nav" href="/studio.html" style="border:1px solid #1f84dc;background:#0c3b69;color:white"><span>✦</span>Business Studio ↗</a></div><div class="aside-bottom">Florida Based · Nationwide Reach<a href="tel:+17722090266">☎ (772) 209-0266</a><a href="/">← Back to Website Launch Engine</a></div></aside><main class="main"><header class="top"><div class="top-left">Client Workspace</div><div class="top-actions"><a href="/studio.html" class="help">Creative Business Studio ↗</a><a href="/" class="help">View public site ↗</a><span class="pill">PREVIEW ONLY</span></div></header><div class="content"><div class="hero"><div><div class="eyebrow" style="color:#7dd5ff">WORKSPACE FOUNDATION · V1</div><h1 id="viewTitle">Your business workspace</h1><p id="viewDescription">Your website projects, inquiries and approvals will appear here after account activation.</p></div><div class="hero-badge">◈ DEVELOPMENT PREVIEW</div></div><div class="stats" id="stats"></div><div class="panels"><section class="panel"><h2 id="panelTitle">Your next steps</h2><p id="panelDesc">Review project information and connected workflows.</p><div id="workList"></div></section><aside class="panel"><h2>What happens next?</h2><p>Enable verified account authentication, tenant permissions, and durable data connections before this portal processes real customer information.</p><a href="/" class="action">Explore Website Templates →</a><a href="tel:+17722090266" class="action secondary">Call (772) 209-0266 ↗</a></aside></div><section style="margin-top:26px;background:linear-gradient(110deg,#062849,#0d69ad);border-radius:14px;padding:25px 29px;color:#fff;border:1px solid #1779bf;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap"><div><div style="font-size:11px;letter-spacing:.18em;color:#7cdeff;font-weight:900">NEW WORKSPACE PREVIEW</div><h2 style="margin:9px 0;font-size:27px;letter-spacing:-.03em">Your Business Studio</h2><p style="color:#d6ebfc;margin:0;font-size:15px;max-width:650px">Social campaign drafts, digital business cards, branded image briefs, video storyboards, and content tools in one place. No live publishing.</p></div><a href="/studio.html" class="action" style="background:#078dff">Explore Business Studio →</a></section><div class="notice"><b>Preview limitations:</b> This portal uses only static, non-sensitive placeholder states. No sign-in, lead delivery, client data, queue execution, billing, or release action is active. Production data must not be entered.</div><div class="footer">© 2026 Website Launch Engine · A Strategic Minds AI System · <a href="/">Home</a> · <a href="tel:+17722090266">Contact</a></div></div></main></div><script>
+
+ /* Homepage-aligned brand, 50/50 white + dark-navy intro, real customer navigation. */
+ :root{--home-navy:#04172b;--home-blue:#0675f9;--home-ink:#071b31;--home-white:#fff}
+ .side-nav:hover,.side-nav.active{background:#0675f9;border-color:#3b95fc}
+ .top-left{color:#071b31}
+ .help-button{background:#0675f9;color:#fff;border:0;border-radius:7px;padding:11px 15px;font-size:13px}
+ .creative-workspace[hidden]{display:none!important}
+ .creative-workspace{display:block}
+ .content.creative-active{max-width:1700px;padding:22px clamp(16px,2.4vw,35px) 30px}
+ .creative-active>.hero,.creative-active>.stats,.creative-active>.panels,.creative-active>.studio-promo,.creative-active>.notice{display:none!important}
+ .creative-entry{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;border-radius:14px;background:linear-gradient(90deg,#fff 50%,#04172b 50%);border:1px solid #dce8f2;min-height:235px;box-shadow:0 12px 37px #0b29420b;margin-bottom:21px}
+ .creative-intro{padding:31px 34px;background:#fff;color:#071b31;align-self:center}
+ .creative-intro h1{margin:9px 0 12px;font-weight:900;font-size:clamp(30px,3.4vw,49px);line-height:1.04;letter-spacing:-.05em}
+ .creative-intro h1 em{font-style:normal;color:#0675f9}
+ .creative-intro p{color:#4d6174;line-height:1.58;font-size:14px;margin:0;max-width:520px}
+ .creative-steps{background:#04172b;color:white;padding:28px 32px;display:grid;align-content:center;gap:12px}
+ .creative-label{color:#6bc8ff;letter-spacing:.22em;font-size:10px;font-weight:900}
+ .step-row{display:flex;align-items:start;gap:13px}
+ .step-row>b{flex:none;border:1px solid #23699e;background:#0d3965;border-radius:8px;color:#b0e1ff;padding:9px 10px;font-size:12px}
+ .step-row strong{display:block;font-size:14px}
+ .step-row small{display:block;color:#adcadd;font-size:11px;margin-top:3px}
+ .creative-frame{display:block;width:100%;min-height:1200px;height:1550px;border:0;background:#f6f9fc;border-radius:13px;overflow:hidden}
+ .creative-warning{margin:12px 0 2px;color:#5a7288;font-size:12px;line-height:1.55}
+ @media(max-width:1080px){.creative-entry{min-height:0}.creative-intro{padding:26px}.creative-steps{padding:25px}}
+ @media(max-width:720px){.creative-entry{grid-template-columns:1fr;background:#fff}.creative-intro{padding:23px}.creative-steps{padding:22px}.creative-intro h1{font-size:35px}.top-actions{gap:8px}.help-button{font-size:11px;padding:9px 10px}.content.creative-active{padding:15px 12px}}
+ @media(max-width:460px){.creative-intro{padding:21px}.creative-intro h1{font-size:33px}.step-row strong{font-size:13px}.creative-steps{padding:19px}.creative-frame{min-height:1800px}}
+ </style></head><body><div class="frame"><aside class="aside"><a class="brand" href="/"><em>🚀</em><span>Website<br>Launch Engine<small>STRATEGIC MINDS AI</small></span></a><div class="rail-label">BUSINESS OWNER</div><div class="nav-container"><button type="button" class="side-nav active" data-view="Overview" aria-current="page"><span>▦</span>Overview</button><button type="button" class="side-nav" data-view="My Websites" aria-current="false"><span>◈</span>My Websites</button><button type="button" class="side-nav" data-view="Lead Inbox" aria-current="false"><span>✉</span>Lead Inbox</button><button type="button" class="side-nav" data-view="Onboarding" aria-current="false"><span>▣</span>Onboarding</button><button type="button" class="side-nav" data-view="Approvals" aria-current="false"><span>✓</span>Approvals</button><button type="button" class="side-nav" data-view="Support" aria-current="false"><span>☏</span>Support</button><button type="button" class="side-nav" data-view="Creative Studio" aria-current="false"><span>✦</span>Creative Studio</button></div><div class="aside-bottom">Florida Based · Nationwide Reach<a href="tel:+17722090266">☎ (772) 209-0266</a><a href="/">← Back to Website Launch Engine</a></div></aside><main class="main"><header class="top"><div class="top-left">Client Workspace</div><div class="top-actions"><button type="button" class="help help-button" id="openCreativeTop">Create a business card ✦</button><a href="/" class="help">View public site ↗</a><span class="pill">PREVIEW ONLY</span></div></header><div class="content">
+<section class="creative-workspace" id="creativeWorkspace" hidden aria-label="Business Creative Studio in customer dashboard">
+ <div class="creative-entry">
+  <div class="creative-intro">
+   <span class="eyebrow">BUSINESS OWNER / CREATIVE STUDIO</span>
+   <h1>One business.<br><em>Every first impression.</em></h1>
+   <p>Your business card, logo, flyer and social content live here in your customer workspace. No extra app or complicated setup.</p>
+  </div>
+  <div class="creative-steps">
+   <span class="creative-label">THREE SIMPLE STEPS</span>
+   <div class="step-row"><b>01</b><span><strong>Add your business details</strong><small>Name, phone, website and your images</small></span></div>
+   <div class="step-row"><b>02</b><span><strong>Make it yours</strong><small>Match your branding, logo and colors</small></span></div>
+   <div class="step-row"><b>03</b><span><strong>Download & share</strong><small>Card + QR, brochure and social drafts</small></span></div>
+  </div>
+ </div>
+ <iframe id="creativeFrame" class="creative-frame" title="Your business card, branding, flyers and social tools" src="about:blank" data-src="/creative-studio.html?embedded=client" loading="lazy" referrerpolicy="same-origin"></iframe>
+ <p class="creative-warning">Private preview: all exports are made in your browser. Google account connections and customer data storage are not yet live. Do not enter real customer or private information.</p>
+</section>
+<div class="hero"><div><div class="eyebrow" style="color:#7dd5ff">WORKSPACE FOUNDATION · V1</div><h1 id="viewTitle">Your business workspace</h1><p id="viewDescription">Your website projects, inquiries and approvals will appear here after account activation.</p></div><div class="hero-badge">◈ DEVELOPMENT PREVIEW</div></div><div class="stats" id="stats"></div><div class="panels"><section class="panel"><h2 id="panelTitle">Your next steps</h2><p id="panelDesc">Review project information and connected workflows.</p><div id="workList"></div></section><aside class="panel"><h2>What happens next?</h2><p>Enable verified account authentication, tenant permissions, and durable data connections before this portal processes real customer information.</p><a href="/" class="action">Explore Website Templates →</a><a href="tel:+17722090266" class="action secondary">Call (772) 209-0266 ↗</a></aside></div><section class="studio-promo" style="margin-top:26px;background:linear-gradient(110deg,#062849,#0d69ad);border-radius:14px;padding:25px 29px;color:#fff;border:1px solid #1779bf;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap"><div><div style="font-size:11px;letter-spacing:.18em;color:#7cdeff;font-weight:900">NEW WORKSPACE PREVIEW</div><h2 style="margin:9px 0;font-size:27px;letter-spacing:-.03em">Your Business Studio</h2><p style="color:#d6ebfc;margin:0;font-size:15px;max-width:650px">Social campaign drafts, digital business cards, branded image briefs, video storyboards, and content tools in one place. No live publishing.</p></div><button type="button" class="action" id="openCreativeOverview" style="background:#0675f9">Open Creative Studio →</button></section><div class="notice"><b>Preview limitations:</b> This portal uses only static, non-sensitive placeholder states. No sign-in, lead delivery, client data, queue execution, billing, or release action is active. Production data must not be entered.</div><div class="footer">© 2026 Website Launch Engine · A Strategic Minds AI System · <a href="/">Home</a> · <a href="tel:+17722090266">Contact</a></div></div></main></div><script>
  const views={"Overview":["Your business workspace","Your website projects, inquiries and approvals will appear here after account activation.","My websites|No account data","New leads|Not connected","Approvals|No account data","Upcoming launches|Not connected"],"My Websites":["Website projects","Approved live sites and private previews will be shown after secure account linking.","Website inventory|Not connected","Preview links|Not available","Launch status|Not available","Performance|Not connected"],"Lead Inbox":["Your inquiries","Verified customer contacts will appear after lead capture, consent, and tenant-scoped storage are enabled.","New leads|Not connected","Lead assignment|Not available","Response history|Not connected","Export|Disabled"],"Onboarding":["Tell us about your business","Preview the information needed before we prepare a website.","Business name|Needed at enrollment","Industry|To be verified","Service area|To be verified","Contact routing|To be verified"],"Approvals":["Review website changes","You will review versioned designs and release requests before anything is published.","Designs awaiting review|No account data","Published sites|Not connected","Revision history|Not connected","Approved releases|None"],"Support":["We're here to help","Call the Florida team or return to the marketing site to learn more.","Business support|(772) 209-0266","Availability|Not verified","Tickets|Not connected","Messaging|Disabled"]};
  const tabs=Array.from(document.querySelectorAll("[data-view]"));
+ const portalRoot=document.querySelector(".content");
+ const creativeWorkspace=document.getElementById("creativeWorkspace");
+ const creativeFrame=document.getElementById("creativeFrame");
+ function highlightView(view){
+  for(const tab of tabs){const on=tab.dataset.view===view;tab.classList.toggle("active",on);tab.setAttribute("aria-current",on?"page":"false")}
+ }
  function render(view){
+  const creative=view==="Creative Studio";
+  portalRoot.classList.toggle("creative-active",creative);
+  creativeWorkspace.hidden=!creative;
+  if(creative){
+   highlightView(view);
+   document.querySelector(".top-left").textContent="My Creative Studio";
+   if(creativeFrame.getAttribute("src")==="about:blank")creativeFrame.src=creativeFrame.dataset.src;
+   history.replaceState(null,"","#"+encodeURIComponent(view));
+   return;
+  }
+  document.querySelector(".top-left").textContent="Client Workspace";
   const parts=views[view]; if(!parts)return;
   document.getElementById("viewTitle").textContent=parts[0];
   document.getElementById("viewDescription").textContent=parts[1];
@@ -21,9 +82,19 @@
   document.getElementById("panelTitle").textContent=view==="Overview"?"Quick overview":view;
   document.getElementById("panelDesc").textContent="This is the preview of the "+view.toLowerCase()+" workspace, with live integrations deliberately disabled.";
   document.getElementById("workList").innerHTML=cards.map(([label,value])=>"<div class='task'><div><b>"+label+"</b><small>Connect a verified data source to activate</small></div><span class='status'>"+value+"</span></div>").join("");
-  for(const tab of tabs){const on=tab.dataset.view===view;tab.classList.toggle("active",on);tab.setAttribute("aria-current",on?"page":"false")}
+  highlightView(view);
   history.replaceState(null,"","#"+encodeURIComponent(view));
  }
  for(const tab of tabs)tab.addEventListener("click",()=>render(tab.dataset.view));
- const initial=decodeURIComponent(location.hash.slice(1));render(Object.hasOwn(views,initial)?initial:"Overview");
+ document.getElementById("openCreativeTop").addEventListener("click",()=>render("Creative Studio"));
+ document.getElementById("openCreativeOverview").addEventListener("click",()=>render("Creative Studio"));
+ // The embedded component can only report its document height to its same-origin host.
+ window.addEventListener("message",event=>{
+  if(event.origin!==location.origin || event.source!==creativeFrame.contentWindow)return;
+  if(event.data?.type!=="wle-creative-frame-height")return;
+  const h=Number(event.data.height);
+  if(Number.isFinite(h)&&h>=300&&h<=8000)creativeFrame.style.height=(h+16)+"px";
+ });
+ const initial=decodeURIComponent(location.hash.slice(1));
+ render(initial==="Creative Studio"||Object.hasOwn(views,initial)?initial:"Overview");
  </script></body></html>
