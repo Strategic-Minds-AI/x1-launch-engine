@@ -365,7 +365,7 @@ if(window.parent!==window&&new URLSearchParams(location.search).get('embedded')=
  const validUuid=x=>typeof x==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(x);
  const profilePanel=document.querySelector('.sidebar .panel .panel-inner');
  const accountActions=document.createElement('div');accountActions.hidden=true;
- accountActions.style.cssText='margin-top:19px;padding-top:16px;border-top:1px solid #d8e5ee;display:grid;gap:9px';
+ accountActions.style.cssText='margin-top:19px;padding-top:16px;border-top:1px solid #d8e5ee;gap:9px';
  const heading=document.createElement('strong');heading.textContent='My saved business profile';heading.style.fontSize='14px';
  const hint=document.createElement('small');hint.textContent='Save your entered text and colors to your authorized staging account. Photos remain on your device.';
  const save=document.createElement('button');save.type='button';save.id='account-save-profile';save.className='btn';save.textContent='Save business profile';
@@ -376,7 +376,7 @@ if(window.parent!==window&&new URLSearchParams(location.search).get('embedded')=
   if(event.origin!==location.origin||event.source!==window.parent)return;
   if(event.data?.type!=='wle-client-tenant-authorized'||!validUuid(event.data.tenant_id))return;
   accountTenant=event.data.tenant_id;accountDraft=crypto.randomUUID();
-  accountActions.hidden=false;note.textContent='Customer account verified. Save is always your choice.';
+  accountActions.hidden=false;accountActions.style.display='grid';note.textContent='Customer account verified. Save is always your choice.';
  });
  const request=async(method,body)=>{
   const url='/api/client/drafts'+(method==='GET'?'?tenant_id='+encodeURIComponent(accountTenant):'');
