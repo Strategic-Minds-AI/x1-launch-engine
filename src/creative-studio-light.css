@@ -140,6 +140,12 @@ html.client-embed body { background:transparent; }
  .client-embed .panel-inner { padding:16px; }
  .client-embed .tab-pane { padding:16px; }
 }
+/* Keep the live visual proof beside editable details in wide customer portals.
+   On tablets/phones, a single-column editor remains easier to use. */
+@media(min-width:900px){
+ .client-embed .workarea{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)!important;align-items:start}
+ .client-embed .workspace-preview{position:static}
+}
 @media print {
  .client-embed .workspace-preview,.client-embed .paper-section { position:static; }
  .client-embed .workarea { display:block!important; }
