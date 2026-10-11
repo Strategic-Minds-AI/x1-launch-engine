@@ -31,24 +31,29 @@ export default async function handler(req,res){
   if(!canWrite(member.role))return respond(res,403,'ROLE_CANNOT_EDIT');
   const profile=cleanProfile(body.profile),draftId=body.draft_id;
   if(!profile||!isUuid(draftId))return respond(res,400,'INVALID_PROFILE_OR_DRAFT_ID');
-  // Prevent service-role upsert from taking ownership of another customer's
-  // draft ID (including a guessed or leaked ID from another tenant).
-  const prior=await supa(conf,'/rest/v1/wle_studio_drafts?draft_id=eq.'+draftId+
-    '&select=tenant_id,created_by,status,kind&limit=1',{privileged:true});
-  if(!prior.ok||!Array.isArray(prior.data))throw Error('OWNERSHIP_LOOKUP_FAILED');
-  if(prior.data.length){
-   const previous=prior.data[0];
-   if(previous.tenant_id!==tenantId||previous.created_by!==verified.user.id||
-      previous.kind!==kind||previous.status!=='DRAFT')return respond(res,403,'DRAFT_IMMUTABLE_OR_NOT_OWNED');
-  }
+  // Prevent a TOCTOU ownership bypass: insert ignores duplicate IDs, and
+  // updates are separately filtered by tenant, user, kind and draft state.
+  // Never upsert with a service key directly against an unscoped primary key.
   const payload={...profile,saved_by:verified.user.id};
   const entry={draft_id:draftId,tenant_id:tenantId,created_by:verified.user.id,
      kind,status:'DRAFT',payload};
-  const saved=await supa(conf,'/rest/v1/wle_studio_drafts?on_conflict=draft_id&select=draft_id,updated_at',{
+  const added=await supa(conf,'/rest/v1/wle_studio_drafts?on_conflict=draft_id&select=draft_id,updated_at',{
     privileged:true,method:'POST',body:entry,
-    headers:{Prefer:'resolution=merge-duplicates,return=representation'}
+    headers:{Prefer:'resolution=ignore-duplicates,return=representation'}
   });
-  if(!saved.ok||!Array.isArray(saved.data)||saved.data.length!==1)throw Error('DRAFT_WRITE_FAILED');
+  if(!added.ok||!Array.isArray(added.data))throw Error('DRAFT_INSERT_FAILED');
+  let saved=added;
+  if(!added.data.length){
+   const target='draft_id=eq.'+draftId+'&tenant_id=eq.'+tenantId+
+     '&created_by=eq.'+verified.user.id+'&kind=eq.'+kind+'&status=eq.DRAFT';
+   saved=await supa(conf,'/rest/v1/wle_studio_drafts?'+target+'&select=draft_id,updated_at',{
+     privileged:true,method:'PATCH',body:{payload,updated_at:new Date().toISOString()},
+     headers:{Prefer:'return=representation'}
+   });
+  }
+  if(!saved.ok||!Array.isArray(saved.data)||saved.data.length!==1){
+   return respond(res,403,'DRAFT_IMMUTABLE_OR_NOT_OWNED');
+  }
   return respond(res,200,'DRAFT_SAVED',{draft_id:draftId,tenant_id:tenantId,updated_at:saved.data[0].updated_at});
  }catch{
   return respond(res,503,'DRAFT_OPERATION_UNAVAILABLE',{customerDataAccepted:false});
