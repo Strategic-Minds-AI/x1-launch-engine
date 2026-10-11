@@ -191,7 +191,7 @@ $('share-copy').addEventListener('click',async()=>{
 });
 function cardSvg(){
  const color=state.accent,business=escapeXml(company()),name=escapeXml(get('person')||'Your Name'),role=escapeXml(get('role')),phone=escapeXml(get('phone')),email=escapeXml(get('email')),website=escapeXml(safeWebsite());
- const qr=state.qrSvg?state.qrSvg.replace(/<svg[^>]*>/,'<svg x="895" y="350" width="195" height="195" viewBox="0 0 180 180">'):'';
+ const qr=state.qrSvg?state.qrSvg.replace('<svg ', '<svg x="895" y="350" width="195" height="195" '):'';
  const logo=logoUrl(state.logoSvg);
  return '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-label="Business card for '+business+'">'+
  '<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#071528"/><stop offset="1" stop-color="#0e4b6f"/></linearGradient></defs>'+
