@@ -1,0 +1,149 @@
+/* Website Launch Engine / brand-locked customer creative workspace
+   2026-10-11: preserve marketing home; balance white surfaces with approved
+   #031225 navy, #0675f9 royal blue, and the existing primary CTA design.
+   This file only styles the Creative Studio, never the homepage.
+*/
+:root {
+  --brand-navy:#04172b; --brand-ink:#071b31; --brand-blue:#0675f9; --brand-sky:#38bdf8;
+  --surface:#fff; --surface-alt:#f6f9fc; --border-light:#d7e5f0;
+  color-scheme:light;
+}
+body { background:#f6f9fc; color:var(--brand-ink); }
+.topbar { background:#031125f5; border-color:#14446b; }
+.topinner { min-height:74px; }
+.mark-icon { background:transparent; border:0; border-radius:5px; width:44px; height:44px; font-size:36px; }
+.mark strong { color:white; font-size:14px; }
+.mark small { color:#4fc6ff; }
+.top-actions a { color:#dbeafe; }
+.state { border-color:#286091; background:#072542; color:#c4efff; }
+.hero {
+  color:#071b31;
+  background:linear-gradient(90deg,#ffffff 0%,#ffffff 50%,#04172b 50%,#04172b 100%);
+  border-bottom:1px solid #d3e4f1;
+}
+.hero-inner { min-height:336px; padding:35px 0; gap:30px; }
+.hero h1 { font-size:clamp(40px,4.9vw,68px); color:#071b31; line-height:1.02; margin:14px 0 15px; }
+.hero h1 em { color:#0675f9; }
+.hero p { color:#475d72; line-height:1.62; max-width:580px; }
+.eyebrow { color:#15507b; }
+.hero-tools { margin-top:16px; }
+.hero-tools span { color:#173f61; border-color:#bfd9ee; background:#eaf4ff; }
+.hero-showcase { height:250px; }
+.floating-card { background:linear-gradient(130deg,#04172b,#0c3561 77%,#0675f9); border-color:#4485bc; transform:rotate(-4deg); }
+.float-logo { color:#0675f9; background:white; }
+.float-circle { background:linear-gradient(130deg,#1557a1,#031b34); }
+.privacy { color:#486075; padding:3px 0 8px; }
+.privacy strong { color:#075b9a; }
+.workarea { grid-template-columns:minmax(320px,480px) minmax(0,1fr); gap:21px; padding-bottom:55px; }
+.sidebar { gap:17px; }
+.panel { background:#fff; border:1px solid #d9e6f0; border-radius:13px; box-shadow:0 8px 30px #0826410b; color:#071b31; }
+.panel-inner { padding:24px; }
+.panel h2 { color:#071b31; }
+.panel h3 { color:#122d47; }
+.help,.hint,.tab-pane p { color:#566f82; }
+.section-id { color:#1263ab; }
+.panel-head { margin-bottom:17px; }
+.formgrid { gap:11px; }
+.field label { color:#213b52; font-size:12px; }
+.field input,.field select,.field textarea {
+ background:#fff;color:#071b31;border:1px solid #b4cadb;border-radius:7px;min-height:45px;font-size:13px;
+}
+.field input::placeholder,.field textarea::placeholder { color:#7b90a2; }
+.field input:focus,.field select:focus,.field textarea:focus { border-color:#0675f9; }
+.btn { background:#0675f9; border:1px solid #0675f9; color:#fff; border-radius:7px; }
+.btn.secondary { background:#e8f3ff; border:1px solid #bddcf8; color:#075ea9; }
+.btn.ghost { background:#fff; border:1px solid #b5cede; color:#16577f; }
+.upload-tile { background:#f5faff; border-color:#a5c2d8; }
+.upload-tile small { color:#5f7790; }
+.tabs { padding:10px 13px; gap:7px; background:#f2f7fb; border-color:#dae6f2; flex-wrap:wrap; }
+.tabs button { background:white; border:1px solid #ccdce8; color:#264764; border-radius:7px; padding:9px 11px; font-size:11px; }
+.tabs button[aria-selected=true] { color:white; border-color:#0675f9; background:#0675f9; }
+.tab-pane { padding:23px; }
+.pill-button { background:#fff; border:1px solid #d5e3ef; color:#152e46; }
+.pill-button small { color:#57758d; }
+.pill-button.selected { border-color:#0675f9; box-shadow:inset 0 0 0 1px #0675f9; }
+.swatch { border-color:white; box-shadow:0 0 0 2px #35506a; }
+.workspace-preview { gap:17px; }
+.section-title h2 { color:#081f34; }
+.eyechip { color:#1065ae; border:1px solid #c3ddeb; }
+.artboard {
+ background:linear-gradient(145deg,#ecf4fb,#ffffff 63%);
+ border-top:1px solid #e0ebf3;
+ padding:22px;
+}
+.digital-card { background:linear-gradient(120deg,#031225,#092f56); border-color:#5c8eb9; min-height:253px; }
+.digital-card.layout-classic { background:linear-gradient(130deg,#071b31,#152b42); }
+.digital-card.layout-bold { background:linear-gradient(135deg,#031225,#1161c2); }
+.card-details { color:#e4f4ff; }
+.card-watermark { color:#d2e7f5; }
+.artboard-foot { border-color:#d9e6f0; }
+.mono { color:#23577d; }
+.qr-white { background:white; }
+.paper-section { border:0; margin-top:0; padding-top:0; }
+.sheet { border:1px solid #d6e0e9; box-shadow:0 14px 35px #14334a12; }
+.sheet-hero { background:linear-gradient(125deg,#04172b,#1057a8); }
+.sheet-cta { background:#04172b; }
+.statusline { background:#fff; color:#56758c; border-color:#e2edf5; }
+.notice { background:#f1f7fd; border:1px solid #cbdfef; color:#415b72; border-radius:8px; }
+.notice strong { color:#155991; }
+.integrate-grid .connect { background:#f9fcff; border:1px solid #dae7f0; }
+.connect strong { color:#153750; }
+.connect small { color:#687e93; }
+.connect button { border:1px solid #d3dfeb; background:#edf3f8; color:#6c7e91; }
+.output { background:#fff; color:#071b31; border:1px solid #b4cce0; }
+.divider { background:#dce9f2; }
+.footer { background:#04172b; color:#c1d4e4; border-top:1px solid #163c59; padding:22px 0; }
+.footer a { color:#8bd6fb; }
+#toast { background:#071b31; color:white; border:1px solid #256ead; }
+/* The standalone preview keeps a balanced white/navy hero. Within Client Admin,
+   the existing brand/navigation is authoritative, so hide duplicated mastheads. */
+html.client-embed body { background:transparent; }
+.client-embed .topbar,.client-embed .hero,.client-embed .privacy,.client-embed .footer { display:none!important; }
+.client-embed .container { width:100%; max-width:none; }
+.client-embed .workarea { padding:0 0 12px; gap:18px; }
+.client-embed .sidebar { gap:15px; }
+.client-embed .panel { box-shadow:0 4px 18px #0b33440a; }
+.client-embed .panel-inner { padding:22px; }
+.client-embed .workspace-preview { top:12px; }
+.client-embed .tab-pane { padding:20px; }
+.client-embed .digital-card { min-height:240px; }
+.client-embed .artboard { padding:16px; }
+.client-embed .paper-section { margin-top:0; }
+@media(max-width:1120px) {
+ .workarea { grid-template-columns:minmax(305px,.92fr) minmax(0,1.08fr); }
+ .hero-inner { gap:20px; }
+ .client-embed .workarea { grid-template-columns:minmax(0,1fr); }
+ .client-embed .workspace-preview { position:static; }
+}
+@media(max-width:990px) {
+ .hero { background:linear-gradient(180deg,#fff 0%,#fff 51%,#04172b 51%,#04172b 100%); }
+ .hero-inner { grid-template-columns:1fr; min-height:0; padding:34px 0 20px; }
+ .hero-showcase { margin-top:20px; height:230px; }
+ .workarea { grid-template-columns:1fr; }
+ .workspace-preview { position:static; }
+}
+@media(max-width:550px) {
+ .container { width:calc(100% - 24px); }
+ .hero { background:linear-gradient(180deg,#fff 0%,#fff 55%,#04172b 55%,#04172b 100%); }
+ .hero h1 { font-size:clamp(35px,9vw,48px); }
+ .hero-inner { padding:28px 0 14px; }
+ .hero-showcase { height:195px; }
+ .hero-tools span { font-size:10px; }
+ .panel-inner { padding:17px; }
+ .tabs { gap:5px; }
+ .tabs button { padding:9px 10px; }
+ .tab-pane { padding:17px; }
+ .workarea,.client-embed .workarea { gap:13px; }
+ .artboard { padding:13px; }
+ .card-details { font-size:10px; }
+ .sheet-services { grid-template-columns:1fr; }
+ .client-embed .panel-inner { padding:16px; }
+ .client-embed .tab-pane { padding:16px; }
+}
+@media print {
+ .client-embed .workspace-preview,.client-embed .paper-section { position:static; }
+ .client-embed .workarea { display:block!important; }
+ .client-embed .sidebar,.client-embed .workspace-preview>.panel:first-child,.client-embed .workspace-preview>.panel:last-child { display:none!important; }
+ .client-embed .workspace-preview .paper-section { display:block!important; }
+ .sheet { max-width:none!important; width:100%!important; }
+}
