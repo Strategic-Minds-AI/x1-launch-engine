@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#061528">
+<title>Business Creative Studio | Website Launch Engine</title>
+<meta name="description" content="Private preview: a connected business card, brand, logo, brochure and social content studio by Website Launch Engine.">
+<style>
+:root{--base:#061528;--card:#0c2139;--line:#29445f;--white:#f4fbff;--muted:#aac4da;--sky:#4dd3ff;--accent:#34caff;--bright:#88f3ff;--soft:#d7e8f5;--canvas:#edf5fa;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#061528;color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select,textarea{font:inherit}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+button:disabled{cursor:not-allowed;opacity:.54}
+:focus-visible{outline:3px solid #8ae8ff;outline-offset:4px}
+.container{width:min(1440px,calc(100% - 44px));margin:auto}
+.topbar{position:sticky;top:0;z-index:40;background:#061528ec;backdrop-filter:blur(16px);border-bottom:1px solid #2d4760}
+.topinner{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:78px}
+.mark{display:flex;align-items:center;gap:14px}
+.mark-icon{width:45px;height:45px;display:grid;place-items:center;border:1px solid #329dbd;border-radius:13px;background:linear-gradient(135deg,#0a4a76,#06233e);font-size:27px;font-weight:950;color:#a3ecff}
+.mark strong{display:block;letter-spacing:.12em;font-size:13px;line-height:1.5}
+.mark small{display:block;font-size:10px;color:#80b6d2;letter-spacing:.2em;margin-top:3px}
+.top-actions{display:flex;gap:16px;align-items:center}
+.top-actions a{font-size:12px;font-weight:800;color:#b8e8fd}
+.state{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border-radius:100px;background:#0a3551;border:1px solid #306b8c;color:#9defff;font-size:10px;font-weight:850;letter-spacing:.14em;text-transform:uppercase}
+.dot{width:6px;height:6px;background:#7ff2d0;border-radius:50%;box-shadow:0 0 0 3px #7ff2d021}
+.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 78% 45%,#0c6382 0,#0b3559 30%,transparent 59%),linear-gradient(120deg,#071429,#08213d 62%,#12415e);border-bottom:1px solid #264761}
+.hero-inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.78fr);align-items:center;gap:40px;min-height:410px;padding:48px 0}
+.eyebrow{font-size:11px;letter-spacing:.25em;font-weight:850;color:#62d4ff;text-transform:uppercase}
+.hero h1{font-size:clamp(42px,5.2vw,82px);letter-spacing:-.065em;line-height:.98;margin:15px 0 18px;max-width:800px;font-weight:900}
+.hero h1 em{font-style:normal;color:#7adfff}
+.hero p{font-size:15px;line-height:1.75;color:#bbd5e8;max-width:620px}
+.hero-tools{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}
+.hero-tools span{border:1px solid #3b5c7a;padding:8px 13px;border-radius:100px;color:#e0f4ff;font-size:11px;font-weight:700;background:#ffffff08}
+.hero-showcase{height:285px;position:relative;display:grid;place-items:center;isolation:isolate}
+.hero-showcase:before{content:"";position:absolute;inset:3% 13%;border:1px solid #45beef2e;border-radius:50%;box-shadow:0 0 0 35px #4ca8cf0d,0 0 0 70px #4ca8cf09}
+.floating-card{position:relative;z-index:2;width:min(92%,475px);aspect-ratio:1.75/1;border:1px solid #60d6fa88;border-radius:21px;padding:32px;background:linear-gradient(125deg,#08233e,#0f5776 70%,#0d2b4c);box-shadow:0 25px 90px #0008,0 0 58px #55cdf42a;transform:rotate(-8deg)}
+.floating-card:after{content:"";position:absolute;inset:18px;border:1px solid #ffffff22;border-radius:15px;pointer-events:none}
+.floating-card b{font-size:20px;letter-spacing:.11em}
+.floating-card small{display:block;font-size:10px;letter-spacing:.2em;color:#8fddff;margin-top:8px}
+.floating-card p{font-size:11px;position:absolute;bottom:18px;color:#bde0f2}
+.float-circle{position:absolute;right:-5%;top:-4%;width:114px;height:114px;border-radius:25px;display:grid;place-items:center;background:linear-gradient(145deg,#165781,#0a233b);border:1px solid #569ed5;transform:rotate(14deg);font-size:60px;box-shadow:0 20px 50px #0008}
+.float-logo{position:absolute;left:4%;bottom:0;width:114px;height:92px;display:grid;place-items:center;border-radius:17px;background:linear-gradient(135deg,#edf8ff,#ffffff);color:#066b9f;font-size:55px;font-weight:950;box-shadow:0 20px 42px #0006;transform:rotate(12deg);z-index:3}
+.privacy{margin:20px auto 12px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;color:#b5cfdf;font-size:12px}
+.privacy strong{color:#88e6fb}
+.workarea{display:grid;grid-template-columns:minmax(340px,510px) minmax(0,1fr);gap:24px;align-items:start;padding-bottom:85px}
+.sidebar{display:grid;gap:18px}
+.panel{background:#0c2139;border:1px solid #2b4760;border-radius:20px;box-shadow:0 13px 46px #00000022;overflow:hidden}
+.panel-inner{padding:25px}
+.panel-head{display:flex;align-items:start;justify-content:space-between;gap:12px;margin-bottom:19px}
+.section-id{font-size:10px;text-transform:uppercase;font-weight:900;color:#67c9fa;letter-spacing:.2em}
+.panel h2{margin:5px 0 7px;font-size:24px;letter-spacing:-.035em}
+.panel h3{font-size:16px;margin:0 0 10px}
+.help{color:#b2cfe0;font-size:12px;line-height:1.6;margin:0}
+form,.fields{display:grid;gap:13px}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:grid;gap:7px;min-width:0}
+.field label{color:#c8e5f4;font-size:11px;font-weight:750;letter-spacing:.01em}
+.field input,.field select,.field textarea{background:#06172a;color:#f2faff;border:1px solid #365471;min-height:44px;padding:10px 12px;border-radius:10px;width:100%;font-size:13px;min-width:0}
+.field input[type=color]{padding:5px;width:75px;cursor:pointer}
+.field input::placeholder,.field textarea::placeholder{color:#7799b1}
+.field textarea{resize:vertical;min-height:80px;line-height:1.6}
+.hint{font-size:11px;color:#9dbdd0;margin:8px 0 0;line-height:1.5}
+.actions{display:flex;align-items:center;flex-wrap:wrap;gap:9px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:11px;background:#21bdf1;border:1px solid #2ebeee;color:#001d31;padding:12px 15px;font-size:12px;font-weight:900;min-height:43px;text-align:center;line-height:1.3}
+.btn:hover:not(:disabled){filter:brightness(1.14)}
+.btn.secondary{background:#163551;color:#dff4ff;border-color:#49708b}
+.btn.ghost{background:transparent;color:#9edaff;border-color:#416783}
+.btn.small{padding:8px 11px;min-height:36px;font-size:11px}
+.uploads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.upload-tile{border:1px dashed #50728d;border-radius:12px;min-height:108px;display:grid;place-items:center;text-align:center;padding:12px;background:#061a2d;cursor:pointer}
+.upload-tile small{display:block;color:#90adbf;font-size:10px;line-height:1.4;margin-top:6px}
+.upload-tile span{font-size:24px}
+.upload-tile img{max-height:83px;max-width:100%;object-fit:cover;border-radius:8px;display:none}
+.upload-tile.has-image img{display:block}
+.upload-tile.has-image .upload-label{display:none}
+.u-input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:15px 19px;background:#091c2f;border-bottom:1px solid #2d4a65}
+.tabs button{white-space:nowrap;background:#122e49;color:#bdd5e6;border:1px solid #32516b;padding:10px 14px;border-radius:10px;font-size:11px;font-weight:850}
+.tabs button[aria-selected=true]{color:#041c2e;background:#84e6ff;border-color:#84e6ff}
+.tab-pane{display:none;padding:24px}
+.tab-pane.active{display:block}
+.tab-pane p{line-height:1.65;color:#bcd4e4;font-size:12px}
+.pills{display:grid;gap:9px}
+.pill-button{border:1px solid #375d79;border-radius:13px;background:#0a1a2d;text-align:left;padding:13px;color:#e6f7ff;font-weight:800;font-size:12px}
+.pill-button small{display:block;color:#96bcd3;font-size:10px;font-weight:500;margin-top:4px}
+.pill-button.selected{border-color:#68d4fa;box-shadow:inset 0 0 0 1px #67c1e8}
+.swatches{display:flex;flex-wrap:wrap;gap:7px}
+.swatch{width:34px;height:34px;border-radius:50%;border:2px solid #bceeff;box-shadow:0 0 0 2px #102842;cursor:pointer}
+.workspace-preview{display:grid;gap:19px;position:sticky;top:94px}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+.section-title h2{font-size:22px;letter-spacing:-.04em;margin:0}
+.eyechip{padding:8px 10px;border:1px solid #3a6079;border-radius:20px;color:#9fd5f3;font-weight:850;font-size:10px;letter-spacing:.11em}
+.artboard{padding:24px;background:#10263f;border-top:1px solid #2b4760}
+.card-stage{display:grid;grid-template-columns:minmax(0,1fr);gap:13px}
+.digital-card{position:relative;min-height:270px;background:linear-gradient(120deg,#061f3b,#0c4774);border:1px solid #4099be;border-radius:19px;box-shadow:0 18px 55px #0006;overflow:hidden;padding:30px;display:flex;flex-direction:column;justify-content:space-between;color:#fff}
+.digital-card:after{content:"";position:absolute;inset:-90px -60px auto auto;height:270px;width:310px;border:40px solid var(--brand-accent,#3dc9ff);border-radius:100%;opacity:.22;pointer-events:none}
+.digital-card.layout-classic{background:linear-gradient(135deg,#101722,#233044)}
+.digital-card.layout-bold{background:linear-gradient(135deg,#051325,#11637d)}
+.card-top{display:flex;gap:16px;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.card-company{font-size:13px;text-transform:uppercase;letter-spacing:.16em;font-weight:900;max-width:400px}
+.card-person{font-size:clamp(29px,3.1vw,45px);font-weight:900;letter-spacing:-.052em;line-height:1;margin-bottom:7px;overflow-wrap:anywhere;max-width:370px}
+.card-role{font-size:13px;color:#c6e6f6;margin-bottom:18px}
+.card-details{display:flex;gap:8px 18px;flex-wrap:wrap;font-size:12px;color:#def1fc;max-width:470px}
+.card-logo{width:72px;height:72px;object-fit:contain;filter:drop-shadow(0 4px 10px #0004)}
+.card-bottom{position:relative;z-index:1;display:flex;align-items:end;justify-content:space-between;gap:15px}
+.qr-white{background:#fff;width:107px;height:107px;padding:7px;border-radius:11px;display:grid;place-items:center;overflow:hidden}
+.qr-white svg{width:100%;height:100%;max-width:100%;max-height:100%}
+.qr-placeholder{display:grid;place-items:center;text-align:center;color:#819baa;font-size:9px}
+.card-watermark{color:#b8d9e9;font-size:10px;letter-spacing:.09em;opacity:.8}
+.artboard-foot{border-top:1px solid #2b4760;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.paper-section{border-top:1px solid #2d4965;margin-top:25px;padding-top:20px}
+.sheet{max-width:690px;min-height:430px;display:flex;flex-direction:column;overflow:hidden;border:1px solid #a7bdca;background:#fff;color:#112a3d;box-shadow:0 15px 35px #0003}
+.sheet-hero{height:195px;background:linear-gradient(135deg,#0f3758,#1b5f7a);display:flex;align-items:end;padding:23px;color:#fff;background-position:center;background-size:cover}
+.sheet-label{font-size:10px;letter-spacing:.19em;text-transform:uppercase;font-weight:800;color:#c0eeff}
+.sheet-head{font-size:34px;font-weight:900;letter-spacing:-.045em;line-height:1.05;max-width:480px;margin:7px 0}
+.sheet-body{display:grid;gap:18px;padding:25px}
+.sheet-services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.sheet-service{border-top:2px solid var(--brand-accent,#39c9f4);padding-top:10px;font-size:12px;font-weight:760;overflow-wrap:anywhere}
+.sheet-about{font-size:13px;line-height:1.65}
+.sheet-cta{margin-top:auto;background:#10334e;color:#fff;padding:19px 25px;font-size:14px;font-weight:850}
+.statusline{padding:12px 18px;color:#9cbed2;font-size:12px;border-top:1px solid #304d67;line-height:1.5}
+.notice{border-radius:12px;border:1px solid #567491;background:#0b2037;padding:13px;color:#b8d7e8;font-size:11px;line-height:1.65;margin:12px 0}
+.notice strong{color:#94e9ff}
+.integrate-grid{display:grid;gap:9px;margin:12px 0}
+.connect{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;border:1px solid #315572;border-radius:11px;background:#091a30}
+.connect strong{font-size:13px}
+.connect small{display:block;font-size:10px;color:#96bcd3;margin-top:4px}
+.connect button{padding:8px;border-radius:9px;background:#193a54;color:#9ab5c9;border:1px solid #466782;font-size:11px}
+.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;color:#aad3e8;word-break:break-all}
+.output{width:100%;min-height:110px;background:#041729;border:1px solid #365773;color:#dff7ff;font-size:12px;padding:13px;border-radius:10px;resize:vertical;line-height:1.5}
+.divider{height:1px;background:#294662;margin:17px 0}
+.footer{border-top:1px solid #2e4b66;padding:22px 0 32px;color:#9cbbce;font-size:11px}
+.footer a{color:#9ae4ff}
+#toast{position:fixed;z-index:99;bottom:22px;left:50%;transform:translateX(-50%);border:1px solid #67bed9;background:#103956;padding:12px 16px;border-radius:12px;color:#e4fbff;font-size:13px;max-width:min(460px,90%);box-shadow:0 12px 36px #0009;display:none}
+#toast.show{display:block}
+@media(max-width:990px){.hero-inner{grid-template-columns:1fr;gap:0;padding:45px 0}.hero-showcase{height:225px;margin:12px auto 0;width:min(590px,100%)}.workarea{grid-template-columns:1fr}.workspace-preview{position:static}.formgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:550px){.container{width:calc(100% - 26px)}.topinner{min-height:69px}.top-actions .state{display:none}.mark strong{font-size:10px}.mark small{font-size:8px}.mark-icon{width:38px;height:38px;font-size:22px}.hero-inner{padding:36px 0}.hero h1{font-size:clamp(38px,10vw,54px)}.hero p{font-size:13px}.hero-showcase{height:195px}.floating-card{padding:20px;border-radius:13px}.floating-card b{font-size:16px}.float-circle{width:70px;height:70px;font-size:35px;right:0}.float-logo{width:76px;height:64px;font-size:39px}.workarea{gap:16px}.panel-inner,.tab-pane{padding:18px}.formgrid{grid-template-columns:1fr}.uploads{gap:7px}.upload-tile{min-height:83px;padding:9px}.digital-card{min-height:235px;padding:20px}.card-person{font-size:29px}.card-logo{width:55px;height:55px}.card-details{font-size:10px}.qr-white{width:80px;height:80px}.artboard{padding:13px}.sheet-hero{height:150px}.sheet-head{font-size:26px}.sheet-body{padding:16px}.sheet-services{grid-template-columns:1fr}.top-actions a{font-size:10px}}
+@media print{@page{size:letter;margin:0.45in}html,body{margin:0;background:white;color:#000}.topbar,.hero,.privacy,.sidebar,.preview-label,.artboard-foot,.footer,#toast,.statusline{display:none!important}.container{width:100%}.workarea,.workspace-preview,.panel,.artboard{display:block!important;border:0!important;background:#fff!important;box-shadow:none!important;margin:0!important;padding:0!important}.panel>.panel-inner{padding:0!important}.print-hide{display:none!important}.sheet{width:7.6in;max-width:100%;height:9.6in;min-height:9.6in;box-shadow:none;break-inside:avoid;border:0}.paper-section{display:block!important;border:0;padding:0;margin:0}.sheet-hero{height:3.1in}.sheet-head{font-size:44px}.sheet-body{padding:0.4in}.sheet-cta{padding:0.35in}}
+</style>
+<script defer src="/vendor/qrcode-generator.js"></script>
+<script defer src="/creative-studio.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="container topinner">
+ <a href="/studio.html#card" class="mark"><span class="mark-icon">W</span><span><strong>WEBSITE LAUNCH ENGINE</strong><small>BUSINESS CREATIVE STUDIO</small></span></a>
+ <div class="top-actions"><span class="state"><span class="dot"></span>Private preview</span><a href="/studio.html#card">← Business Studio</a></div>
+</div></header>
+<section class="hero"><div class="container hero-inner">
+ <div><div class="eyebrow">ONE BUSINESS IDENTITY. EVERY CUSTOMER TOUCHPOINT.</div><h1>Create your brand.<br><em>Share it everywhere.</em></h1><p>Build an elegant digital business card, transparent logo, branded flyer, brochure and social media content from one editable profile. Export locally now; connected Google accounts and automated publishing stay gated until approved.</p><div class="hero-tools"><span>Digital cards + QR</span><span>Transparent PNG logos</span><span>Brand directions</span><span>Flyers + brochures</span><span>Project photos</span></div></div>
+ <div class="hero-showcase" aria-hidden="true"><div class="floating-card"><b>YOUR BUSINESS</b><small>BRAND. CONNECT. GROW.</small><p>THE NEXT GENERATION OF BUSINESS IDENTITY</p></div><div class="float-circle">⌁</div><div class="float-logo">W</div></div>
+</div></section>
+<div class="container privacy"><span><strong>Privacy-first:</strong> No files, contacts or profile data are uploaded by this demo. Share buttons open your device's own composer.</span><span>Staging feature demonstration · 2026</span></div>
+<main class="container workarea">
+<div class="sidebar">
+<section class="panel"><div class="panel-inner">
+ <div class="panel-head"><div><div class="section-id">01 / Your source of truth</div><h2>Business profile</h2><p class="help">Edit once. Card, logo, brochure and social content stay in sync.</p></div></div>
+ <div class="formgrid">
+  <div class="field"><label for="business">Business name</label><input id="business" maxlength="90" value="Your Premium Business"></div>
+  <div class="field"><label for="person">Your name</label><input id="person" maxlength="80" value="Your Name"></div>
+  <div class="field"><label for="role">Your title</label><input id="role" maxlength="65" value="Owner / Founder"></div>
+  <div class="field"><label for="industry">Industry</label><select id="industry"><option>Professional Services</option><option>Home Services</option><option>Construction</option><option>Epoxy Flooring</option><option>Real Estate</option><option>Roofing</option><option>Medical & Wellness</option><option>Consulting</option><option>Retail</option><option>Other</option></select></div>
+  <div class="field"><label for="phone">Business phone</label><input id="phone" inputmode="tel" maxlength="45" placeholder="(772) 209-0266"></div>
+  <div class="field"><label for="email">Business email</label><input id="email" type="email" maxlength="100" placeholder="hello@company.com"></div>
+  <div class="field"><label for="website">Website</label><input id="website" type="url" maxlength="190" placeholder="https://company.com"></div>
+  <div class="field"><label for="location">Service area / address</label><input id="location" maxlength="140" placeholder="City, State"></div>
+ </div>
+ <div class="fields" style="margin-top:13px"><div class="field"><label for="tagline">Tagline / promise</label><input id="tagline" maxlength="115" placeholder="Describe the real value you provide"></div><div class="field"><label for="about">About your business</label><textarea id="about" maxlength="1300" placeholder="What does your company do? Only verified facts will be reused."></textarea></div><div class="field"><label for="services">Services (separate with commas or new lines)</label><textarea id="services" maxlength="900" placeholder="Design consultation, Installation, Project support"></textarea></div></div>
+</div></section>
+<section class="panel"><div class="panel-inner">
+ <div class="section-id">02 / Asset collection</div><h2>Images & identity</h2><p class="help" style="margin-bottom:14px">Preview your real projects, personal portrait or logo. Nothing is stored on our servers in this demo.</p>
+ <div class="uploads">
+  <label class="upload-tile" id="portrait-tile" for="portrait-file"><span class="upload-label"><span>◉</span><small>Your photo</small></span><img id="portrait-img" alt="Your selected portrait"></label>
+  <label class="upload-tile" id="project-tile" for="project-file"><span class="upload-label"><span>▧</span><small>Project photo</small></span><img id="project-img" alt="Your selected project photo"></label>
+  <label class="upload-tile" id="logo-tile" for="logo-file"><span class="upload-label"><span>◇</span><small>Existing logo</small></span><img id="logo-img" alt="Your selected logo"></label>
+ </div>
+ <input class="u-input" id="portrait-file" type="file" accept="image/png,image/jpeg,image/webp">
+ <input class="u-input" id="project-file" type="file" accept="image/png,image/jpeg,image/webp">
+ <input class="u-input" id="logo-file" type="file" accept="image/png,image/jpeg,image/webp">
+ <p class="hint">JPEG, PNG or WebP, up to 5 MB per file. Use only images you own or have permission to publish. Browser-session preview only.</p>
+</div></section>
+<section class="panel">
+ <div class="tabs" role="tablist" aria-label="Creative tools">
+  <button type="button" role="tab" aria-selected="true" data-tab="card" id="tab-card">Card</button>
+  <button type="button" role="tab" aria-selected="false" data-tab="brand" id="tab-brand">Brand + Logo</button>
+  <button type="button" role="tab" aria-selected="false" data-tab="print" id="tab-print">Flyer + Brochure</button>
+  <button type="button" role="tab" aria-selected="false" data-tab="social" id="tab-social">Social</button>
+  <button type="button" role="tab" aria-selected="false" data-tab="connect" id="tab-connect">Connect</button>
+ </div>
+ <div id="pane-card" class="tab-pane active" role="tabpanel" aria-labelledby="tab-card">
+  <div class="section-id">03 / Digital business card</div><h2>Make a lasting introduction.</h2><p>Generate a scannable QR that stays on-device, download your digital card graphic, save a contact file, or open an email or text draft.</p>
+  <div class="field"><label for="qr-mode">QR code contents</label><select id="qr-mode"><option value="website">Business website (when supplied)</option><option value="vcard">Contact card (vCard 3.0)</option></select></div>
+  <div class="notice">A QR containing personal contact details is readable by anyone who scans it. Choose the website option for public-facing cards when possible.</div>
+  <div class="actions">
+    <button type="button" class="btn" id="share-email">✉ Email card</button>
+    <button type="button" class="btn secondary" id="share-sms">▣ Text card</button>
+    <button type="button" class="btn secondary" id="share-copy">Copy details</button>
+    <button type="button" class="btn ghost" id="save-vcard">↓ Contact .vcf</button>
+    <button type="button" class="btn ghost" id="save-card">↓ Card SVG</button>
+    <button type="button" class="btn ghost" id="save-qr">↓ QR SVG</button>
+  </div>
+  <p class="hint">Email and SMS open your own composer. No message is sent automatically and this preview does not pretend to host a public card URL.</p>
+ </div>
+ <div id="pane-brand" class="tab-pane" role="tabpanel" aria-labelledby="tab-brand">
+  <div class="section-id">04 / Branding lab</div><h2>Discover your look.</h2><p>Choose a visual direction, tune the accent, and create a transparent vector logo. AI-rendered logos require a separately bound image provider.</p>
+  <div class="fields"><div class="field"><label for="design">Design direction</label><select id="design"><option value="modern">Modern / Architectural</option><option value="classic">Classic / Refined</option><option value="bold">Bold / Contemporary</option></select></div>
+  <div class="field"><label for="mark">Logo mark</label><select id="mark"><option value="orbit">Orbit emblem</option><option value="crest">Architectural crest</option><option value="monogram">Minimal monogram</option></select></div>
+  <div class="field"><label for="accent">Accent color</label><div class="actions"><input id="accent" type="color" value="#34caff" aria-label="Accent color"><span id="accent-hex" class="mono">#34CAFF</span></div></div></div>
+  <div class="divider"></div>
+  <div class="actions"><button type="button" class="btn" id="create-brands">✦ Generate 3 brand directions</button></div>
+  <div id="brand-directions" class="pills" style="margin:13px 0" aria-live="polite"></div>
+  <div class="actions"><button type="button" class="btn secondary" id="save-logo-svg">↓ Transparent logo SVG</button><button type="button" class="btn secondary" id="save-logo-png">↓ Transparent logo PNG</button><button type="button" class="btn ghost" id="save-brand">↓ Brand brief</button></div>
+  <p class="hint">Vector logo exports contain no background layer. Uploaded logos are not automatically background-removed.</p>
+ </div>
+ <div id="pane-print" class="tab-pane" role="tabpanel" aria-labelledby="tab-print">
+  <div class="section-id">05 / Business collateral</div><h2>Brochure + flyer generator</h2><p>Your company facts, uploaded project image, services and brand palette flow directly into ready-to-print layouts.</p>
+  <div class="field"><label for="print-type">Format</label><select id="print-type"><option value="flyer">One-page digital flyer</option><option value="brochure">Digital brochure / service sheet</option></select></div>
+  <div class="actions" style="margin-top:14px"><button type="button" class="btn" id="make-copy">Generate draft copy</button><button type="button" class="btn secondary" id="print-pdf">Print / Save PDF</button><button type="button" class="btn ghost" id="copy-brochure">Copy text</button></div>
+  <p class="hint">Print uses your browser's PDF printer. Verify all claims before publishing or emailing. No fabricated reviews, pricing or guarantees.</p>
+ </div>
+ <div id="pane-social" class="tab-pane" role="tabpanel" aria-labelledby="tab-social">
+  <div class="section-id">06 / Social media</div><h2>Generate consistent content.</h2><p>Create editable captions from your approved business facts and the same brand direction. This does not publish anything.</p>
+  <div class="field"><label for="social-network">Platform</label><select id="social-network"><option>Instagram</option><option>Facebook</option><option>LinkedIn</option><option>Google Business Profile</option></select></div>
+  <div class="actions" style="margin:15px 0"><button type="button" class="btn" id="make-social">✦ Draft social post</button><button type="button" class="btn secondary" id="copy-social">Copy caption</button></div>
+  <label class="field" for="social-output">Generated caption</label><textarea class="output" id="social-output" aria-label="Social caption draft" placeholder="Your draft appears here."></textarea>
+  <p class="hint">Social networks, automated replies, and scheduling remain disconnected pending owner authorization.</p>
+ </div>
+ <div id="pane-connect" class="tab-pane" role="tabpanel" aria-labelledby="tab-connect">
+  <div class="section-id">07 / Connected workspace</div><h2>Google + enrichment</h2><p>Connect personal or business Google accounts per customer tenant. The buttons remain unavailable until authenticated consent and encrypted token storage are in place.</p>
+  <div class="integrate-grid">
+   <div class="connect"><span><strong>Gmail</strong><small>Compose or send approved cards and brochures</small></span><button disabled title="Google OAuth is not bound in this preview">Not connected</button></div>
+   <div class="connect"><span><strong>Google Calendar</strong><small>Consultation links, availability and appointments</small></span><button disabled title="Google OAuth is not bound in this preview">Not connected</button></div>
+   <div class="connect"><span><strong>Google Contacts</strong><small>Import selected contacts with consent</small></span><button disabled title="Google OAuth is not bound in this preview">Not connected</button></div>
+  </div>
+  <div class="divider"></div>
+  <div class="field"><label for="business-url-research">Your owned business website</label><input id="business-url-research" type="url" placeholder="https://yourcompany.com"></div>
+  <button class="btn secondary" type="button" disabled title="Authenticated public-business enrichment is not bound in this preview" style="margin-top:12px">Research website (secure connection required)</button>
+  <div class="notice"><strong>Research policy:</strong> Only owner-authorized public business pages, respecting site restrictions and provenance. No private-person skip tracing, hidden-contact harvesting, or invented business facts.</div>
+  <div class="field"><label for="paste-source">Or paste business facts from your own website</label><textarea id="paste-source" maxlength="5000" placeholder="Paste verified about/services/contact text that you own. We will create editable suggestions locally."></textarea></div>
+  <button class="btn ghost" type="button" id="suggest-from-paste" style="margin-top:10px">Suggest from pasted text</button>
+  <div id="source-suggestions" class="notice" aria-live="polite">No source text imported. Review any suggested facts before using them.</div>
+ </div>
+</section>
+</div>
+<div class="workspace-preview">
+<section class="panel">
+ <div class="panel-inner preview-label"><div class="section-title"><h2>Live card preview</h2><span class="eyechip">INSTANT RENDER</span></div><p class="help">Your card changes as you edit, without uploading your personal details.</p></div>
+ <div class="artboard">
+  <div class="card-stage"><div id="card-preview" class="digital-card">
+    <div class="card-top"><div><div id="card-business" class="card-company">YOUR PREMIUM BUSINESS</div><span id="card-tagline" style="color:#c7e6f5;font-size:11px">Your story. Your next opportunity.</span></div><img id="card-logo" class="card-logo" alt="Logo graphic" src="" style="display:none"></div>
+    <div class="card-bottom"><div><div class="card-person" id="card-name">Your Name</div><div class="card-role" id="card-job">Owner / Founder</div><div class="card-details"><span id="card-phone"></span><span id="card-email"></span><span id="card-website"></span></div><p class="card-watermark">DIGITAL CONTACT CARD · PRIVATE DESIGN PREVIEW</p></div><div class="qr-white" id="qr-preview" aria-label="Generated QR code"><div class="qr-placeholder">Enter a website or details for QR</div></div></div>
+  </div></div>
+ </div><div class="artboard-foot"><span class="mono" id="brand-summary">MODERN / #34CAFF</span><span class="mono">Logo + QR + contact card</span></div>
+</section>
+<section class="panel paper-section">
+ <div class="panel-inner preview-label"><div class="section-title"><h2>Flyer / brochure proof</h2><span class="eyechip">PRINT READY DRAFT</span></div><p class="help">A live business-ready document surface, built from the same facts and approved project imagery.</p></div>
+ <div class="artboard"><article id="print-sheet" class="sheet"><div class="sheet-hero" id="sheet-hero"><div><div class="sheet-label" id="sheet-label">BUSINESS OVERVIEW</div><div class="sheet-head" id="sheet-title">Your Premium Business</div><div id="sheet-tagline" style="font-size:15px">Your next project starts here.</div></div></div><div class="sheet-body"><div class="sheet-about" id="sheet-about">Describe your business to complete your document.</div><div class="sheet-services" id="sheet-services"></div><div><strong style="display:block;font-size:12px;margin-bottom:6px;color:#254960">PROJECT / BRAND PHOTOGRAPHY</strong><img id="sheet-project-img" alt="Selected project or company image" style="display:none;max-height:170px;width:100%;object-fit:cover;border-radius:9px"></div></div><div class="sheet-cta" id="sheet-cta">Connect with us · Contact details will appear here</div></article></div>
+ <div class="statusline">Draft: content is based only on information you enter or explicitly review. Print or save PDF when ready.</div>
+</section>
+<section class="panel print-hide"><div class="panel-inner"><div class="section-title"><h2>Identity system preview</h2><span class="eyechip">TRANSPARENT SVG</span></div><div style="display:flex;gap:19px;align-items:center;flex-wrap:wrap"><div id="logo-preview" style="width:155px;height:155px;border:1px dashed #6f95b4;border-radius:15px;display:grid;place-items:center;background:linear-gradient(45deg,#dde9f1 25%,transparent 25%,transparent 75%,#dde9f1 75%),linear-gradient(45deg,#dde9f1 25%,#fff 25%,#fff 75%,#dde9f1 75%);background-size:22px 22px;background-position:0 0,11px 11px"></div><div style="flex:1;min-width:170px"><strong>Transparent by design</strong><p class="help" style="margin-top:6px">Generated wordmark and symbol download as background-free SVG or PNG for use on your website, card, brochure, and social materials.</p></div></div></div></section>
+</div>
+</main>
+<footer class="footer"><div class="container">WEBSITE LAUNCH ENGINE · By Strategic Minds AI · Florida · <a href="tel:+17722090266">(772) 209-0266</a> · <a href="/studio.html#card">Return to Business Studio</a><p>Private, noindex preview. Google account access, external messaging, hosted profiles and AI rendering require separately approved live integrations.</p></div></footer>
+<div role="status" aria-live="polite" id="toast"></div>
+</body></html>
