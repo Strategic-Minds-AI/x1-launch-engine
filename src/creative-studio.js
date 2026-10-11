@@ -270,16 +270,22 @@ for(const [type,id] of [['portrait','portrait-file'],['project','project-file'],
    All communication is height-only, same-origin; never share profile data. */
 if(new URLSearchParams(location.search).get('embedded')==='client'){
  document.documentElement.classList.add('client-embed');
- let previousHeight=0;
+ // Measure actual content, not document.body.scrollHeight. The old approach
+ // included the parent-controlled iframe viewport height, causing an endless
+ // resize feedback loop (observed iframe height 8,003 px).
+ const contentRoot=document.querySelector('main.workarea');
+ let lastContentHeight=0;
  const notifyHeight=()=>{
-  if(window.parent===window)return;
-  const h=Math.max(document.body.scrollHeight,document.documentElement.scrollHeight);
-  if(h!==previousHeight && h>=300 && h<=8000){
-   previousHeight=h;
+  if(window.parent===window || !contentRoot)return;
+  const h=Math.ceil(contentRoot.getBoundingClientRect().height)+24;
+  if(h>=300 && h<=6500 && Math.abs(h-lastContentHeight)>3){
+   lastContentHeight=h;
    window.parent.postMessage({type:'wle-creative-frame-height',height:h},location.origin);
   }
  };
- if(typeof ResizeObserver!=='undefined')new ResizeObserver(notifyHeight).observe(document.body);
+ if(typeof ResizeObserver!=='undefined' && contentRoot){
+  new ResizeObserver(()=>requestAnimationFrame(notifyHeight)).observe(contentRoot);
+ }
  window.addEventListener('load',notifyHeight);
  window.addEventListener('resize',notifyHeight);
  requestAnimationFrame(notifyHeight);
