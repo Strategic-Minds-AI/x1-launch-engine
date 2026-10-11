@@ -48,3 +48,11 @@ Rollback: remove/disable these branch-only changes; leave production, current Ra
 - Fixed preview source changed in src/wle-staging-runner/provision-preview.mjs, with a test enforcing no broken /studio.html hrefs.
 - First preview dpl_2KNwWsRj9nBZRAoyxy6WY1GhjHc3 remains an immutable historical partial validation result with dead standalone Studio links; use only follow-up preview for review.
 - No production site, GitHub main, Railway service/configuration, Supabase schema/queue, secrets, customer data, DNS, payments or outbound messages were changed in this follow-up.
+
+
+## Strict deployment-bound source verification
+- Fresh preview deployed HTML equals the deterministic synthetic fixture transformation **exactly as a prefix**. Vercel appends a 163-character feedback-toolbar script after </html>; its deployment ID is dpl_AyPeZPFMBy7p3ZUA8dcGXYbFq85k.
+- Read-back verifies this is *exactly* the one expected async script from https://vercel.live/_next-live/feedback/feedback.js, bound to the actual deployment ID. No unrecognized trailing content was present.
+- HTTP 200; actual x-robots-tag is "noindex, nofollow"; canonical donor Git blob bf92408e9c495254f6a6c660b8bddd765cf6af62; no stale relative Studio anchor remains.
+- Updated provision-preview.mjs to strip **only** a deployment-bound exact Vercel toolbar suffix for the content-hash check; all other appended or altered content fails closed.
+- Added tests for legitimate toolbar, wrong deployment ID, unrecognized appended JavaScript, in-place source drift and source policy. Locally adapted authoring test suite: 16/16 passed with Node 22. This is NOT GitHub Actions/CI certification of PR's immutable head SHA, and does not prove Railway autonomous provisioning.
