@@ -1,0 +1,33 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import handler from "../api/platform-health.js";
+function request(method = "GET") {
+  const res = { headers: {}, code: 200, body: undefined,
+    setHeader(k, v) { this.headers[k] = v; },
+    status(x) { this.code = x; return this; },
+    json(x) { this.body = x; return this; } };
+  return { req: {method}, res };
+}
+test("staging status fails closed without config", async () => {
+  const prevUrl=process.env.WLE_STAGING_SUPABASE_URL,prevKey=process.env.WLE_STAGING_SUPABASE_PUBLISHABLE_KEY;
+  delete process.env.WLE_STAGING_SUPABASE_URL;delete process.env.WLE_STAGING_SUPABASE_PUBLISHABLE_KEY;
+  const {req,res}=request();await handler(req,res);
+  assert.equal(res.code,200);assert.equal(res.body.supabase,"NOT_CONFIGURED");
+  assert.equal(res.body.missionSubmission,"DISABLED");
+  assert.equal(res.body.railway,"ONLINE_WORKERS_NOT_BOUND");
+  assert.equal(res.headers["Cache-Control"],"no-store, max-age=0");
+  if(prevUrl)process.env.WLE_STAGING_SUPABASE_URL=prevUrl;
+  if(prevKey)process.env.WLE_STAGING_SUPABASE_PUBLISHABLE_KEY=prevKey;
+});
+test("status endpoint rejects mutations",async()=>{
+  const {req,res}=request("POST");await handler(req,res);
+  assert.equal(res.code,405);assert.equal(res.body.error,"method_not_allowed");
+});
+test("staging endpoint hostname is pinned",async()=>{
+  const oldUrl=process.env.WLE_STAGING_SUPABASE_URL,oldKey=process.env.WLE_STAGING_SUPABASE_PUBLISHABLE_KEY;
+  process.env.WLE_STAGING_SUPABASE_URL="https://malicious.example/";process.env.WLE_STAGING_SUPABASE_PUBLISHABLE_KEY="test";
+  const {req,res}=request();await handler(req,res);
+  assert.equal(res.body.supabase,"CONFIGURATION_REJECTED");
+  if(oldUrl)process.env.WLE_STAGING_SUPABASE_URL=oldUrl;else delete process.env.WLE_STAGING_SUPABASE_URL;
+  if(oldKey)process.env.WLE_STAGING_SUPABASE_PUBLISHABLE_KEY=oldKey;else delete process.env.WLE_STAGING_SUPABASE_PUBLISHABLE_KEY;
+});
