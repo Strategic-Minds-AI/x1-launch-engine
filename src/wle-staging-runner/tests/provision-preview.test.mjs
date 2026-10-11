@@ -107,3 +107,30 @@ test('validator blocks wrong host and byte drift', async () => {
     fetchImpl: async () => new Response(artifact.html + 'changed', { status: 200 }),
   }), /LIVE_ARTIFACT_HASH_MISMATCH/);
 });
+
+test('allows only deployment-bound Vercel preview toolbar after exact source', async () => {
+  const id = 'dpl_AyPeZPFMBy7p3ZUA8dcGXYbFq85k';
+  const toolbar = '<script async data-explicit-opt-in="true" data-deployment-id="' +
+    id + '" src="https://vercel.live/_next-live/feedback/feedback.js"></script>';
+  const result = await verifyPreviewBytes({
+    url: 'https://' + previewHost + '/',
+    artifact, deploymentId: id,
+    fetchImpl: async () => new Response(artifact.html + toolbar, {
+      status: 200, headers: { 'x-robots-tag': 'noindex, nofollow' },
+    }),
+  });
+  assert.equal(result.status, 'PASS');
+});
+
+test('blocks unapproved appendages and mismatched Vercel deployment IDs', async () => {
+  const id = 'dpl_AyPeZPFMBy7p3ZUA8dcGXYbFq85k';
+  const mismatched = '<script async data-explicit-opt-in="true" data-deployment-id="dpl_Other123"' +
+    ' src="https://vercel.live/_next-live/feedback/feedback.js"></script>';
+  for (const trailer of [mismatched, '<script src="https://untrusted.invalid/spy.js"></script>']) {
+    await assert.rejects(() => verifyPreviewBytes({
+      url: 'https://' + previewHost + '/',
+      artifact, deploymentId: id,
+      fetchImpl: async () => new Response(artifact.html + trailer, { status: 200 }),
+    }), /UNEXPECTED_PREVIEW_INJECTION/);
+  }
+});
