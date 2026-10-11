@@ -73,8 +73,10 @@ export async function supa(conf,path,{method='GET',body=null,privileged=false,to
  // 'path' must be compiled by trusted server code, never a client-supplied URL.
  if(!/^(\/auth\/v1\/|\/rest\/v1\/)/.test(path))throw Error('UNSUPPORTED_SUPABASE_ROUTE');
  const h={'apikey':privileged?conf.serviceKey:conf.publicKey,'Accept':'application/json',...headers};
- if(privileged)h.Authorization='Bearer '+conf.serviceKey;
- else if(token)h.Authorization='Bearer '+token;
+ // Modern sb_secret_ keys belong in apikey only; the hosted gateway applies
+ // service privileges. Legacy service_role JWTs still use Bearer authorization.
+ if(privileged && !conf.serviceKey.startsWith('sb_secret_'))h.Authorization='Bearer '+conf.serviceKey;
+ else if(!privileged&&token)h.Authorization='Bearer '+token;
  if(body!==null)h['Content-Type']='application/json';
  const response=await fetch(conf.base+path,{
   method,headers:h,body:body===null?undefined:JSON.stringify(body),
