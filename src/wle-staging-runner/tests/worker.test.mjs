@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { buildSyntheticHtml,validateClaim } from "../worker.mjs";
-const donor=readFileSync(new URL("../../templates/roofing.html",import.meta.url),"utf8");
+const donor=readFileSync(new URL("../fixtures/roofing.html",import.meta.url),"utf8");
 const workId="d457ae30-f320-465e-8efa-93b5dbe54918";
 const base={work_id:workId,tenant_id:"666f23bf-61bd-4be0-b5cb-4872e04fad9b",source_sha:"56f5cf7a0f6bffbe8e9ecb44ebbd69aece4e9d99",work_packet_id:"WLE-SB-RAILWAY-20261011-001",action_class:"NON_PRODUCTION_MUTATION",payload:{kind:"WLE_SYNTHETIC_ROOFING_PREVIEW_V1",release_mode:"preview_only",no_customer_data:true,uses_external_model:false,requires_domain_purchase:false},lease:{holderAgentId:"wle-staging-railway-targeted-20261011",leaseId:"f3a8efee-bf1f-4a4b-a822-b12756e55cf8",expiresAt:new Date(Date.now()+3600000).toISOString()}};
 test("pinned output remains fictional and noindex",()=>{const s=buildSyntheticHtml(donor);assert.equal(createHash("sha256").update(s).digest("hex"),"3db4e69029722995f4fd01ddd235f3e60520b64a3fc859db3df8978ba8e3c75f");assert.match(s,/noindex,nofollow/);});
