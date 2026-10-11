@@ -10,6 +10,10 @@ Date: 2026-10-11. Source document is candidate Project knowledge; use live conne
 - Supabase/Railway stage integration https://github.com/Strategic-Minds-AI/website-launch-engine/pull/4
 - APEX Builder https://github.com/Strategic-Minds-AI/website-launch-engine/pull/5
 - One-shot X1 Railway canary https://github.com/Strategic-Minds-AI/website-launch-engine/pull/6
+- Parallel staging preview-runner with operator-created fresh noindex preview (not X1 worker autonomously provisioned): https://github.com/Strategic-Minds-AI/website-launch-engine/pull/7
+- This session's Project Instructions / evidence registry draft: https://github.com/Strategic-Minds-AI/website-launch-engine/pull/8
+- PR7 noindex preview: https://website-launch-engine-93x0z77dy-strategic-minds-advisory.vercel.app/ ; Vercel dpl_2KNwWsRj9nBZRAoyxy6WY1GhjHc3
+- PR7 head SHA 1d01585fac98bd4bf92be0c84fd6036d48b64510; Vercel file API path must be relative to project root src/ to avoid READY/404 errors.
 - Head commit https://github.com/Strategic-Minds-AI/website-launch-engine/commit/791e50f52c99699835c989d579faf6716a63a4b9
 - Source docs in PR6 head: docs/SOURCE_TRUTH.md, docs/RELEASE_CHECKLIST.md, docs/BACKEND_CONTRACT.md, docs/WLE_RAILWAY_X1_ONE_SHOT_VERIFIED_20261011.md.
 - Vercel 404 recovery source in PR4 head: docs/WLE_NEW_VERCEL_404_RECOVERY_20261011.md.
