@@ -1,6 +1,6 @@
 import {test,after} from 'node:test';
 import assert from 'node:assert/strict';
-import {stageConfig,cleanProfile,canWrite,isUuid,checkOrigin} from '../src/_internal/wle-customer-session.js';
+import {stageConfig,cleanProfile,canWrite,isUuid,checkOrigin} from '../src/api/_internal/wle-customer-session.js';
 import sessionHandler from '../src/api/client/session.js';
 import loginHandler from '../src/api/client/login.js';
 import draftHandler from '../src/api/client/drafts.js';
