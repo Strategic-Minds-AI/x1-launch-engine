@@ -1,4 +1,4 @@
-import {common,respond,stageConfig,session,isSafeMutation,parseJsonBody,cleanProfile,canWrite,isUuid,supa} from '../../_internal/wle-customer-session.js';
+import {common,respond,stageConfig,session,isSafeMutation,parseJsonBody,cleanProfile,canWrite,isUuid,supa} from '../_internal/wle-customer-session.js';
 const kind='business_card';
 function tenantArg(req,body){
  const value=req.method==='GET'?req.query?.tenant_id:body?.tenant_id;
