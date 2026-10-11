@@ -7,11 +7,11 @@
 'use strict';
 const $=id=>document.getElementById(id);
 const dataIds=['business','person','role','industry','phone','email','website','location','tagline','about','services'];
-const state={accent:'#34caff',design:'modern',mark:'orbit',qrSvg:'',logoSvg:'',photos:{portrait:'',project:'',logo:''},generatedBrief:'',generatedSocial:''};
+const state={accent:'#0675f9',design:'modern',mark:'orbit',qrSvg:'',logoSvg:'',photos:{portrait:'',project:'',logo:''},generatedBrief:'',generatedSocial:''};
 const get=id=>($(id)?.value||'').trim();
 const setText=(id,value)=>{const el=$(id);if(el)el.textContent=value||'';};
 const escapeXml=value=>String(value||'').replace(/[<>&"']/g,ch=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[ch]));
-const safelyColor=value=>/^#[0-9a-fA-F]{6}$/.test(value||'')?value:'#34caff';
+const safelyColor=value=>/^#[0-9a-fA-F]{6}$/.test(value||'')?value:'#0675f9';
 const safeWebsite=()=>{
  const v=get('website');if(!v)return '';
  try{const u=new URL(v);return u.protocol==='https:'?u.href:''}catch{return ''}
@@ -135,7 +135,7 @@ for(const id of ['design','mark','qr-mode','print-type']){
 $('accent').addEventListener('input',()=>{state.accent=safelyColor(get('accent'));refresh()});
 $('create-brands').addEventListener('click',()=>{
  const opts=[
-  {name:'AQUA | Coastal Precision',design:'modern',mark:'orbit',accent:'#34caff',note:'Crisp, contemporary, blue-forward'},
+  {name:'LAUNCH BLUE | Homepage Match',design:'modern',mark:'orbit',accent:'#0675f9',note:'Our signature royal blue, white and midnight navy'},
   {name:'ONYX | Architectural Authority',design:'classic',mark:'crest',accent:'#dbb978',note:'Elegant dark neutrals with warm accent'},
   {name:'ELECTRIC | Future-Ready',design:'bold',mark:'monogram',accent:'#8ee8ab',note:'Energetic, high contrast, confident'}
  ];
@@ -265,6 +265,24 @@ for(const [type,id] of [['portrait','portrait-file'],['project','project-file'],
   reader.onerror=()=>toast('Could not read the image');
   reader.readAsDataURL(file);
  });
+}
+/* Reuse the same tool, embedded inside the existing customer admin navigation.
+   All communication is height-only, same-origin; never share profile data. */
+if(new URLSearchParams(location.search).get('embedded')==='client'){
+ document.documentElement.classList.add('client-embed');
+ let previousHeight=0;
+ const notifyHeight=()=>{
+  if(window.parent===window)return;
+  const h=Math.max(document.body.scrollHeight,document.documentElement.scrollHeight);
+  if(h!==previousHeight && h>=300 && h<=8000){
+   previousHeight=h;
+   window.parent.postMessage({type:'wle-creative-frame-height',height:h},location.origin);
+  }
+ };
+ if(typeof ResizeObserver!=='undefined')new ResizeObserver(notifyHeight).observe(document.body);
+ window.addEventListener('load',notifyHeight);
+ window.addEventListener('resize',notifyHeight);
+ requestAnimationFrame(notifyHeight);
 }
 state.design=get('design');state.mark=get('mark');state.accent=safelyColor(get('accent'));refresh();
 const requested=location.hash.replace('#','');if(['card','brand','print','social','connect'].includes(requested))setTab(requested);
