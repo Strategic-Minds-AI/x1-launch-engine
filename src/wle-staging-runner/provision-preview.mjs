@@ -52,14 +52,16 @@ export function buildPreviewRequest(artifact, sourceBlobSha) {
   insist(sha256(artifact.html) === artifact.sha256, 'HASH_MISMATCH');
   insist(Buffer.byteLength(artifact.html, 'utf8') <= MAX_HTML_BYTES, 'PREVIEW_TOO_LARGE');
 
-  // Existing Vercel project root is src/. File API entries are relative to
-  // that root. Using src/index.html here produces a READY but 404 deployment.
+  // Live inlined Vercel API test (2026-10-11): the files manifest must
+  // CONTAIN the configured project root src/. Root-level index.html alone
+  // fails with NOW_SANDBOX_WORKER_ROOTDIR_NOT_EXIST. src/index.html and
+  // src/vercel.json produced a READY/HTTP 200 preview; no production alias.
   return {
     name: SCOPE.projectName,
     project: SCOPE.projectId,
     files: [
-      { file: 'index.html', data: artifact.html, encoding: 'utf-8' },
-      { file: 'vercel.json', encoding: 'utf-8', data: JSON.stringify({
+      { file: 'src/index.html', data: artifact.html, encoding: 'utf-8' },
+      { file: 'src/vercel.json', encoding: 'utf-8', data: JSON.stringify({
         version: 2,
         headers: [{ source: '/(.*)', headers: [
           { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
