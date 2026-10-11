@@ -14,7 +14,13 @@ const escapeXml=value=>String(value||'').replace(/[<>&"']/g,ch=>({'<':'&lt;','>'
 const safelyColor=value=>/^#[0-9a-fA-F]{6}$/.test(value||'')?value:'#0675f9';
 const safeWebsite=()=>{
  const v=get('website');if(!v)return '';
- try{const u=new URL(v);return u.protocol==='https:'?u.href:''}catch{return ''}
+ try{
+  const u=new URL(v);
+  if(u.protocol!=='https:'||u.username||u.password||!u.hostname.includes('.')||
+     /(?:^|\.)(?:localhost|local|internal|test)$/.test(u.hostname)||
+     /^(?:\d{1,3}\.){3}\d{1,3}$/.test(u.hostname))return '';
+  return u.href;
+ }catch{return ''}
 };
 const company=()=>get('business')||'Your Business';
 const serviceList=()=>get('services').split(/[\n,]+/).map(x=>x.trim()).filter(Boolean).slice(0,6);
@@ -57,20 +63,28 @@ function updateLogo(){
  else $('card-logo').src=logoUrl(state.logoSvg);
  $('card-logo').style.display='block';
 }
-function qrContent(){const url=safeWebsite();return get('qr-mode')==='website'&&url?url:vCard()}
+// Do not silently leak a personal-contact vCard when a website is missing.
+function qrContent(){return get('qr-mode')==='website'?safeWebsite():vCard()}
 function updateQr(){
  const content=qrContent();
  try{
+  if(!content)throw Error('QR_DESTINATION_MISSING');
   if(typeof qrcode!=='function')throw Error('LOCAL_QR_LIBRARY_NOT_LOADED');
   if(content.length>1200)throw Error('QR_DATA_TOO_LARGE');
   const qr=qrcode(0,'M');qr.addData(content,'Byte');qr.make();
   state.qrSvg=qr.createSvgTag({cellSize:6,margin:2,scalable:true});
   $('qr-preview').innerHTML=state.qrSvg;
   $('qr-preview').setAttribute('data-qr-state','ready');
+  $('save-qr').disabled=false;
+  setText('qr-status',get('qr-mode')==='website'?'QR points to your HTTPS business website.':'QR contains contact details. Share only with consent.');
  }catch(e){
   state.qrSvg='';$('qr-preview').replaceChildren();
-  const p=document.createElement('div');p.className='qr-placeholder';p.textContent='QR unavailable';$('qr-preview').append(p);
-  $('qr-preview').setAttribute('data-qr-state','error');
+  const p=document.createElement('div');p.className='qr-placeholder';
+  p.textContent=!content?'Enter an HTTPS website first':'QR unavailable. Check your details.';
+  $('qr-preview').append(p);
+  $('qr-preview').setAttribute('data-qr-state',!content?'missing':'error');
+  $('save-qr').disabled=true;
+  setText('qr-status',!content?'Add a valid HTTPS website or choose Contact card to generate a QR.':'QR could not be generated. Reduce the information.');
  }
 }
 function updateCard(){
@@ -121,9 +135,22 @@ function refresh(){updateCard();updateLogo();updateQr();updatePaper()}
 function setTab(tab){
  document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===tab)));
  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.toggle('active',p.id==='pane-'+tab));
+ document.querySelectorAll('[data-tab]').forEach(b=>b.tabIndex=b.dataset.tab===tab?0:-1);
  const u=new URL(location.href);u.hash=tab;history.replaceState({},'',u);
 }
-document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
+const tabButtons=Array.from(document.querySelectorAll('[data-tab]'));
+tabButtons.forEach(b=>{
+ b.addEventListener('click',()=>setTab(b.dataset.tab));
+ b.addEventListener('keydown',e=>{
+  if(!['ArrowRight','ArrowLeft','Home','End'].includes(e.key))return;
+  e.preventDefault();
+  const i=tabButtons.indexOf(b);
+  const target=e.key==='Home'?0:e.key==='End'?tabButtons.length-1:
+      (i+(e.key==='ArrowRight'?1:-1)+tabButtons.length)%tabButtons.length;
+  tabButtons[target].focus();
+  setTab(tabButtons[target].dataset.tab);
+ });
+});
 dataIds.forEach(id=>$(id).addEventListener('input',refresh));
 for(const id of ['design','mark','qr-mode','print-type']){
  $(id).addEventListener('change',()=>{
@@ -169,7 +196,7 @@ $('save-logo-png').addEventListener('click',()=>{
 $('save-brand').addEventListener('click',()=>download(slug(company())+'-brand-brief.txt',buildBrandBrief(),'text/plain;charset=utf-8'));
 $('save-vcard').addEventListener('click',()=>download(slug(company())+'-contact.vcf',vCard(),'text/vcard;charset=utf-8'));
 $('save-qr').addEventListener('click',()=>{
- if(!state.qrSvg){toast('Enter a valid website or contact details for QR');return;}
+ if(!state.qrSvg){toast('Enter an HTTPS website or select Contact card QR first');return;}
  download(slug(company())+'-qr.svg',state.qrSvg,'image/svg+xml;charset=utf-8');
 });
 function shareText(){
@@ -177,7 +204,7 @@ function shareText(){
  return lines.join(' | ');
 }
 $('share-email').addEventListener('click',()=>{
- const subject='Business card: '+company(),body=shareText()+'\n\nSave my contact details from the vCard attachment if supplied by the sender.';
+ const subject='Business card: '+company(),body=shareText()+'\n\nThis message is a contact introduction; no attachment is sent automatically.';
  location.href='mailto:?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
  toast('Email draft opened in your device app. No email sent by this site.');
 });
@@ -256,14 +283,30 @@ $('suggest-from-paste').addEventListener('click',suggestFromPaste);
 for(const [type,id] of [['portrait','portrait-file'],['project','project-file'],['logo','logo-file']]){
  $(id).addEventListener('change',event=>{
   const file=event.target.files?.[0];if(!file)return;
-  if(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>5*1024*1024||file.size===0){toast('Please choose PNG, JPG or WebP under 5 MB');event.target.value='';return}
-  const reader=new FileReader();
-  reader.onload=()=>{
-   if(typeof reader.result!=='string'||!reader.result.startsWith('data:image/')){toast('Invalid image data');return}
-   state.photos[type]=reader.result;const img=$(type+'-img');img.src=reader.result;$(type+'-tile').classList.add('has-image');refresh();toast(type+' image added to this browser preview only');
-  };
-  reader.onerror=()=>toast('Could not read the image');
-  reader.readAsDataURL(file);
+  if(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>5*1024*1024||file.size===0){
+  toast('Choose a PNG, JPG or WebP image under 5 MB');event.target.value='';return;
+ }
+ // Decode locally and re-encode pixels. This strips EXIF/GPS metadata.
+ const objectURL=URL.createObjectURL(file),image=new Image();
+ image.onerror=()=>{URL.revokeObjectURL(objectURL);toast('Image decode failed. Use a real PNG/JPG/WebP.');event.target.value='';};
+ image.onload=()=>{
+  URL.revokeObjectURL(objectURL);
+  const w=image.naturalWidth,h=image.naturalHeight;
+  if(!w||!h||w>6000||h>6000||w*h>24000000){
+   toast('Image dimensions exceed safe limits');event.target.value='';return;
+  }
+  const scale=Math.min(1,1600/Math.max(w,h)),canvas=document.createElement('canvas');
+  canvas.width=Math.max(1,Math.round(w*scale));canvas.height=Math.max(1,Math.round(h*scale));
+  const context=canvas.getContext('2d');if(!context){toast('Image processing is unavailable');return;}
+  context.drawImage(image,0,0,canvas.width,canvas.height);
+  let safeData;
+  try{safeData=canvas.toDataURL('image/png');}catch{toast('Could not sanitize this image');return;}
+  if(!safeData.startsWith('data:image/png;base64,')){toast('Image sanitizer failed');return;}
+  state.photos[type]=safeData;
+  const el=$(type+'-img');el.src=safeData;$(type+'-tile').classList.add('has-image');
+  refresh();toast(type+' photo prepared locally (metadata stripped)');
+ };
+ image.src=objectURL;
  });
 }
 /* Reuse the same tool, embedded inside the existing customer admin navigation.
