@@ -45,3 +45,13 @@ DATE: 2026-10-11 | GOVERNANCE: operator approved STAGING ONLY, no production rel
 ## Rollback scope
 - Code rollback: close/revert draft PR #10. Production Vercel deployment dpl_35towmS2gBRZwXibE2rRvTTv8LrF remains unchanged.
 - Staging rollback (operator permission before destructive cleanup): delete only the two named WLE synthetic tenants after verifying no attached test users/drafts; remove only WLE private media Storage bucket after verifying it has no objects; drop only WLE-prefixed Storage policies and private schema function. Do not touch shared X1 records or any production resource.
+
+## Post-deployment independent browser readback
+- Vercel Preview-only deployment dpl_EPykVnDDYV6Tb4UVJSckYs1zBaGS; READY; target null; current source SHA e50d9dec1d0176af88382a9e5160abd2fe56106b; branch feature/wle-business-creative-studio-20261011.
+- URL: https://website-launch-engine-4trencgrk-strategic-minds-advisory.vercel.app/client.html#Creative%20Studio
+- API /api/platform-health HTTP 200 with staging_read_only, supabase=CONNECTED_STAGING, customerAuth=DISABLED, customerData=DISABLED.
+- API /api/client/session HTTP 503 STAGING_CUSTOMER_AUTH_NOT_CONFIGURED, customerDataAccepted=false.
+- Server helper static URL /_internal/wle-customer-session.js HTTP 404.
+- Real Chrome DevTools Protocol Browser QA rerun on EXACT Vercel preview SHA at 390 mobile and 1440 desktop: 16/16 PASS, no JS exceptions. Includes QR privacy, actual PNG/SVG/vCard files, transparent PNG alpha, brochure PDF, mobile navigation and desktop side-by-side editor.
+- Node 24 local mocked Auth/tenancy/key-format tests: 13/13 PASS on executable code SHA b54a6b157bb1e7529b0c0d9ee65f19865d49db80. Subsequent GitHub changes are documentation only; source still same.
+- GitHub main and production Vercel deployment dpl_35towmS2gBRZwXibE2rRvTTv8LrF unchanged.
