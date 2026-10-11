@@ -53,6 +53,13 @@ function cookies(req){
 function cookie(name,value,age){
  return name+'='+encodeURIComponent(value)+'; Secure; HttpOnly; SameSite=Strict; Path=/; Max-Age='+age;
 }
+export async function revokeCurrentSession(req,conf){
+ const access=cookies(req).get(ACCESS);
+ if(!access||access.length>4096)return false;
+ // Explicit local scope: do not sign customers out of unrelated devices.
+ const r=await supa(conf,'/auth/v1/logout?scope=local',{method:'POST',token:access});
+ return r.ok||r.status===401;
+}
 export function clearSession(res){
  res.setHeader('Set-Cookie',[cookie(ACCESS,'',0),cookie(REFRESH,'',0)]);
 }
