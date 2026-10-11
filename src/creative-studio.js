@@ -356,6 +356,71 @@ if(new URLSearchParams(location.search).get('embedded')==='client'){
  window.addEventListener('resize',notifyHeight);
  requestAnimationFrame(notifyHeight);
 }
+/* Save/load explicit owner-approved drafts, activated only by parent staging session.
+   No background syncing, no images/contacts sent without pressing Save.
+   The server MUST independently validate the HttpOnly Auth session and tenant.
+ */
+if(window.parent!==window&&new URLSearchParams(location.search).get('embedded')==='client'){
+ let accountTenant='',accountDraft=crypto.randomUUID();
+ const validUuid=x=>typeof x==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(x);
+ const profilePanel=document.querySelector('.sidebar .panel .panel-inner');
+ const accountActions=document.createElement('div');accountActions.hidden=true;
+ accountActions.style.cssText='margin-top:19px;padding-top:16px;border-top:1px solid #d8e5ee;display:grid;gap:9px';
+ const heading=document.createElement('strong');heading.textContent='My saved business profile';heading.style.fontSize='14px';
+ const hint=document.createElement('small');hint.textContent='Save your entered text and colors to your authorized staging account. Photos remain on your device.';
+ const save=document.createElement('button');save.type='button';save.id='account-save-profile';save.className='btn';save.textContent='Save business profile';
+ const load=document.createElement('button');load.type='button';load.id='account-load-profile';load.className='btn secondary';load.textContent='Load saved profile';
+ const note=document.createElement('div');note.id='account-draft-message';note.style.fontSize='12px';note.setAttribute('role','status');note.setAttribute('aria-live','polite');
+ accountActions.append(heading,hint,save,load,note);profilePanel.append(accountActions);
+ window.addEventListener('message',event=>{
+  if(event.origin!==location.origin||event.source!==window.parent)return;
+  if(event.data?.type!=='wle-client-tenant-authorized'||!validUuid(event.data.tenant_id))return;
+  accountTenant=event.data.tenant_id;accountDraft=crypto.randomUUID();
+  accountActions.hidden=false;note.textContent='Customer account verified. Save is always your choice.';
+ });
+ const request=async(method,body)=>{
+  const url='/api/client/drafts'+(method==='GET'?'?tenant_id='+encodeURIComponent(accountTenant):'');
+  const res=await fetch(url,{method,credentials:'same-origin',cache:'no-store',
+   headers:method==='POST'?{'Content-Type':'application/json'}:{},
+   body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(9000)});
+  let data={};try{data=await res.json()}catch{}
+  return {status:res.status,data};
+ };
+ save.addEventListener('click',async()=>{
+  if(!accountTenant)return;
+  save.disabled=true;note.textContent='Saving to your private account…';
+  try{
+   const profile={};
+   for(const id of dataIds)profile[id]=get(id);
+   profile.accent=state.accent;profile.design=state.design;profile.mark=state.mark;
+   const result=await request('POST',{tenant_id:accountTenant,draft_id:accountDraft,profile});
+   note.textContent=result.status===200&&result.data.code==='DRAFT_SAVED'?
+     'Saved as a private staging draft. Nothing has been published.':
+     'Save was not completed. Check your account connection.';
+  }catch{note.textContent='Save is unavailable. Your local preview is unchanged.'}
+  finally{save.disabled=false}
+ });
+ load.addEventListener('click',async()=>{
+  if(!accountTenant)return;
+  load.disabled=true;note.textContent='Checking your saved draft…';
+  try{
+   const result=await request('GET');
+   const draft=result.data?.draft,profile=draft?.payload;
+   if(result.status!==200){note.textContent='Cannot load your saved draft right now.';return}
+   if(!profile){note.textContent='No draft saved yet. You can create your first one.';return}
+   if(!validUuid(draft.draft_id)||profile.schema_version!==1){note.textContent='Saved draft format is not supported.';return}
+   const fields=dataIds.every(id=>typeof profile[id]==='string');
+   if(!fields){note.textContent='Saved draft content failed validation.';return}
+   for(const id of dataIds)$(id).value=profile[id];
+   if(/^#[0-9a-f]{6}$/i.test(profile.accent)){state.accent=profile.accent;$('accent').value=profile.accent}
+   if(['modern','classic','bold'].includes(profile.design)){state.design=profile.design;$('design').value=profile.design}
+   if(['orbit','crest','monogram'].includes(profile.mark)){state.mark=profile.mark;$('mark').value=profile.mark}
+   accountDraft=draft.draft_id;refresh();
+   note.textContent='Loaded your private business profile. Local photos were not changed.';
+  }catch{note.textContent='Loading failed. Your current profile is unchanged.'}
+  finally{load.disabled=false}
+ });
+}
 state.design=get('design');state.mark=get('mark');state.accent=safelyColor(get('accent'));refresh();
 const requested=location.hash.replace('#','');if(['card','brand','print','social','connect'].includes(requested))setTab(requested);
 })();
