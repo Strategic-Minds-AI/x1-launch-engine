@@ -1,0 +1,13 @@
+{
+  "name": "wle-staging-targeted-canary",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node worker.mjs",
+    "test": "node --test tests/*.test.mjs"
+  }
+}
