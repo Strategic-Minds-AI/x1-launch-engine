@@ -33,3 +33,18 @@ Production status: left untouched
 - Existing preview proves URL provisioning from the operator tool, not unattended Railway automation.
 
 Rollback: remove/disable these branch-only changes; leave production, current Railway image/configuration, Supabase staging one-shot receipt, and both existing Vercel public sites untouched.
+
+
+## Fresh navigation-repaired preview and browser validation (follow-up)
+- Follow-up mission: WLE-X1-FRESH-PREVIEW-20261011-003.
+- Vercel deploy: dpl_AyPeZPFMBy7p3ZUA8dcGXYbFq85k, READY, target preview/null, aliases [].
+- Tested URL: https://website-launch-engine-6t5d4wgns-strategic-minds-advisory.vercel.app/
+- GET / returned HTTP 200 with synthetic fictional/noindex mission markers; no href="/studio.html dead links remain. Standalone /studio.html is not bundled in this preview (404 by design).
+- Production demo Studio https://website-launch-engine.vercel.app/studio.html returned HTTP 200, so standalone preview's Business Studio/Portal anchors were changed to point at that explicitly demo-only path.
+- Independent Cloud Browser at 1440 desktop: 17 semantic elements, Business Studio and Portal anchors point at the working demo Studio, telephone anchors use tel:+17722090266; zero JavaScript errors, image GET requests have no HTTP failures.
+- Independent Cloud Browser at 390 mobile: 12 semantic elements, working absolute Studio anchors, zero JavaScript errors and zero failed image/network requests in checked sample.
+- Cloud Browser screenshot capture FAILED with configuration error BLOB_READ_WRITE_TOKEN not set. No image/pixel-level visual similarity evidence exists, so 99% visual parity is UNKNOWN.
+- CI on the final GitHub SHA has NOT been run. Local Node test source checks passed in authoring environment; this does not substitute for independent final-source CI. GitHub PR #7 is a draft.
+- Fixed preview source changed in src/wle-staging-runner/provision-preview.mjs, with a test enforcing no broken /studio.html hrefs.
+- First preview dpl_2KNwWsRj9nBZRAoyxy6WY1GhjHc3 remains an immutable historical partial validation result with dead standalone Studio links; use only follow-up preview for review.
+- No production site, GitHub main, Railway service/configuration, Supabase schema/queue, secrets, customer data, DNS, payments or outbound messages were changed in this follow-up.
