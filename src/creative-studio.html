@@ -197,7 +197,8 @@ form,.fields{display:grid;gap:13px}
   <div class="field"><label for="qr-mode">QR code contents</label><select id="qr-mode"><option value="website">HTTPS website (enter it above)</option><option value="vcard">Contact card (vCard 3.0)</option></select></div>
   <div class="notice"><strong>Privacy choice:</strong> Website QR shares only the HTTPS link you enter. Contact QR includes the personal details on this card, only when you explicitly select that option.</div><p class="hint" id="qr-status" role="status" aria-live="polite">Enter an HTTPS website to generate a public QR.</p>
   <div class="actions">
-    <button type="button" class="btn" id="share-email">✉ Email card</button>
+    <button type="button" class="btn" id="share-native">↗ Share contact</button>
+    <button type="button" class="btn secondary" id="share-email">✉ Email draft</button>
     <button type="button" class="btn secondary" id="share-sms">▣ Text card</button>
     <button type="button" class="btn secondary" id="share-copy">Copy details</button>
     <button type="button" class="btn ghost" id="save-vcard">↓ Contact .vcf</button>
