@@ -116,7 +116,7 @@ export async function provisionSyntheticPreview({
   });
 }
 
-export async function verifyPreviewBytes({ url, artifact, fetchImpl = fetch }) {
+export async function verifyPreviewBytes({ url, artifact, deploymentId = null, fetchImpl = fetch }) {
   insist(typeof url === 'string' && artifact?.sha256, 'VERIFICATION_INPUT_REQUIRED');
   const locator = new URL(url);
   insist(locator.protocol === 'https:' && HOST_PATTERN.test(locator.hostname) &&
@@ -129,7 +129,15 @@ export async function verifyPreviewBytes({ url, artifact, fetchImpl = fetch }) {
   const servedHtml = await response.text();
   insist(servedHtml.includes(artifact.missionId) &&
     servedHtml.includes('noindex,nofollow'), 'LIVE_POLICY_INVALID');
-  insist(sha256(servedHtml) === artifact.sha256, 'LIVE_ARTIFACT_HASH_MISMATCH');
+  // Vercel injects its optional feedback toolbar AFTER </html> in previews.
+  // Permit only that one exact deployment-bound suffix; all other drift fails.
+  const original = servedHtml.slice(0, artifact.html.length);
+  const injected = servedHtml.slice(artifact.html.length);
+  const allowedToolbar = /^dpl_[A-Za-z0-9]+$/.test(deploymentId || '') ?
+    '<script async data-explicit-opt-in="true" data-deployment-id="' +
+    deploymentId + '" src="https://vercel.live/_next-live/feedback/feedback.js"></script>' : '';
+  insist(!injected || injected === allowedToolbar, 'UNEXPECTED_PREVIEW_INJECTION');
+  insist(sha256(original) === artifact.sha256, 'LIVE_ARTIFACT_HASH_MISMATCH');
   const robots = response.headers?.get?.('x-robots-tag');
   insist(!robots || robots.toLowerCase().includes('noindex'), 'LIVE_ROBOTS_HEADER_INVALID');
   return Object.freeze({
