@@ -1,4 +1,4 @@
-import {common,respond,stageConfig,checkOrigin,clearSession,revokeCurrentSession} from '../../_internal/wle-customer-session.js';
+import {common,respond,stageConfig,checkOrigin,clearSession,revokeCurrentSession} from '../_internal/wle-customer-session.js';
 export default async function handler(req,res){
  common(res);
  if(req.method!=='POST'){res.setHeader('Allow','POST');return respond(res,405,'METHOD_NOT_ALLOWED')}
