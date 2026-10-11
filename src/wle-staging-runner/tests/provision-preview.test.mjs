@@ -105,6 +105,11 @@ test('validator blocks wrong host and byte drift', async () => {
   await assert.rejects(() => verifyPreviewBytes({
     url: 'https://' + previewHost + '/', artifact,
     fetchImpl: async () => new Response(artifact.html + 'changed', { status: 200 }),
+  }), /UNEXPECTED_PREVIEW_INJECTION/);
+  await assert.rejects(() => verifyPreviewBytes({
+    url: 'https://' + previewHost + '/', artifact,
+    fetchImpl: async () => new Response(
+      artifact.html.replace('NOT A REAL CONTRACTOR', 'NOT A REaL CONTRACTOR'), { status: 200 }),
   }), /LIVE_ARTIFACT_HASH_MISMATCH/);
 });
 
