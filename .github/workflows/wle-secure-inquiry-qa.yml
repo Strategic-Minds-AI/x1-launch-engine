@@ -1,0 +1,28 @@
+name: WLE secure inquiry branch QA
+on:
+  push:
+    branches:
+      - feature/wle-secure-inquiry-repair-20261012
+  pull_request:
+    branches:
+      - release/wle-pinned-production-source-20261011
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Syntax check
+        run: node --check src/api/inquiry.js
+      - name: Run staged intake safety regression
+        run: node --test tests/inquiry.test.mjs
+      - name: Confirm protected deployment and fixture boundaries
+        run: |
+          test -f docs/WLE_STAGING_LEAD_SCHEMA_DRAFT.sql
+          ! grep -q 'ALTER TABLE public.website_leads' docs/WLE_STAGING_LEAD_SCHEMA_DRAFT.sql
+          grep -q 'DRAFT ONLY' docs/WLE_STAGING_LEAD_SCHEMA_DRAFT.sql
