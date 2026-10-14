@@ -81,7 +81,7 @@ export default function PrimeSite() {
     // Never store an inquiry in localStorage, cookies or remote APIs.
   }
   return <div className="prime-app" style={theme}>
-    <div className="preview-ribbon"><span className="preview-pulse" aria-hidden="true"/> CONCEPT 05 <span className="divider">/</span> BRAND B <span className="divider">/</span> DESIGN 2 <span className="divider">/</span> PRIVATE NONPRODUCTION DEMO <a href="#top">BACK TO TOP ↗</a></div>
+    <div className="preview-ribbon"><span className="preview-pulse" aria-hidden="true"/> CONCEPT 05 <span className="divider">/</span> BRAND B <span className="divider">/</span> DESIGN 2 <span className="divider">/</span> NONPRODUCTION NOINDEX DEMO <a href="#top">BACK TO TOP ↗</a></div>
     <header className="site-header" id="top"><div className="nav-shell">
       <a className="wordmark" href="#top" aria-label={sanitizeBrand(state.brand)+" Surfaces, back to top"}>
         <span className="mark" aria-hidden="true"><i/><i/><i/></span><span className="wordstack"><b>{sanitizeBrand(state.brand)}</b><small>SURFACES / CONCEPT</small></span>
