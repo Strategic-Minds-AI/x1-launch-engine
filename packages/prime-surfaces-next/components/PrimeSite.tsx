@@ -11,7 +11,7 @@ import {
   DEFAULT_STUDIO, APPROVAL_LOCK,
   makeDraftManifest, makeImageBrief, sanitizeBrand
 } from "@/lib/template";
-import type {AccentId, CopyPreset, ImageDirection, FinishId, StudioState} from "@/lib/template";
+import type {CopyPreset, ImageDirection, FinishId, StudioState} from "@/lib/template";
 
 const FILTERS = [
   ["all", "ALL ENVIRONMENTS"], ["garage","GARAGES"],
@@ -83,7 +83,7 @@ export default function PrimeSite() {
   return <div className="prime-app" style={theme}>
     <div className="preview-ribbon"><span className="preview-pulse" aria-hidden="true"/> CONCEPT 05 <span className="divider">/</span> BRAND B <span className="divider">/</span> DESIGN 2 <span className="divider">/</span> PRIVATE NONPRODUCTION DEMO <a href="#top">BACK TO TOP ↗</a></div>
     <header className="site-header" id="top"><div className="nav-shell">
-      <a className="wordmark" href="#top" aria-label="Prime Surfaces, back to top">
+      <a className="wordmark" href="#top" aria-label={sanitizeBrand(state.brand)+" Surfaces, back to top"}>
         <span className="mark" aria-hidden="true"><i/><i/><i/></span><span className="wordstack"><b>{sanitizeBrand(state.brand)}</b><small>SURFACES / CONCEPT</small></span>
       </a>
       <button type="button" className="menu-toggle" aria-controls="mainNav" aria-label="Toggle navigation" aria-expanded={navOpen} onClick={()=>setNavOpen(v=>!v)}><span/><span/><span/></button>
@@ -161,12 +161,12 @@ export default function PrimeSite() {
     </main>
     <footer className="site-footer"><div className="shell foot-grid"><div><div className="footer-logo">{sanitizeBrand(state.brand)} SURFACES<span>.</span></div><p>A bold design direction for concrete and epoxy flooring. Fictional sample brand.</p></div><nav aria-label="Footer" className="foot-links">{[["SOLUTIONS","services"],["FINISHES","materials"],["INSPIRATION","portfolio"],["PROCESS","method"],["PROJECT BRIEF","inquiry"]].map(([n,id])=><a href={"#"+id} key={id}>{n}</a>)}</nav><div className="foot-proof"><span>CONCEPT 05 / 20-INDUSTRY LIBRARY</span><span>WEBSITE LAUNCH ENGINE</span><span>NONPRODUCTION PREVIEW</span></div></div><div className="shell foot-bottom"><span>© 2026 DESIGN DEMONSTRATION. NOT A REAL FLOORING COMPANY.</span><a href="#top">BACK TO TOP ↗</a></div></footer>
     <button className="studio-tab" type="button" aria-controls="studioPanel" aria-expanded={studioOpen} onClick={()=>setStudioOpen(true)}>✦<span> BRAND STUDIO</span></button>
-    {studioOpen&&<div className="studio-backdrop" onClick={closeStudio}/>}
+    {studioOpen&&<button type="button" className="studio-backdrop" aria-label="Close studio" onClick={closeStudio}/>}
     <aside ref={panelRef} id="studioPanel" className={"studio-panel"+(studioOpen?" open":"")} role="dialog" aria-modal="true" aria-labelledby="studioTitle" aria-hidden={!studioOpen}>
       <div className="panel-top"><span className="panel-eyebrow">THE APEX TEMPLATE ENGINE / V0.1</span><button type="button" className="icon-close" onClick={closeStudio} aria-label="Close design studio">×</button><h2 id="studioTitle">MAKE IT <em>YOURS.</em></h2><p>Four interchangeable generators. Approved layout and responsive logic remain unchanged.</p></div>
       <div className="panel-scroll">
         <div className="control-group"><span className="control-count">01 / BRAND GENERATOR</span><label htmlFor="brandName">BRAND WORDMARK</label><input ref={brandRef} id="brandName" value={state.brand} maxLength={24} onChange={e=>patch("brand",sanitizeBrand(e.target.value))}/><small>Preview only. Trademark and business claims require approval.</small></div>
-        <div className="control-group"><span className="control-count">02 / ACCENT REGENERATOR</span><label>ACCENT SYSTEM</label><div className="accent-row" role="group" aria-label="Accent color">{ACCENTS.map(c=><button key={c.id} type="button" style={{"--swatch":c.color} as CSSProperties} aria-pressed={state.accent===c.id} aria-label={c.label} title={c.label} onClick={()=>patch("accent",c.id)}/>)}</div><div className="control-note">{acc.label} / Contrast-aware CTA palette</div></div>
+        <div className="control-group"><span className="control-count">02 / ACCENT REGENERATOR</span><span className="control-label">ACCENT SYSTEM</span><div className="accent-row" role="group" aria-label="Accent color">{ACCENTS.map(c=><button key={c.id} type="button" style={{"--swatch":c.color} as CSSProperties} aria-pressed={state.accent===c.id} aria-label={c.label} title={c.label} onClick={()=>patch("accent",c.id)}/>)}</div><div className="control-note">{acc.label} / Contrast-aware CTA palette</div></div>
         <div className="control-group"><span className="control-count">03 / CONTENT GENERATOR</span><label htmlFor="copyPreset">POSITIONING VARIANT</label><select id="copyPreset" value={state.copy} onChange={e=>patch("copy",e.target.value as CopyPreset)}>{(Object.keys(COPY) as CopyPreset[]).map(k=><option key={k} value={k}>{COPY[k].title}</option>)}</select><small>Preset copy only. No unverified AI business claims.</small></div>
         <div className="control-group"><span className="control-count">04 / IMAGE DIRECTION</span><label htmlFor="imagePreset">CAMPAIGN ART DIRECTION</label><select id="imagePreset" value={state.image} onChange={e=>patch("image",e.target.value as ImageDirection)}>{(Object.keys(IMAGES) as ImageDirection[]).map(k=><option key={k} value={k}>{IMAGES[k].label}</option>)}</select><small>Image references are illustrative. Generate and approve original photography before client usage.</small></div>
         <div className="control-group"><span className="control-count">APPROVED MANIFEST</span><div className="manifest-display"><span>BRAND <b>{APPROVAL_LOCK.brandPack}</b></span><span>DESIGN <b>{APPROVAL_LOCK.websiteDesign}</b></span><span>WORKFLOW <b>{APPROVAL_LOCK.workflow}</b></span><span>CONCEPT <b>{APPROVAL_LOCK.concept}</b></span></div>
