@@ -9,6 +9,7 @@ test('full homepage, noindex and responsive layout', async ({ page }, info) => {
   expect(response?.status()).toBe(200);
   await expect(page.locator('h1')).toContainText('THE SURFACE');
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
+  expect(response?.headers()['x-robots-tag']).toContain('noindex');
   await expect(page.locator('#services')).toBeVisible();
   await expect(page.locator('#materials')).toBeVisible();
   await expect(page.locator('#portfolio')).toBeVisible();
@@ -42,13 +43,12 @@ test('four generator controls, material tabs, gallery filtering', async ({ page 
   await page.locator('#copyPreset').selectOption('commercial');
   await expect(page.locator('#heroTitle')).toContainText('PERFORMANCE');
   await page.locator('#imagePreset').selectOption('interior');
-  const image=await page.locator('.hero-photo').evaluate(el=>getComputedStyle(el).backgroundImage);
-  expect(image).toContain('1600607687939');
+  await expect(page.locator('.hero-photo')).toHaveCSS('background-image', /1600607687939/);
   await page.getByRole('button',{name:'Close design studio'}).click();
   await expect(page.locator('#studioPanel')).not.toHaveClass(/open/);
   await page.getByRole('button',{name:/METALLIC EFFECT/}).click();
   await expect(page.locator('.finish-label strong')).toHaveText('METALLIC EFFECT');
-  await page.locator('[data-filter="garage"]').click();
+  await page.getByRole('button',{name:'GARAGES',exact:true}).click();
   await expect(page.locator('.portfolio-item:visible')).toHaveCount(2);
 });
 
