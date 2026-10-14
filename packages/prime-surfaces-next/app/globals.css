@@ -271,3 +271,6 @@ html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!importan
 .button-accent,.studio-tab{background:var(--action,var(--accent-dark));border-color:var(--action,var(--accent-dark));color:var(--action-ink,#ffffff)}
 .button-accent:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
 .intro .eyebrow,.materials .eyebrow,.method .eyebrow,.project-form .form-heading span:first-child,.method-grid article>b{color:var(--accent-dark)}
+
+.studio-backdrop{border:0;padding:0;cursor:pointer}
+.control-group .control-label{display:block;font-size:10px;letter-spacing:.12em;font-weight:950;margin-bottom:9px}
