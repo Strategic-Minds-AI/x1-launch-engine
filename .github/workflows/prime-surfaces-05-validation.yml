@@ -1,12 +1,6 @@
 name: Prime Surfaces 05 Nonproduction Validation
 
 on:
-  push:
-    branches:
-      - feature/prime-surfaces-brand-b-design2-20261014
-    paths:
-      - 'packages/prime-surfaces-next/**'
-      - '.github/workflows/prime-surfaces-05-validation.yml'
   pull_request:
     branches:
       - release/wle-pinned-production-source-20261011
@@ -51,6 +45,12 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Verify desktop and mobile browser flows against local Next server
         run: npm run test:e2e
+      - name: Hash screenshot evidence
+        if: always()
+        run: |
+          if test -d test-results; then
+            find test-results -type f -name '*homepage.png' -exec sha256sum {} + > test-results/SCREENSHOT_SHA256SUMS.txt
+          fi
       - name: Retain responsive screenshot and browser failure evidence
         if: always()
         uses: actions/upload-artifact@v4
