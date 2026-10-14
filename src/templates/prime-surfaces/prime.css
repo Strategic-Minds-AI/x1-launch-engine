@@ -266,3 +266,8 @@ h2{font-size:clamp(43px,5vw,76px);line-height:1;letter-spacing:-.069em;font-weig
 @media(prefers-reduced-motion:reduce){
 html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
+
+/* contrast-safe action foreground and darker interactive background */
+.button-accent,.studio-tab{background:var(--action,var(--accent-dark));border-color:var(--action,var(--accent-dark));color:var(--action-ink,#ffffff)}
+.button-accent:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
+.intro .eyebrow,.materials .eyebrow,.method .eyebrow,.project-form .form-heading span:first-child,.method-grid article>b{color:var(--accent-dark)}
