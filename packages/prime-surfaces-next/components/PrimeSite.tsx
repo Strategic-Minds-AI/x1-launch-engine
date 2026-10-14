@@ -97,7 +97,7 @@ export default function PrimeSite() {
         <div className="hero-photo image-direction" role="img" aria-label={hero.alt} style={{backgroundImage:"url("+hero.url+")"}}/>
         <div className="hero-vignette"/><div className="hero-rail"><span>01 / 05</span><span className="hero-vertical">CONCRETE REIMAGINED</span><span className="hero-rule"/></div>
         <div className="hero-content shell">
-          <p className="overline"><span className="slash" aria-hidden="true">///</span> CUSTOM EPOXY & DECORATIVE CONCRETE</p>
+          <p className="overline"><span className="slash" aria-hidden="true">{"///"}</span> CUSTOM EPOXY & DECORATIVE CONCRETE</p>
           <h1 id="heroTitle">{copy.headingA}<br/>{copy.headingB} <em>{copy.headingAccent}</em></h1>
           <p className="hero-subtitle">{copy.description}</p>
           <div className="hero-cta"><a className="button button-accent" href="#inquiry">DESIGN YOUR FLOOR <span>↗</span></a><a className="button button-outline" href="#portfolio">EXPLORE THE WORK <span>↓</span></a></div>
