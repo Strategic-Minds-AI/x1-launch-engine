@@ -50,6 +50,7 @@
   }
   function applyState(){
     qsa("[data-brand]").forEach(el=>{el.textContent=state.brand});
+    const logo=qs(".wordmark");if(logo)logo.setAttribute("aria-label",state.brand+" Surfaces, top of page");
     document.title=state.brand+" Surfaces | Premium Concrete & Coatings | Demo";
     const cv=copyVariants[state.copy];
     qs("#heroTitle").innerHTML=cv.hero;
