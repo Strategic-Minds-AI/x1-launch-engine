@@ -1,0 +1,71 @@
+name: Prime Surfaces 05 Nonproduction Validation
+
+on:
+  pull_request:
+    branches:
+      - release/wle-pinned-production-source-20261011
+    paths:
+      - 'packages/prime-surfaces-next/**'
+      - '.github/workflows/prime-surfaces-05-validation.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prime-surfaces-05-validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  nextjs:
+    name: lint-typecheck-tests-build
+    if: github.repository == 'Strategic-Minds-AI/x1-launch-engine'
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    defaults:
+      run:
+        working-directory: packages/prime-surfaces-next
+    steps:
+      - name: Checkout requested branch commit
+        uses: actions/checkout@v4
+      - name: Install Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated dependencies without lifecycle scripts
+        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Verify types
+        run: npm run typecheck
+      - name: Verify lint
+        run: npm run lint
+      - name: Run declared tests
+        run: npm test
+      - name: Verify production build of isolated Next package
+        run: npm run build
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Verify desktop and mobile browser flows against local Next server
+        run: npm run test:e2e
+      - name: Hash screenshot evidence
+        if: always()
+        run: |
+          if test -d test-results; then
+            find test-results -type f -name '*homepage.png' -exec sha256sum {} + > test-results/SCREENSHOT_SHA256SUMS.txt
+          fi
+      - name: Retain responsive screenshot and browser failure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prime-surfaces-05-browser-evidence-${{ github.run_id }}
+          path: |
+            packages/prime-surfaces-next/test-results/
+            packages/prime-surfaces-next/playwright-report/
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Retain generated lockfile for package review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prime-surfaces-05-lockfile-${{ github.run_id }}
+          path: packages/prime-surfaces-next/package-lock.json
+          if-no-files-found: ignore
+          retention-days: 7
