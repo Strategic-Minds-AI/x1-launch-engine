@@ -22,9 +22,9 @@
     }
   };
   const art={
-    garage:{url:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2200&q=88",name:"Illustrative premium automotive and architectural flooring inspiration"},
-    interior:{url:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=88",name:"Illustrative contemporary architectural interior inspiration"},
-    workplace:{url:"https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2200&q=88",name:"Illustrative modern workspace with material-focused art direction"}
+    garage:{url:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_0682-Enhanced-NR-min_6c6d7b7a-16b7-44e4-9744-79aa1992824e.jpg?v=1721927781&width=2800",name:"XPS training reference: broadcast epoxy flake coating"},
+    interior:{url:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_5783-min.jpg?v=1721928098&width=2025",name:"XPS metallic epoxy floor training reference"},
+    workplace:{url:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_7400-Enhanced-NR-min_9d6c666a-3dbb-4ad8-b3d9-b79f0e0175be.jpg?v=1721928197&width=2700",name:"XPS metallic epoxy finish reference"}
   };
   const finishes={flake:"ARCHITECTURAL FLAKE",metallic:"METALLIC EFFECT",polished:"POLISHED CONCRETE"};
   function sanitiseBrand(value) {
