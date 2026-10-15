@@ -43,7 +43,7 @@ test('four generator controls, material tabs, gallery filtering', async ({ page 
   await page.locator('#copyPreset').selectOption('commercial');
   await expect(page.locator('#heroTitle')).toContainText('PERFORMANCE');
   await page.locator('#imagePreset').selectOption('interior');
-  await expect(page.locator('.hero-photo')).toHaveCSS('background-image', /1600607687939/);
+  await expect(page.locator('.hero-photo')).toHaveCSS('background-image', /IMG_5783-min/);
   await page.getByRole('button',{name:'Close design studio'}).click();
   await expect(page.locator('#studioPanel')).not.toHaveClass(/open/);
   await page.getByRole('button',{name:/METALLIC EFFECT/}).click();
