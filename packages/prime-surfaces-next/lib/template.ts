@@ -37,20 +37,20 @@ export type CopyPreset = keyof typeof COPY;
 export const IMAGES = {
   garage: {
     label: "Garage / Automotive",
-    url: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2200&q=88",
-    alt: "Illustrative high-end automotive design environment",
+    url: "https://xtremepolishingsystems.com/cdn/shop/files/IMG_0682-Enhanced-NR-min_6c6d7b7a-16b7-44e4-9744-79aa1992824e.jpg?v=1721927781&width=2800",
+    alt: "XPS epoxy flake application reference",
     prompt: "Wide cinematic editorial architectural photograph of a pristine premium garage with authentic coated concrete surface, grounded natural light, dark steel accents, no logos or people, horizontal 16:9 framing."
   },
   interior: {
     label: "Architectural / Interior",
-    url: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=88",
-    alt: "Illustrative modern architectural interior",
+    url: "https://xtremepolishingsystems.com/cdn/shop/files/IMG_5783-min.jpg?v=1721928098&width=2025",
+    alt: "XPS metallic epoxy training reference",
     prompt: "Luxury minimalist residential architecture emphasizing actual decorative concrete, tactile material detail, realistic surface microtexture and raking sunlight, no brands or people, 16:9 editorial framing."
   },
   workplace: {
     label: "Commercial / Workspace",
-    url: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2200&q=88",
-    alt: "Illustrative contemporary commercial environment",
+    url: "https://xtremepolishingsystems.com/cdn/shop/files/IMG_7400-Enhanced-NR-min_9d6c666a-3dbb-4ad8-b3d9-b79f0e0175be.jpg?v=1721928197&width=2700",
+    alt: "XPS metallic epoxy finish reference",
     prompt: "Realistic spacious commercial studio showing maintainable polished concrete, authentic joints and light reflection, professional architecture photography, no signage or people, 16:9."
   }
 } as const;
@@ -69,11 +69,11 @@ export const SERVICES = [
   {id: "decorative", number: "03 / DESIGN",titleLines: ["DECORATIVE","CONCRETE."],teaser: "Material character for distinctive environments.",className:"service-three"}
 ] as const;
 export const GALLERY = [
-  {id:"performance",cat:"garage",name:"PERFORMANCE SPACES",label:"GARAGE DESIGN STUDY",src:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1450&q=84",alt:"Illustrative sports car environment with strong material contrast"},
-  {id:"workplace",cat:"commercial",name:"COMMERCIAL",label:"WORKPLACE STUDY",src:"https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=82",alt:"Modern commercial environment, visual inspiration"},
-  {id:"architecture",cat:"residential",name:"ARCHITECTURAL",label:"INTERIOR STUDY",src:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=82",alt:"Minimal contemporary interior, material inspiration"},
-  {id:"showcase",cat:"garage",name:"SHOWCASE",label:"GARAGE STUDY",src:"https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=82",alt:"Illustrative premium automotive setting"},
-  {id:"living",cat:"residential",name:"LIVING",label:"RESIDENTIAL STUDY",src:"https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1000&q=82",alt:"Premium residential interior materials"}
+  {id:"performance",cat:"garage",name:"PERFORMANCE SPACES",label:"GARAGE DESIGN STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_0682-Enhanced-NR-min_6c6d7b7a-16b7-44e4-9744-79aa1992824e.jpg?v=1721927781&width=2800",alt:"Illustrative sports car environment with strong material contrast"},
+  {id:"workplace",cat:"commercial",name:"COMMERCIAL",label:"WORKPLACE STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_7400-Enhanced-NR-min_9d6c666a-3dbb-4ad8-b3d9-b79f0e0175be.jpg?v=1721928197&width=2700",alt:"Modern commercial environment, visual inspiration"},
+  {id:"architecture",cat:"residential",name:"ARCHITECTURAL",label:"INTERIOR STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_5783-min.jpg?v=1721928098&width=2025",alt:"Minimal contemporary interior, material inspiration"},
+  {id:"showcase",cat:"garage",name:"SHOWCASE",label:"GARAGE STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_3107-min.jpg?v=1721750767&width=1800",alt:"Illustrative premium automotive setting"},
+  {id:"living",cat:"residential",name:"LIVING",label:"RESIDENTIAL STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_2216_1.jpg?v=1721854848&width=1125",alt:"Premium residential interior materials"}
 ] as const;
 
 export type StudioState = {
