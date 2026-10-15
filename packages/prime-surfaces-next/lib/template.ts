@@ -69,11 +69,11 @@ export const SERVICES = [
   {id: "decorative", number: "03 / DESIGN",titleLines: ["DECORATIVE","CONCRETE."],teaser: "Material character for distinctive environments.",className:"service-three"}
 ] as const;
 export const GALLERY = [
-  {id:"performance",cat:"garage",name:"PERFORMANCE SPACES",label:"GARAGE DESIGN STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_0682-Enhanced-NR-min_6c6d7b7a-16b7-44e4-9744-79aa1992824e.jpg?v=1721927781&width=2800",alt:"Illustrative sports car environment with strong material contrast"},
-  {id:"workplace",cat:"commercial",name:"COMMERCIAL",label:"WORKPLACE STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_7400-Enhanced-NR-min_9d6c666a-3dbb-4ad8-b3d9-b79f0e0175be.jpg?v=1721928197&width=2700",alt:"Modern commercial environment, visual inspiration"},
-  {id:"architecture",cat:"residential",name:"ARCHITECTURAL",label:"INTERIOR STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_5783-min.jpg?v=1721928098&width=2025",alt:"Minimal contemporary interior, material inspiration"},
-  {id:"showcase",cat:"garage",name:"SHOWCASE",label:"GARAGE STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_3107-min.jpg?v=1721750767&width=1800",alt:"Illustrative premium automotive setting"},
-  {id:"living",cat:"residential",name:"LIVING",label:"RESIDENTIAL STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_2216_1.jpg?v=1721854848&width=1125",alt:"Premium residential interior materials"}
+  {id:"performance",cat:"garage",name:"PERFORMANCE SPACES",label:"GARAGE DESIGN STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_0682-Enhanced-NR-min_6c6d7b7a-16b7-44e4-9744-79aa1992824e.jpg?v=1721927781&width=2800",alt:"XPS epoxy flake application reference"},
+  {id:"workplace",cat:"commercial",name:"COMMERCIAL",label:"WORKPLACE STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_7400-Enhanced-NR-min_9d6c666a-3dbb-4ad8-b3d9-b79f0e0175be.jpg?v=1721928197&width=2700",alt:"XPS metallic epoxy installation training reference"},
+  {id:"architecture",cat:"residential",name:"ARCHITECTURAL",label:"INTERIOR STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_5783-min.jpg?v=1721928098&width=2025",alt:"XPS metallic epoxy finish reference"},
+  {id:"showcase",cat:"garage",name:"SHOWCASE",label:"GARAGE STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_3107-min.jpg?v=1721750767&width=1800",alt:"XPS flake epoxy installation reference"},
+  {id:"living",cat:"residential",name:"LIVING",label:"RESIDENTIAL STUDY",src:"https://xtremepolishingsystems.com/cdn/shop/files/IMG_2216_1.jpg?v=1721854848&width=1125",alt:"XPS metallic epoxy coating reference"}
 ] as const;
 
 export type StudioState = {
