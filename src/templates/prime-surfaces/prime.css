@@ -49,7 +49,7 @@ h1,h2,h3{font-family:Arial,Helvetica,sans-serif}
 .menu-toggle span{width:24px;height:2px;background:white;display:block;margin:5px 0}
 .hero{position:relative;min-height:730px;display:flex;isolation:isolate;align-items:center;color:white;background:#080b10;overflow:hidden}
 .hero-photo,.hero-vignette{position:absolute;inset:0;z-index:-2}
-.hero-photo{background-image:url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2200&q=88");background-size:cover;background-position:center 45%;filter:saturate(.75) contrast(1.1);transform:scale(1.01);transition:background-image .3s}
+.hero-photo{background-image:url("https://xtremepolishingsystems.com/cdn/shop/files/IMG_0682-Enhanced-NR-min_6c6d7b7a-16b7-44e4-9744-79aa1992824e.jpg?v=1721927781&width=2800");background-size:cover;background-position:center 45%;filter:saturate(.75) contrast(1.1);transform:scale(1.01);transition:background-image .3s}
 .hero-vignette{z-index:-1;background:linear-gradient(90deg,#050709f5 1%,#07090fd8 34%,#0b1119aa 55%,#080c1152 82%,#090b0e33),linear-gradient(0deg,#090b10bb,transparent 40%)}
 .hero-rail{position:absolute;top:0;bottom:0;right:0;width:57px;border-left:1px solid #ffffff3d;display:flex;flex-direction:column;align-items:center;gap:28px;padding-top:38px;color:#b8c2cc;font-size:10px;letter-spacing:.2em}
 .hero-vertical{writing-mode:vertical-rl;letter-spacing:.4em;margin-top:130px;font-weight:900;color:#eef1f2}
@@ -91,9 +91,9 @@ h2{font-size:clamp(43px,5vw,76px);line-height:1;letter-spacing:-.069em;font-weig
 .service-card{height:480px;position:relative;display:flex;align-items:end;overflow:hidden;background:#232831;color:#fff;isolation:isolate}
 .service-image,.service-shade{position:absolute;inset:0;z-index:-2}
 .service-image{background-size:cover;background-position:center;filter:saturate(.8);transition:transform .5s}
-.service-one .service-image{background-image:url("https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1100&q=85")}
-.service-two .service-image{background-image:url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85")}
-.service-three .service-image{background-image:url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85")}
+.service-one .service-image{background-image:url("https://xtremepolishingsystems.com/cdn/shop/files/IMG_8152-min_a7d0e43c-ae03-4e67-b98d-f99306da664c.jpg?v=1721927597&width=1800")}
+.service-two .service-image{background-image:url("https://xtremepolishingsystems.com/cdn/shop/files/IMG_7400-Enhanced-NR-min_9d6c666a-3dbb-4ad8-b3d9-b79f0e0175be.jpg?v=1721928197&width=2700")}
+.service-three .service-image{background-image:url("https://xtremepolishingsystems.com/cdn/shop/files/IMG_5783-min.jpg?v=1721928098&width=2025")}
 .service-card:hover .service-image{transform:scale(1.05)}
 .service-shade{z-index:-1;background:linear-gradient(0deg,#07090def 1%,#0c1019b8 37%,#080a101f 94%)}
 .service-content{padding:30px;display:flex;flex-direction:column;width:100%}
@@ -105,7 +105,7 @@ h2{font-size:clamp(43px,5vw,76px);line-height:1;letter-spacing:-.069em;font-weig
 .materials{background:#f3f1ed}
 .finish-layout{display:grid;grid-template-columns:1.15fr .85fr;min-height:540px;gap:0;background:#fff}
 .finish-visual{position:relative;min-height:510px;overflow:hidden;background:#262931;isolation:isolate}
-.finish-image{position:absolute;inset:0;background-image:url("https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=86");background-size:cover;background-position:center;z-index:-2;transition:filter .2s}
+.finish-image{position:absolute;inset:0;background-image:url("https://xtremepolishingsystems.com/cdn/shop/files/FB-310_ORBIT_1.4_InStock_65ac5e71-ad78-4db4-9487-e5086fd5ebc4.jpg?v=1761146763&width=500");background-size:cover;background-position:center;z-index:-2;transition:filter .2s}
 .finish-visual[data-finish=flake] .finish-image{filter:grayscale(.55) contrast(1.14)}
 .finish-visual[data-finish=metallic] .finish-image{filter:sepia(.3) saturate(1.65) contrast(1.18)}
 .finish-visual[data-finish=polished] .finish-image{filter:grayscale(.7) brightness(1.05)}
@@ -158,7 +158,7 @@ h2{font-size:clamp(43px,5vw,76px);line-height:1;letter-spacing:-.069em;font-weig
 .inquiry-aside{margin-top:34px;border-top:1px solid #515963;padding-top:20px;color:#9ea9b4;font-size:10px;letter-spacing:.09em;font-weight:900;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .signal{width:7px;height:7px;background:var(--accent);border-radius:50%}
 .smallpipe{color:#4d565f}
-.inquiry-art{height:250px;max-width:500px;margin-top:45px;background:linear-gradient(90deg,#171b20b0,#171b202e),url("https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=950&q=80") center/cover;filter:saturate(.7)}
+.inquiry-art{height:250px;max-width:500px;margin-top:45px;background:linear-gradient(90deg,#171b20b0,#171b202e),url("https://xtremepolishingsystems.com/cdn/shop/files/IMG_2501-min.jpg?v=1721752668&width=1800") center/cover;filter:saturate(.7)}
 .project-form{padding:clamp(22px,3.7vw,52px);background:#f9f9f8;color:#171a1f}
 .form-heading{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #d0d4d5;padding-bottom:16px;font-size:10px;color:#69747e;letter-spacing:.14em;font-weight:900}
 .form-heading span:first-child{color:var(--accent)}
@@ -271,3 +271,8 @@ html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!importan
 .button-accent,.studio-tab{background:var(--action,var(--accent-dark));border-color:var(--action,var(--accent-dark));color:var(--action-ink,#ffffff)}
 .button-accent:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
 .intro .eyebrow,.materials .eyebrow,.method .eyebrow,.project-form .form-heading span:first-child,.method-grid article>b{color:var(--accent-dark)}
+
+/* Finish-accurate photography: these three states must NOT re-color one generic scene. */
+.finish-visual[data-finish=flake] .finish-image{background-image:url('https://xtremepolishingsystems.com/cdn/shop/files/FB-310_ORBIT_1.4_InStock_65ac5e71-ad78-4db4-9487-e5086fd5ebc4.jpg?v=1761146763&width=500');filter:none}
+.finish-visual[data-finish=metallic] .finish-image{background-image:url('https://xtremepolishingsystems.com/cdn/shop/files/IMG_2216_1.jpg?v=1721854848&width=1125');filter:none}
+.finish-visual[data-finish=polished] .finish-image{background-image:url('https://xtremepolishingsystems.com/cdn/shop/files/IMG_2501-min.jpg?v=1721752668&width=1800');filter:none}
