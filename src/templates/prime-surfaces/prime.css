@@ -275,4 +275,4 @@ html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!importan
 /* Finish-accurate photography: these three states must NOT re-color one generic scene. */
 .finish-visual[data-finish=flake] .finish-image{background-image:url('https://xtremepolishingsystems.com/cdn/shop/files/FB-310_ORBIT_1.4_InStock_65ac5e71-ad78-4db4-9487-e5086fd5ebc4.jpg?v=1761146763&width=500');filter:none}
 .finish-visual[data-finish=metallic] .finish-image{background-image:url('https://xtremepolishingsystems.com/cdn/shop/files/IMG_2216_1.jpg?v=1721854848&width=1125');filter:none}
-.finish-visual[data-finish=polished] .finish-image{background-image:url('https://xtremepolishingsystems.com/cdn/shop/files/IMG_2501-min.jpg?v=1721752668&width=1800');filter:none}
+.finish-visual[data-finish=polished] .finish-image{background-image:url('https://xtremepolishingsystems.com/cdn/shop/files/Xtreme_Marketing_FloorMaintenance_Blog.jpg?v=1755523574&width=1200');filter:none}
