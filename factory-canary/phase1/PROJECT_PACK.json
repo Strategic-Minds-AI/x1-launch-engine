@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "project_id": "wle-gptbf-prime-live-canary-20261016",
+  "project_mode": "AI_ENHANCEMENT",
+  "project_name": "Website Launch Engine",
+  "operator_surface": "UNLIMITED WEBSITES ChatGPT Project",
+  "source_truth": {
+    "repository": "Strategic-Minds-AI/x1-launch-engine",
+    "renamed_from": "Strategic-Minds-AI/website-launch-engine",
+    "default_branch": "main",
+    "source_sha": "2a9164499f05612d3489b8677f819599833fe247",
+    "canary_branch": "feature/gptbf-prime-live-canary-20261016"
+  },
+  "intake": {
+    "contact_email": "jeremy@strategicmindsai.com",
+    "website_phone": "+17722090266",
+    "public_address": "NO PUBLIC ADDRESS",
+    "existing_url": "https://website-launch-engine.vercel.app/",
+    "desired_domain": "UNLIMITEDWEBSITES.NET",
+    "industry": "Website generation / construction-industry website factory",
+    "geography": "Florida-based, nationwide reach",
+    "primary_conversion_goal": "Move qualified operators/clients from industry/template selection into an approval-first preview workflow",
+    "project_goal": "Prove GPT Builder Factory PRIME can execute a real WLE project through governed intake, X1, runtime, noindex preview, QA, validation and client-ready handoff without production mutation",
+    "definition_of_done": "One exact-SHA noindex preview with durable X1 execution receipt, verified runtime parity, Artifact Vault evidence, QA report, Independent Validator PASS and client-ready packet",
+    "success_metrics": [
+      "exact source/deployment identity",
+      "one-attempt X1 execution",
+      "HTTP 200 preview",
+      "noindex enforced",
+      "desktop/mobile QA",
+      "independent validation",
+      "artifact read-back"
+    ]
+  },
+  "approvals": {
+    "visual_gate": "APPROVED_EXISTING_SOURCE_LOCK",
+    "production_release": "NOT_AUTHORIZED",
+    "protected_branch_merge": "NOT_AUTHORIZED"
+  },
+  "form_status": {
+    "status": "BLOCKED",
+    "reason": "Both available Google Form connector routes returned unsupported MCP protocol version 2025-11-05 during dry-run",
+    "workaround": "Use canonical normalized intake packet and Drive intake document for this canary; do not claim form-connected"
+  },
+  "protected_actions": [
+    "production release",
+    "protected/default branch merge",
+    "production DB/RLS",
+    "secrets/OAuth",
+    "DNS/domain purchase/change",
+    "permissions",
+    "spend/payment",
+    "customer outbound",
+    "public posting",
+    "destructive/irreversible changes"
+  ]
+}
