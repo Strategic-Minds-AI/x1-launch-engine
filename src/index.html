@@ -354,7 +354,7 @@ const originalTemplateDrawer=drawTemplates;
 let expandedTemplateLibrary=false;
 drawTemplates=function(){
  if(selectedIndustry!=="All"||expandedTemplateLibrary){originalTemplateDrawer();return;}
- const featured=["High-Call Legal Funnel","Luxury Real Estate","Contractor Lead Machine","Med Spa Bookings","HVAC Service Pro","Dental Growth"];
+ const featured=["General Contractor Showcase","Premium Roofing Estimate","Instant Epoxy Estimate","Premium Flooring Studio","Commercial Build Partners","HVAC Service Pro"];
  const grid=document.getElementById("templateGrid");
  grid.innerHTML=featured.map(name=>{
   const t=templates.find(x=>x[0]===name);
