@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "GPTBF_PHASE1_WLE_LIVE_CANARY_EVIDENCE",
+  "project_id": "wle-gptbf-prime-live-canary-20261016",
+  "verdict": "PASS_WITH_WARNINGS",
+  "tested_source": {
+    "repository": "Strategic-Minds-AI/x1-launch-engine",
+    "branch": "feature/gptbf-prime-live-canary-20261016",
+    "sha": "3c5ec80e81f534a0a037b30c6308f399af01d07a",
+    "note": "Evidence commits intentionally advance branch HEAD after the tested deployment; this SHA is the immutable tested source identity."
+  },
+  "intake": {
+    "drive_document_id": "1higbH6Pg8JjVC5u7eYqiuqjcHeXDt8GibZTHkTsdfj8",
+    "google_forms_status": "BLOCKED",
+    "google_forms_reason": "Unsupported MCP protocol version 2025-11-05 on both available Form adapters",
+    "workaround": "Normalized PROJECT_PACK.json plus verified Drive intake document"
+  },
+  "visual_gate": {
+    "selected": "Direction A — Approved Cinematic Blue Mountain",
+    "approval": "APPROVED_EXISTING_SOURCE_LOCK",
+    "alternatives": [
+      "Direction B — White Editorial Studio",
+      "Direction C — Dark Operator Studio"
+    ]
+  },
+  "x1": {
+    "work_id": "ff7b9e2c-1168-4810-bb38-4bfa2533a5fb",
+    "work_packet_id": "WP-WLE-GPTBF-PHASE1-20261016-003",
+    "status": "COMPLETED",
+    "attempts": 1,
+    "worker": "x1-swarm-preview-1",
+    "receipt_id": "worker:ff7b9e2c-1168-4810-bb38-4bfa2533a5fb:1",
+    "source_sha": "3c5ec80e81f534a0a037b30c6308f399af01d07a"
+  },
+  "runtime": {
+    "local_device": "JARVIS-COMMAND",
+    "local_container": "wle-gptbf-phase1",
+    "local_url": "http://127.0.0.1:18081/",
+    "railway_project_id": "f442cf0a-7275-4c2b-bf73-2dda4254e002",
+    "railway_environment_id": "d4cd61a5-fe51-4eba-afb7-286267861734",
+    "railway_service_id": "b9c79ead-1edc-44b9-9823-98d37b20399e",
+    "railway_service_state": "live",
+    "railway_latest_deployment_status": "SUCCESS"
+  },
+  "deployment": {
+    "project_id": "prj_JbkX4yKWygqBFRhkHL6nbeQXM46f",
+    "deployment_id": "dpl_2aQ5XDEvh5EMyWkv1aEyjXrzKdVq",
+    "preview_url": "https://website-launch-engine-pee2u4cf5-strategic-minds-advisory.vercel.app/",
+    "ready_state": "READY",
+    "target": "preview",
+    "git_sha": "3c5ec80e81f534a0a037b30c6308f399af01d07a",
+    "noindex": true
+  },
+  "repair_loop": {
+    "count": 1,
+    "defect": "Stale featured-template names referenced removed non-construction templates and caused TypeError reading element [0].",
+    "fix_commit": "3c5ec80e81f534a0a037b30c6308f399af01d07a",
+    "fix": "Replaced stale featured list with six valid current construction templates.",
+    "retest": "PASS"
+  },
+  "qa": {
+    "qa_report_id": "6ad2ab684fac8de5c34379a4",
+    "score": 99,
+    "executable_checks_total": 28,
+    "executable_checks_passed": 28,
+    "verdict": "PASS_WITH_WARNINGS",
+    "desktop": "1440x900",
+    "tablet": "768x1024",
+    "mobile": "390x844",
+    "local_artifacts": [
+      "09_Validation/GPTBF_PHASE1/qa-results.json",
+      "09_Validation/GPTBF_PHASE1/desktop-1440x900.png",
+      "09_Validation/GPTBF_PHASE1/admin-1440x900.png",
+      "09_Validation/GPTBF_PHASE1/client-1440x900.png",
+      "09_Validation/GPTBF_PHASE1/tablet-768x1024.png",
+      "09_Validation/GPTBF_PHASE1/mobile-390x844.png",
+      "09_Validation/GPTBF_PHASE1/desktop.har",
+      "09_Validation/GPTBF_PHASE1/remote-run.log"
+    ]
+  },
+  "independent_validator": {
+    "validation_result_id": "6ad2aba388d5562b88b99c1a",
+    "score": 99,
+    "status": "PASS"
+  },
+  "known_warnings": [
+    "Google Forms connector protocol mismatch prevents verified Form-connected intake.",
+    "Cloud Browser initial navigation works but subsequent session routing can return 405/session-not-found.",
+    "Cloud Browser agent_execute is blocked by Vercel AI Gateway 402 insufficient_funds; no spend was authorized.",
+    "JARVIS local private Git authentication unavailable; authenticated provider reads were mirrored to local Docker.",
+    "One generic Chromium console-only 404 message remains unattributed while Playwright captured zero page errors, request failures and unexpected HTTP responses."
+  ],
+  "protected_actions": {
+    "production_release": false,
+    "protected_default_merge": false,
+    "production_db_rls": false,
+    "secrets_oauth": false,
+    "dns_domain": false,
+    "permissions": false,
+    "spend": false,
+    "customer_outbound": false,
+    "public_posting": false,
+    "destructive_irreversible": false
+  },
+  "rollback": {
+    "git": "abandon/delete feature/gptbf-prime-live-canary-20261016",
+    "vercel": "expire/remove preview dpl_2aQ5XDEvh5EMyWkv1aEyjXrzKdVq; production aliases unchanged",
+    "x1": "retain READ_ONLY receipts for audit",
+    "local": "remove wle-gptbf-phase1 container and canary QA artifacts"
+  }
+}
