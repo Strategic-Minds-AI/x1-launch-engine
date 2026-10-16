@@ -1,0 +1,233 @@
+{
+  "schema": "strategic-minds/construction22/v1",
+  "phase": "preview",
+  "donorDeployment": "dpl_2R6LcDwusuVkzBn8GvNRm9bSkMWq",
+  "brandLock": "Brand B Design 2",
+  "industryCount": 22,
+  "industries": [
+    {
+      "name": "General Contracting",
+      "template": "General Contractor Showcase",
+      "hero": "A better way to build, from first conversation to final walkthrough",
+      "services": [
+        "New Construction",
+        "Owner Representation",
+        "Project Planning"
+      ]
+    },
+    {
+      "name": "Roofing",
+      "template": "Premium Roofing Estimate",
+      "hero": "A stronger roof starts with a smarter plan",
+      "services": [
+        "Roof Inspection",
+        "Repair & Replacement",
+        "Commercial Roofing"
+      ]
+    },
+    {
+      "name": "HVAC",
+      "template": "HVAC Service Pro",
+      "hero": "Comfort you can count on through every season",
+      "services": [
+        "Cooling Systems",
+        "Heating Systems",
+        "Maintenance Plans"
+      ]
+    },
+    {
+      "name": "Plumbing",
+      "template": "Plumbing Response Pro",
+      "hero": "Dependable plumbing starts with a clear next step",
+      "services": [
+        "Leak Diagnosis",
+        "Water Heaters",
+        "Fixture & Pipe Work"
+      ]
+    },
+    {
+      "name": "Electrical",
+      "template": "Electrical Expert",
+      "hero": "Powering safer, smarter spaces",
+      "services": [
+        "Panel & Service Upgrades",
+        "Lighting Projects",
+        "Electrical Troubleshooting"
+      ]
+    },
+    {
+      "name": "Kitchen Remodeling",
+      "template": "Kitchen Transformation Studio",
+      "hero": "A kitchen worth gathering around",
+      "services": [
+        "Cabinetry & Layout",
+        "Counters & Surfaces",
+        "Full Kitchen Renovation"
+      ]
+    },
+    {
+      "name": "Bathroom Remodeling",
+      "template": "Bath Design Studio",
+      "hero": "A more considered bathroom, built around you",
+      "services": [
+        "Walk-in Showers",
+        "Tile & Waterproofing",
+        "Complete Bathroom Renovation"
+      ]
+    },
+    {
+      "name": "Home Remodeling",
+      "template": "Home Renovation Atelier",
+      "hero": "Make the place you live work beautifully",
+      "services": [
+        "Whole-Home Renovations",
+        "Open-Plan Conversions",
+        "Interior Upgrades"
+      ]
+    },
+    {
+      "name": "Concrete Contractors",
+      "template": "Concrete Project Studio",
+      "hero": "Concrete solutions with a solid plan",
+      "services": [
+        "Flatwork & Slabs",
+        "Decorative Concrete",
+        "Repair & Resurfacing"
+      ]
+    },
+    {
+      "name": "Masonry",
+      "template": "Masonry Craft Portfolio",
+      "hero": "Built in stone, brick, and lasting detail",
+      "services": [
+        "Brick & Block",
+        "Stonework",
+        "Masonry Repair"
+      ]
+    },
+    {
+      "name": "Painting",
+      "template": "Precision Painting Co.",
+      "hero": "Color that changes how a space feels",
+      "services": [
+        "Interior Painting",
+        "Exterior Coatings",
+        "Commercial Painting"
+      ]
+    },
+    {
+      "name": "Windows & Doors",
+      "template": "Windows & Doors Studio",
+      "hero": "More light. Better openings. Thoughtful installation.",
+      "services": [
+        "Window Replacement",
+        "Entry Doors",
+        "Sliding & Patio Doors"
+      ]
+    },
+    {
+      "name": "Siding",
+      "template": "Exterior Siding Studio",
+      "hero": "A beautiful exterior begins with the right envelope",
+      "services": [
+        "Siding Replacement",
+        "Fiber Cement Options",
+        "Exterior Trim"
+      ]
+    },
+    {
+      "name": "Insulation",
+      "template": "High-Performance Insulation",
+      "hero": "Thoughtful insulation for more comfortable buildings",
+      "services": [
+        "Attic Insulation",
+        "Wall Insulation",
+        "Commercial Envelope"
+      ]
+    },
+    {
+      "name": "Landscaping",
+      "template": "Landscape Design",
+      "hero": "Outdoor spaces designed to be lived in",
+      "services": [
+        "Landscape Design",
+        "Planting & Irrigation",
+        "Grounds Care"
+      ]
+    },
+    {
+      "name": "Hardscaping",
+      "template": "Outdoor Hardscape Design",
+      "hero": "Shape the spaces beyond your walls",
+      "services": [
+        "Paver Patios",
+        "Retaining Walls",
+        "Outdoor Living Features"
+      ]
+    },
+    {
+      "name": "Decks & Patios",
+      "template": "Outdoor Living Studio",
+      "hero": "Create an outdoor room you love coming home to",
+      "services": [
+        "Custom Decks",
+        "Covered Patios",
+        "Outdoor Structures"
+      ]
+    },
+    {
+      "name": "Restoration",
+      "template": "Restoration Response",
+      "hero": "Move from property damage to a documented recovery plan",
+      "services": [
+        "Water Damage",
+        "Fire & Smoke Recovery",
+        "Reconstruction"
+      ]
+    },
+    {
+      "name": "Commercial Construction",
+      "template": "Commercial Build Partners",
+      "hero": "Spaces that work as hard as your business",
+      "services": [
+        "Tenant Improvements",
+        "Commercial Fit-Outs",
+        "Project Delivery"
+      ]
+    },
+    {
+      "name": "Solar Installation",
+      "template": "Solar Project Studio",
+      "hero": "Explore solar with a plan built for your property",
+      "services": [
+        "Solar Assessments",
+        "System Design",
+        "Installation Planning"
+      ]
+    },
+    {
+      "name": "Epoxy Contractors",
+      "template": "Instant Epoxy Estimate",
+      "hero": "Upgrade your floors. Elevate your space.",
+      "services": [
+        "Garage Floor Epoxy",
+        "Commercial Coatings",
+        "Flake & Metallic Finishes"
+      ]
+    },
+    {
+      "name": "Flooring",
+      "template": "Premium Flooring Studio",
+      "hero": "Floors that complete the whole space",
+      "services": [
+        "Luxury Vinyl & Tile",
+        "Hardwood & Laminate",
+        "Commercial Flooring"
+      ]
+    }
+  ],
+  "previewOnly": true,
+  "robots": "noindex,nofollow",
+  "crm": "not_connected",
+  "liveCustomerMessaging": false
+}
