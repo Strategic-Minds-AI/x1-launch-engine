@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "build_id": "wle-gptbf-prime-live-canary-20261016",
+  "source_repo": "Strategic-Minds-AI/x1-launch-engine",
+  "base_sha": "2a9164499f05612d3489b8677f819599833fe247",
+  "branch": "feature/gptbf-prime-live-canary-20261016",
+  "runtime": {
+    "local": "JARVIS-COMMAND + Docker",
+    "durable": "existing Railway Strategic Sandbox / existing X1 worker fleet",
+    "supabase_staging": "uvdkzsbjackpjvpoxtyk",
+    "vercel_project_id": "prj_JbkX4yKWygqBFRhkHL6nbeQXM46f"
+  },
+  "build_scope": [
+    "preserve approved WLE visual",
+    "compile current static site as reproducible preview",
+    "reuse existing X1 queue and preview worker",
+    "deploy noindex preview only",
+    "run desktop/mobile/browser checks",
+    "persist QA, validation and artifact receipts"
+  ],
+  "acceptance_tests": [
+    "Git source and deployment SHA match",
+    "local Docker serves HTTP 200",
+    "X1 queue job reaches COMPLETED with lease/worker receipt",
+    "Railway existing worker handles job without new worker creation",
+    "Supabase staging remains healthy",
+    "Vercel preview is READY and noindex",
+    "desktop 1440x900 and mobile 390x844 browser evidence exist",
+    "QA separate from builder",
+    "Independent Validator re-fetches exact identities",
+    "Artifact Vault read-back succeeds",
+    "client-ready handoff packet contains limitations and rollback"
+  ],
+  "rollback": {
+    "git": "delete or abandon canary branch",
+    "vercel": "remove/expire preview deployment only",
+    "x1": "retain synthetic/nonproduction receipts for audit",
+    "local": "remove canary container/image"
+  }
+}
