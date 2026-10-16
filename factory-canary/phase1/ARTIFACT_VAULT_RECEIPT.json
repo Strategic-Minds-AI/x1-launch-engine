@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "GPTBF_PHASE1_ARTIFACT_VAULT_RECEIPT",
+  "project_id": "wle-gptbf-prime-live-canary-20261016",
+  "status": "PASS_WITH_WARNINGS",
+  "durable_receipt_id": "rcpt_gptbf_phase1_wle_live_canary_20261016",
+  "durable_record_id": "6ad2ac1d864c33fcc81ffd90",
+  "tested_source_sha": "3c5ec80e81f534a0a037b30c6308f399af01d07a",
+  "x1_receipt_id": "worker:ff7b9e2c-1168-4810-bb38-4bfa2533a5fb:1",
+  "vercel_deployment_id": "dpl_2aQ5XDEvh5EMyWkv1aEyjXrzKdVq",
+  "qa_report_id": "6ad2ab684fac8de5c34379a4",
+  "validator_result_id": "6ad2aba388d5562b88b99c1a",
+  "github_evidence_blob_sha": "a771597efd477582c01637c83374feed475e710e",
+  "github_handoff_blob_sha": "1eaa5700dfe365a35a5e273ccf69ff0a92912ad6",
+  "drive_evidence_document_id": "1Qhu2DjlEoKHKnvCuMU12ggAqQ9ONOj-XOM0j35k27GE",
+  "drive_revision_id": "AHj4eMQ-KNnmHA9ijwb4XXf1bNqDP0EE2UWHnhddlOMLhPtaTXWFn-keFtCY3Qf_JjYHyNn7Bm-QtFYEcyFY7ukVWv2tSYM5hIwwJZa67hQ",
+  "local_receipt_path": "C:\\_Strategic_Minds_AI_OS\\49_WEBSITE LAUNCH EGINE\\AUTONOMOUS_EXECUTION_V1\\10_Receipts\\GPTBF_PHASE1_WLE_FINAL_RECEIPT.json",
+  "preview_url": "https://website-launch-engine-pee2u4cf5-strategic-minds-advisory.vercel.app/",
+  "production_release_authorized": false,
+  "rollback": "abandon canary branch; expire preview deployment; production aliases unchanged"
+}
