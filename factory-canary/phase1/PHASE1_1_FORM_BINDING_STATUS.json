@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "1.1",
+  "canary": "FORM_BINDING_REPAIR",
+  "status": "BLOCKED_CREDENTIAL",
+  "observed_at": "2026-10-17T00:39:00Z",
+  "adapter_branch": "feature/gptbf-phase1-1-form-binding-canary-20261016",
+  "adapter_head": "ee0aba8e1e7419f5b1c264c8ca06251c28a9fd06",
+  "preview_deployment_id": "dpl_2pJ7VXV4bJdvsnaD456tNWo4A5jh",
+  "preview_ready_state": "READY",
+  "verified_failure": {
+    "code": "GOOGLE_SA_INVALID_GRANT_ACCOUNT_NOT_FOUND",
+    "source": "Vercel preview build prebuild adapter",
+    "meaning": "The configured GOOGLE_SA_* credential set cannot obtain a Google OAuth token because the referenced service-account identity is not found.",
+    "secret_exposed": false
+  },
+  "legacy_connector": {
+    "status": "BLOCKED_PROTOCOL",
+    "error": "Unsupported MCP protocol version 2025-11-05"
+  },
+  "healthy_upgrade_surface": {
+    "server": "AUTO_BUILDER_2",
+    "health": "ok",
+    "limitation": "No create_google_form capability is exposed."
+  },
+  "existing_x1_queue": {
+    "project_id": "uvdkzsbjackpjvpoxtyk",
+    "table": "public.x1_work_queue",
+    "enqueue_functions": [
+      "public.x1_enqueue_work(jsonb)",
+      "public.fn_enqueue(jsonb)"
+    ],
+    "duplicate_queue_created": false
+  },
+  "phase1_chain": {
+    "tested_source_sha": "3c5ec80e81f534a0a037b30c6308f399af01d07a",
+    "x1_receipt": "worker:ff7b9e2c-1168-4810-bb38-4bfa2533a5fb:1",
+    "vercel_deployment": "dpl_2aQ5XDEvh5EMyWkv1aEyjXrzKdVq",
+    "qa_report": "6ad2ab684fac8de5c34379a4",
+    "validator_result": "6ad2aba388d5562b88b99c1a"
+  },
+  "authorization_boundary": {
+    "required_next_action": "Create/replace or re-authorize the Google service-account/OAuth credential used by the Forms adapter, then bind it server-side to the preview adapter.",
+    "reason": "Project governance requires fresh explicit approval for secrets/OAuth/permission changes.",
+    "production_release_authorized": false
+  },
+  "rollback": {
+    "git": "abandon feature/gptbf-phase1-1-form-binding-canary-20261016",
+    "vercel": "expire preview dpl_2pJ7VXV4bJdvsnaD456tNWo4A5jh",
+    "credentials": "no credential changes have been made"
+  },
+  "adapter_receipt_commit": "c2d6cfab8b59835caafc5dbeb30a4d3f61f7bf05"
+}
