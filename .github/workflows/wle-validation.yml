@@ -21,3 +21,16 @@ jobs:
           node-version: '22'
       - name: Check application JS and route contracts
         run: node --test tests/wle-contracts.test.mjs
+  live-route-release-gate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify live HTTP routes and auth gate
+        run: node --test tests/wle-live-smoke.test.mjs
+        env:
+          WLE_TARGET_URL: https://website-launch-engine.vercel.app
