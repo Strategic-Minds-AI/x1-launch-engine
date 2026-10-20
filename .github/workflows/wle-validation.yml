@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'admin.html'
+      - 'academy.html'
       - 'client.html'
       - 'designer.html'
       - 'api/**'
@@ -20,4 +21,4 @@ jobs:
         with:
           node-version: '22'
       - name: Check application JS and route contracts
-        run: node --test tests/wle-contracts.test.mjs
+        run: node --test tests/wle-contracts.test.mjs tests/wle-academy-integration.test.mjs

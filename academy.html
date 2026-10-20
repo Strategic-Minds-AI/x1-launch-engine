@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Universal Template Academy | X1 Admin</title><style>
+:root{font:15px Inter,system-ui,sans-serif;background:#07192d;color:#eff8ff}*{box-sizing:border-box}body{margin:0}header{padding:13px 22px;background:#0c2946;border-bottom:1px solid #38658c;display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap}strong{font-size:16px}.nav{display:flex;flex-wrap:wrap;gap:6px;padding:11px 16px;background:#0a2138}.nav button{border:1px solid #325e85;background:#173b5e;color:#d8edff;border-radius:8px;padding:10px 13px;font:inherit;cursor:pointer}.nav button[aria-pressed="true"]{background:#187be7;color:white}.embed{height:calc(100vh - 136px);min-height:630px}iframe{width:100%;height:100%;border:0;background:white}a{color:#9edaff;font-weight:700}.fallback{padding:10px 18px;background:#102b46;font-size:12px;color:#b9d2e9}button:focus-visible,a:focus-visible{outline:3px solid #83d5ff;outline-offset:2px}
+</style></head><body><header><strong>X1 / ORIGINAL UNIVERSAL FACTORY ACADEMY</strong><div><a href="/admin.html">← Admin dashboard</a> · <a id="openSource" href="https://universal-factory-academy.vercel.app/studio/" target="_blank" rel="noopener noreferrer">Open original Studio ↗</a></div></header><nav class="nav" aria-label="Industry academies" id="nav"></nav><div class="fallback">Source: original Universal Factory Academy · 40 master layouts and 36 industry demonstrations. Original Studio export technology; Client projects can be saved directly when signed in to X1 and using the original Studio bridge.</div><section class="embed"><iframe id="factory" title="Original Universal Factory Academy Studio" referrerpolicy="strict-origin-when-cross-origin" loading="eager"></iframe></section><script>
+const base='https://universal-factory-academy.vercel.app';
+const views=[['Studio','/studio/'],['All academies','/academies/'],['Epoxy','/academies/epoxy/'],['Legal','/academies/legal/'],['Real Estate','/academies/real-estate/'],['Equipment','/academies/equipment/'],['Training','/academies/training/'],['AI Systems','/academies/ai-systems/']];
+const nav=document.getElementById('nav'),frame=document.getElementById('factory'),open=document.getElementById('openSource');let active=0;
+views.forEach(([name],i)=>{const button=document.createElement('button');button.textContent=name;button.type='button';button.onclick=()=>show(i);nav.append(button)});
+const x1Nonce=Array.from(crypto.getRandomValues(new Uint8Array(16)),v=>v.toString(16).padStart(2,'0')).join('');
+const workspaceOrigin=location.origin;
+function show(i){active=i;const route=views[i][1];const target=new URL(base+route);if(i===0){target.searchParams.set('x1_origin',workspaceOrigin);target.searchParams.set('x1_nonce',x1Nonce)}const url=target.toString();frame.src=url;open.href=url;[...nav.children].forEach((button,j)=>button.setAttribute('aria-pressed',String(j===i)));history.replaceState(null,'','#'+encodeURIComponent(views[i][0]))}
+async function saveToX1(event){
+ if(event.origin!==base || event.source!==frame.contentWindow) return;
+ if(event.data?.type!=='X1_ACADEMY_SAVE_V1'||event.data.nonce!==x1Nonce) return;
+ const reply=(ok,error)=>frame.contentWindow?.postMessage({type:'X1_ACADEMY_SAVE_RESULT_V1',ok,error},base);
+ try{
+  const d=event.data.config;
+  if(!d||d.format!=='studio-config-v1'||typeof d.template_id!=='string'||!(/^[a-z0-9-]{1,80}$/).test(d.template_id)||typeof d.brand!=='string'||!d.brand.trim()||d.brand.length>180||typeof d.industry!=='string'||d.industry.length>180||!Array.isArray(d.services)||d.services.length!==3||!/^#[0-9a-f]{6}$/i.test(d.accent))throw Error('Invalid Studio configuration');
+  const token=localStorage.getItem('x1_access_token');
+  if(!token)throw Error('Sign in through the X1 Client Portal first');
+  const response=await fetch('/api/config',{cache:'no-store'}),provider=await response.json();
+  if(!response.ok||provider.ready!==true)throw Error('X1 authentication provider unavailable');
+  const userResponse=await fetch(provider.url+'/auth/v1/user',{headers:{apikey:provider.anonKey,Authorization:'Bearer '+token}});
+  if(!userResponse.ok)throw Error('Session expired; sign in through the Client Portal');
+  const user=await userResponse.json();if(!user.id)throw Error('Authenticated account missing');
+  const clean={format:'studio-config-v1',source:'original-universal-factory-academy',template_id:d.template_id,industry_academy:typeof d.industry_academy==='string'?d.industry_academy.slice(0,80):null,brand:d.brand.trim(),industry:d.industry,headline:String(d.headline||'').slice(0,250),subtitle:String(d.subtitle||'').slice(0,1000),cta:String(d.cta||'').slice(0,80),services:d.services.map(v=>String(v).slice(0,180)),accent:d.accent};
+  const created=await fetch(provider.url+'/rest/v1/wle_sites',{method:'POST',headers:{apikey:provider.anonKey,Authorization:'Bearer '+token,'Content-Type':'application/json',Prefer:'return=representation'},body:JSON.stringify({owner_id:user.id,business_name:clean.brand,industry:clean.industry,city:'',template_id:clean.template_id,status:'draft',content:{academy:clean}})});
+  if(!created.ok)throw Error('Project save rejected (HTTP '+created.status+')');
+  const rows=await created.json();if(!Array.isArray(rows)||!rows[0]?.id)throw Error('Project receipt missing');
+  reply(true,null);
+ }catch(e){reply(false,e.message)}
+}
+window.addEventListener('message',saveToX1);
+const initial=views.findIndex(([name])=>name===decodeURIComponent(location.hash.slice(1)));show(initial<0?0:initial);
+</script></body></html>
