@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>X1 Template Designer — Website Launch Engine</title><meta name="robots" content="noindex,nofollow">
+<style>
+:root{font:15px Inter,system-ui,-apple-system,sans-serif;color:#162d45;background:#071626}*{box-sizing:border-box}
+body{margin:0}button,input,textarea,select{font:inherit}button{cursor:pointer}
+.shell{display:grid;grid-template-columns:350px minmax(0,1fr);min-height:100vh}
+aside{background:#071626;color:#e6f1ff;padding:22px;overflow:auto;max-height:100vh;border-right:1px solid #254461}
+.brand{font-size:20px;font-weight:900;letter-spacing:-.035em}.brand small{display:block;font-size:11px;color:#7fbcea;letter-spacing:.15em;margin-top:6px}
+h1{font-size:28px;letter-spacing:-.04em;margin:10px 0 4px}p.note{font-size:12px;line-height:1.6;color:#a8bfd3}
+label{display:block;font-size:12px;font-weight:700;margin-top:15px;color:#c7dff4}input,select,textarea{width:100%;border:1px solid #41607d;border-radius:8px;background:#0d2943;color:white;padding:10px;margin-top:6px}textarea{min-height:64px;resize:vertical}
+fieldset{border:1px solid #2c4e70;border-radius:10px;margin:16px 0;padding:13px}legend{font-size:12px;color:#a3cbf2;padding:0 7px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:17px}button{padding:11px 12px;border:0;border-radius:8px;background:#167cf1;color:white;font-weight:750}button.alt{background:#1c3e60}button:focus-visible,a:focus-visible{outline:3px solid #4cc6ff;outline-offset:3px}
+main{padding:20px;background:#e8f0f7;min-width:0}.toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px;color:#203c54}.toolbar strong{font-size:19px}.toolbar button{background:#164c7c}
+.viewport{margin:auto;width:100%;max-width:1280px;min-height:78vh;background:white;box-shadow:0 18px 60px #0a22432e;border:1px solid #c1d3e1;border-radius:10px;overflow:hidden;transition:max-width .2s}.viewport.tablet{max-width:768px}.viewport.mobile{max-width:390px}
+#frame{display:block;width:100%;height:calc(100vh - 110px);min-height:700px;border:0;background:white}
+.status{font-size:12px;color:#52718b}a{color:#9fd6ff} .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:850px){.shell{grid-template-columns:1fr}aside{max-height:none}.viewport{min-height:65vh}#frame{height:700px}main{padding:10px}}
+</style></head><body><div class="shell"><aside>
+<div class="brand">X1 / TEMPLATE DESIGNER<small>WEBSITE LAUNCH ENGINE</small></div>
+<h1>Industry site builder</h1><p class="note">Create and customize a real, self-contained website file. Browser drafts remain on this device; no client account or cloud publication is implied.</p>
+<label for="industry">Industry</label><select id="industry"></select>
+<label for="business">Business name</label><input id="business" maxlength="90" placeholder="Your business name">
+<label for="city">City / service area</label><input id="city" maxlength="90" placeholder="Fort Lauderdale, FL">
+<label for="headline">Headline</label><textarea id="headline" maxlength="190"></textarea>
+<label for="intro">Description</label><textarea id="intro" maxlength="550"></textarea>
+<label for="phone">Business phone</label><input id="phone" type="tel" maxlength="32" placeholder="(555) 123-4567">
+<label for="email">Inquiry email</label><input id="email" type="email" maxlength="180" placeholder="hello@example.com">
+<fieldset><legend>Design system</legend><div class="two"><label for="accent">Accent color<input id="accent" type="color" value="#176ce8" style="height:45px;padding:4px"></label><label for="dark">Dark color<input id="dark" type="color" value="#071d33" style="height:45px;padding:4px"></label></div>
+<label for="layout">Hero layout</label><select id="layout"><option value="split">Split editorial</option><option value="center">Centered conversion</option><option value="minimal">Minimal luxury</option></select></fieldset>
+<div class="actions"><button id="save">Save draft</button><button class="alt" id="reset">Reset fields</button><button id="export">Export website</button><button class="alt" id="copy">Copy HTML</button></div>
+<p id="status" class="note" role="status" aria-live="polite"></p><p class="note"><a href="/">← Website Launch Engine</a></p>
+</aside><main><div class="toolbar"><strong>Live website preview</strong><div><button data-size="desktop" aria-pressed="true">Desktop</button> <button data-size="tablet" aria-pressed="false">Tablet</button> <button data-size="mobile" aria-pressed="false">Mobile</button></div><span class="status" id="revision">Unsaved design</span></div><div class="viewport" id="viewport"><iframe id="frame" title="Generated website preview" sandbox="allow-forms"></iframe></div></main></div>
+<script>
+"use strict";
+const PACKS={
+"Legal • Personal injury":{headline:"Trusted representation when it matters most",intro:"Clear communication, thoughtful preparation, and a direct conversation about your options.",services:["Personal injury consultations","Case evaluation","Client guidance"]},
+"Legal • Family law":{headline:"Practical guidance through important family decisions",intro:"Discuss your situation confidentially with a legal professional and understand possible next steps.",services:["Divorce and separation","Parenting matters","Support and modifications"]},
+"Legal • Estate planning":{headline:"Plan confidently for the people who matter",intro:"Organize your estate planning questions and connect with experienced legal counsel.",services:["Wills and trusts","Estate administration","Probate consultations"]},
+"Epoxy • Residential":{headline:"Flooring that transforms everyday spaces",intro:"Explore carefully planned coating systems and finishes designed for garages and living spaces.",services:["Garage floor coatings","Decorative flake systems","Metallic epoxy finishes"]},
+"Epoxy • Commercial":{headline:"High-performance flooring for working facilities",intro:"Discuss substrate preparation, operational requirements and coating options for your commercial space.",services:["Commercial coatings","Concrete surface preparation","Durable finish systems"]},
+"Concrete • Polishing":{headline:"Beautiful concrete, professionally finished",intro:"Discover polished concrete and decorative surface options suited to your project.",services:["Concrete polishing","Surface restoration","Decorative concrete"]},
+"Home services • HVAC":{headline:"Comfort solutions for every season",intro:"Request service, discuss system upgrades and find practical comfort solutions.",services:["Heating repair","Cooling service","System maintenance"]},
+"Home services • Roofing":{headline:"Protect your property from the top down",intro:"Discuss roof inspections, repairs and replacement options for your property.",services:["Roof inspections","Roof replacement","Roof repair"]},
+"Home services • Plumbing":{headline:"Dependable plumbing help when you need it",intro:"Find solutions for repairs, maintenance and plumbing projects.",services:["Leak diagnosis","Drain service","Fixture installation"]},
+"Home services • Electrical":{headline:"Electrical work built around safety and precision",intro:"Arrange an assessment for repairs, installations or upgrades.",services:["Electrical repairs","Panel upgrades","Lighting installation"]},
+"Home services • Restoration":{headline:"A clear next step after property damage",intro:"Talk through restoration requirements and understand the assessment process.",services:["Water damage assessment","Restoration planning","Property repairs"]},
+"Professional • Real estate":{headline:"Discover the right property opportunity",intro:"Work with a property professional to explore local options and next steps.",services:["Buyer consultations","Seller services","Market guidance"]}
+};
+const ids=["industry","business","city","headline","intro","phone","email","accent","dark","layout"],$=id=>document.getElementById(id);
+const escapeHtml=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const cleanPhone=s=>String(s||"").replace(/[^+\d]/g,"");
+const validColor=s=>/^#[\da-f]{6}$/i.test(s)?s:"#176ce8";
+const industry=$("industry");for(const name of Object.keys(PACKS)){let option=document.createElement("option");option.value=option.textContent=name;industry.append(option)}
+function defaults(){const p=PACKS[industry.value];$("headline").value=p.headline;$("intro").value=p.intro}
+function state(){return Object.fromEntries(ids.map(id=>[id,$(id).value]))}
+function renderHTML(s){
+const pack=PACKS[s.industry]||PACKS[Object.keys(PACKS)[0]],esc=escapeHtml;
+const business=esc(s.business.trim()||"Your Business"),city=esc(s.city.trim()||"Your service area"),accent=validColor(s.accent),dark=validColor(s.dark),phone=cleanPhone(s.phone),email=String(s.email||"").trim(),mailto=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)?'mailto:'+encodeURIComponent(email).replace(/%40/gi,'@'):'',layout=["split","center","minimal"].includes(s.layout)?s.layout:"split";
+const contact=mailto?'<a class="btn" href="'+esc(mailto)+'?subject=Website%20inquiry">Email us</a>':phone?'<a class="btn" href="tel:'+esc(phone)+'">Call us</a>':'<a class="btn" href="#contact">Contact details</a>';
+const services=pack.services.map((x,i)=>'<article><span>0'+(i+1)+'</span><h3>'+esc(x)+'</h3><p>Talk with our team about your specific goals and requirements.</p></article>').join("");
+return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${esc(s.intro)}"><title>${business} | ${city}</title><style>
+:root{--accent:${accent};--dark:${dark};font-family:Inter,system-ui,-apple-system,sans-serif;color:#142b3c;background:#fff}*{box-sizing:border-box}body{margin:0}a{text-decoration:none}nav{padding:22px max(5%,calc((100vw - 1180px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px;background:var(--dark);color:white}nav strong{font-size:22px;letter-spacing:-.04em}nav a{color:white;font-weight:700}.hero{padding:100px max(6%,calc((100vw - 1180px)/2));background:linear-gradient(125deg,var(--dark),#264c69);color:#fff;min-height:480px;display:flex;flex-direction:column;justify-content:center}.hero.center{text-align:center;align-items:center}.hero.minimal{background:#f3f6f9;color:var(--dark)}.hero>*{max-width:800px}.eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:12px;font-weight:800;color:var(--accent)}.hero h1{font-size:clamp(38px,6vw,76px);letter-spacing:-.06em;line-height:1.03;margin:20px 0}.hero p{font-size:clamp(16px,2vw,20px);line-height:1.6;opacity:.9}.btn{display:inline-block;background:var(--accent);color:white;border-radius:7px;padding:15px 24px;font-weight:800;margin-top:20px}.hero.minimal .btn{color:white}main{max-width:1180px;margin:auto;padding:75px 5%}.section-kicker{letter-spacing:.15em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:900}.section-title{font-size:clamp(30px,4vw,48px);letter-spacing:-.045em}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.grid article{background:#f2f6fa;border:1px solid #e0eaf2;padding:27px;border-radius:12px}.grid span{font-weight:900;color:var(--accent)}h3{font-size:22px;letter-spacing:-.03em}.grid p{color:#5a6b7c;line-height:1.6}.contact{padding:65px 6%;background:var(--dark);color:white;text-align:center}.contact p{font-size:18px;line-height:1.6}footer{background:#091929;color:#c9d6e2;text-align:center;padding:24px;font-size:12px}@media(max-width:720px){nav{padding:16px}.hero{padding:64px 7%;min-height:400px}.grid{grid-template-columns:1fr}main{padding:48px 6%}}
+</style></head><body><nav><strong>${business}</strong><a href="#contact">Get in touch →</a></nav><header class="hero ${layout}"><div class="eyebrow">${city} · ${esc(s.industry)}</div><h1>${esc(s.headline)}</h1><p>${esc(s.intro)}</p><div>${contact}</div></header><main><div class="section-kicker">What we do</div><h2 class="section-title">Services built around your needs</h2><section class="grid" aria-label="Services">${services}</section></main><section class="contact" id="contact"><h2>Start a conversation</h2><p>Tell us about your project and the results you want.</p>${contact}</section><footer>© ${new Date().getFullYear()} ${business}. All rights reserved.</footer></body></html>`;}
+function render(){const s=state();$("frame").srcdoc=renderHTML(s);$("revision").textContent="Edited • Save or export";$("status").textContent=""}
+industry.addEventListener("change",()=>{defaults();render()});for(const id of ids.filter(x=>x!=="industry"))$(id).addEventListener("input",render);
+$("save").onclick=()=>{try{localStorage.setItem("x1-template-designer-v1",JSON.stringify(state()));$("status").textContent="Draft saved in this browser.";$("revision").textContent="Local draft saved"}catch(e){$("status").textContent="Browser storage unavailable; use Export website."}};
+$("reset").onclick=()=>{for(const id of ["business","city","phone","email"])$(id).value="";$("accent").value="#176ce8";$("dark").value="#071d33";$("layout").value="split";defaults();render()};
+$("export").onclick=()=>{const s=state(),blob=new Blob([renderHTML(s)],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="x1-"+(s.business||"industry-site").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60)+".html";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);$("status").textContent="Website HTML exported."};
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(renderHTML(state()));$("status").textContent="Complete website HTML copied."}catch(e){$("status").textContent="Clipboard unavailable; use Export website."}};
+document.querySelectorAll("[data-size]").forEach(button=>button.addEventListener("click",()=>{const value=button.dataset.size;$("viewport").className="viewport "+(value==="desktop"?"":value);document.querySelectorAll("[data-size]").forEach(el=>el.setAttribute("aria-pressed",String(el===button)))}));
+try{const saved=JSON.parse(localStorage.getItem("x1-template-designer-v1")||"null");if(saved&&PACKS[saved.industry])for(const id of ids)if(typeof saved[id]==="string"&&saved[id].length<600)$(id).value=saved[id];else{}else defaults()}catch(e){defaults()}
+if(!$("headline").value)defaults();render();
+</script></body></html>
