@@ -1,0 +1,23 @@
+name: WLE branch validation
+on:
+  pull_request:
+    paths:
+      - 'admin.html'
+      - 'client.html'
+      - 'designer.html'
+      - 'api/**'
+      - 'tests/**'
+      - '.github/workflows/wle-validation.yml'
+  workflow_dispatch:
+jobs:
+  static-and-auth-contracts:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check application JS and route contracts
+        run: node --test tests/wle-contracts.test.mjs
