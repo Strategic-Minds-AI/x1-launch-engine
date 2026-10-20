@@ -21,4 +21,4 @@ jobs:
         with:
           node-version: '22'
       - name: Check application JS and route contracts
-        run: node --test tests/wle-contracts.test.mjs tests/wle-academy-integration.test.mjs
+        run: node --test tests/wle-contracts.test.mjs tests/wle-academy-integration.test.mjs tests/x1-sandbox-contracts.test.mjs
