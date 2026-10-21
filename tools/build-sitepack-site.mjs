@@ -364,7 +364,7 @@ const CSS = [
   ".footer-legal{border-top:1px solid rgba(255,255,255,.2);margin-top:1.5rem;padding-top:1rem;font-size:.85rem;color:#9fc4d2}",
   "@media (max-width:720px){.nav-toggle{display:inline-block}.site-nav{display:none;width:100%}.site-nav.open{display:block}.site-nav ul{flex-direction:column;gap:.6rem}.header-phone{margin-left:0}}",
   "@media print{.site-header,.lead-form,.nav-toggle{display:none}}"
-]);
+];
 
 const JS = [
   "// Preview-build behaviour only: no network calls, no tracking.",
@@ -394,7 +394,7 @@ const JS = [
   "    });",
   "  });",
   "})();"
-]);
+];
 
 const ROBOTS = lines(["User-agent: *", "Disallow: /", "Noindex preview build. Indexing returns only after approved production promotion.", ""]);
 
