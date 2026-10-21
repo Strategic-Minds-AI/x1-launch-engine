@@ -265,7 +265,7 @@ export function renderSite(pack) {
     ])
   };
   const areas = {
-    slug: "areas", prefix: "../", jsonld: ["LocalBusiness", "BreadcrumbList"],
+    slug: "areas", path: "service-areas/index.html", prefix: "../", jsonld: ["LocalBusiness", "BreadcrumbList"],
     title: "Service areas across " + pack.market.region + " | " + pack.brand.name,
     description: "Commercial kitchen exhaust and grease duct cleaning serving " + cities.join(", ") + ".",
     crumbs: [{ name: "Home", url: "../index.html" }, { name: "Service areas", url: "index.html" }],
@@ -299,7 +299,7 @@ export function renderSite(pack) {
     ])
   };
   const pages = [home, services, areas, contact];
-  return pages.map(function (page) { return { path: page.slug === "home" ? "index.html" : page.slug + "/index.html", content: pageShell(pack, page) }; });
+  return pages.map(function (page) { return { path: page.path ? page.path : (page.slug === "home" ? "index.html" : page.slug + "/index.html"), content: pageShell(pack, page) }; });
 }
 
 const CSS = [
