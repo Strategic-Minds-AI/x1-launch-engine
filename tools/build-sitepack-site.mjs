@@ -407,7 +407,7 @@ export function buildSitepackSite(pack, outDir, options) {
   const files = renderSite(pack).concat([
     { path: "assets/site.css", content: CSS.join("\n") + "\n" },
     { path: "assets/site.js", content: JS.join("\n") + "\n" },
-    { path: "robots.txt", content: ROBOTS.join("\n") }
+    { path: "robots.txt", content: ROBOTS }
   ]);
   files.sort(function (a, b) { return a.path < b.path ? -1 : a.path > b.path ? 1 : 0; });
   const manifestFiles = files.map(function (file) { return { path: file.path, bytes: Buffer.byteLength(file.content, "utf8"), sha256: sha256(file.content) }; });
