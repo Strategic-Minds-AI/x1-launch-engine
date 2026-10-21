@@ -1,0 +1,24 @@
+{
+  "schema": "x1uf.legal-launch-plan.v1",
+  "mission_id": "X1UF-EFE517EDDDE488C1",
+  "status": "DRAFT_BLOCKED",
+  "site_model": "UNRESOLVED_LAW_FIRM_OR_QUALIFYING_PROVIDER",
+  "identity_required": ["advertiser legal name", "responsible lawyer and Florida Bar profile or qualifying-provider authority", "owner authorization", "real office and service area", "verified phone ownership", "approved claim and fee evidence", "brand and asset rights"],
+  "design": {"concepts": 10, "selected": null, "approval": "PENDING"},
+  "funnel": {
+    "current": "LOCAL_ENUMERATED_SAMPLE_ONLY",
+    "live_intake": "BLOCKED_NO_VERIFIED_TENANT_CONTRACT",
+    "minimum_fields": ["contact preference", "one contact channel", "incident category", "state/county", "approximate date", "explicit request consent"],
+    "exclude": ["medical history", "SSN", "full birth date", "file uploads", "settlement estimate", "free-text case narrative in initial form"],
+    "required_controls": ["server-side schema validation and body byte limit", "fixed exact origin allowlist with CSRF protections", "bot challenge verified server-side", "durable tenant and advertiser binding resolved server-side", "idempotency key and unique durable persistence", "immutable consent text version and timestamp", "separate optional marketing consent", "retention and deletion policy", "tenant access negative controls", "encrypted transport", "no personal data in logs, analytics or URLs"],
+    "required_live_tests": ["synthetic lead accepted once and read back by correct tenant", "duplicate request does not create another lead", "missing consent denied without write", "unknown advertiser/tenant denied", "cross-tenant read and write denied", "spam challenge failure denied", "upstream failure returns failure with no false success", "contact routing delivered to verified recipient without real outreach"]
+  },
+  "search": {
+    "preview": "NOINDEX_NO_SITEMAP_NO_LEGALBUSINESS_SCHEMA",
+    "production": ["one canonical brand domain with verified ownership", "unique useful practice and resource pages", "genuine service locations only", "absolute canonicals and XML sitemap from approved route inventory", "LegalService and attorney schema only for verified facts", "visible source citations and named legal reviewer", "FAQ answers visible in page; no rich-result guarantee", "descriptive links and clean topic hubs", "robots indexing change only at approved release"],
+    "google": {"ga4_property": null, "gsc_property": null, "connection_status": "NOT_VERIFIED", "events": ["consultation_cta_click", "intake_started", "intake_success_after_durable_acceptance"], "sensitive_dimensions": "PROHIBITED", "indexing_api": "NOT_FOR_ORDINARY_PAGES"}
+  },
+  "acceptance": {"overall_min": 95, "visual_min": 95, "critical_percent": 100, "viewports": [1440,768,390], "guardian_identity": "UNVERIFIED", "max_repair_cycles": 3},
+  "release": {"owner_approval": false, "legal_review": false, "domain_spend_approved": false, "production_promotion": "BLOCKED", "rollback": "retain previous immutable deployment; rehearse on approved canary before promotion"},
+  "rollout": {"phases": [1,5,20,50,100], "mode": "STAGED_DRAFTS_ONLY", "queue": "REUSE_EXISTING_AUTHENTICATED_FENCED_LEASE_AUTHORITY", "new_scheduler": false, "concurrency_ceiling": 4, "per_tenant_cost_cap": null, "stop_conditions": ["any critical failure", "unknown legal identity or approval", "cross-tenant conflict", "missing exact-SHA Guardian receipt", "cost cap missing or exceeded", "rollback unavailable"], "domains": "distinct legitimate brands/audiences only; no city doorway clones"}
+}
