@@ -13,7 +13,8 @@ export const GATE_CODES = Object.freeze({
   LEAD: "GATE_LEAD_ENDPOINT_NOT_STAGING",
   SHAPE: "GATE_SITEPACK_INCOMPLETE",
   PHASE: "GATE_PHASE_NOT_PREVIEW",
-  PRODUCTION: "GATE_PRODUCTION_REFERENCE_PRESENT"
+  PRODUCTION: "GATE_PRODUCTION_REFERENCE_PRESENT",
+  SYNTHETIC: "GATE_SYNTHETIC_LABEL_REQUIRED"
 });
 
 export class BuildGateError extends Error {
@@ -39,6 +40,9 @@ export function validateSitepack(pack) {
   if (!Array.isArray(pack.market.cities) || pack.market.cities.length < 4) throw new BuildGateError(GATE_CODES.SHAPE, "at least four service areas are required");
   if (!Array.isArray(pack.faq) || pack.faq.length < 3) throw new BuildGateError(GATE_CODES.SHAPE, "at least three FAQ entries are required");
   if (!pack.brand.name || !pack.brand.phone || !pack.brand.email) throw new BuildGateError(GATE_CODES.SHAPE, "brand name, phone and email are required");
+  if (String(pack.verification_status || "SYNTHETIC_UNVERIFIED") !== "VERIFIED" && pack.synthetic !== true) {
+    throw new BuildGateError(GATE_CODES.SYNTHETIC, "an unverified example business must be labelled synthetic, so that no reader mistakes its claims for a real operating company");
+  }
   const endpoint = String(pack.lead_form.endpoint || "");
   const isDisabled = endpoint === "DISABLED";
   const isStaging = /^https:\/\/[a-z0-9.-]*(staging|preview|stg)[a-z0-9.-]*\//.test(endpoint);
@@ -56,6 +60,21 @@ function esc(value) {
 function lines(list) { return list.join("\n"); }
 function tel(value) { return String(value).replace(/[^0-9+]/g, ""); }
 function slugify(value) { return String(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+
+const SYNTHETIC_HEADER = '<header class="site-header">';
+
+function syntheticBanner(pack) {
+  const notice = String(pack.synthetic_notice || "Synthetic example for preview validation only. The business name, contact details and service claims are placeholders, not verified facts about a real operating company.");
+  return '<div class="synthetic-banner" role="note" style="background:#fff4d6;border-bottom:1px solid #e0c56e;color:#4a3b00;font:14px/1.5 system-ui,sans-serif;padding:10px 16px"><strong>Synthetic example - not a real business.</strong> ' + esc(notice) + "</div>";
+}
+
+export function labelSynthetic(pack, html) {
+  if (String(pack.verification_status || "") === "VERIFIED") return html;
+  if (html.indexOf(SYNTHETIC_HEADER) === -1) {
+    throw new BuildGateError(GATE_CODES.SYNTHETIC, "the page shell has no header for the synthetic label, so the page would ship unlabelled");
+  }
+  return html.replace(SYNTHETIC_HEADER, syntheticBanner(pack) + "\n" + SYNTHETIC_HEADER);
+}
 
 function navBlock(pack, prefix, active) {
   const items = [["Home", prefix + "index.html", "home"], ["Services", prefix + "services/index.html", "services"], ["Service areas", prefix + "service-areas/index.html", "areas"], ["Contact", prefix + "contact/index.html", "contact"]];
@@ -299,7 +318,7 @@ export function renderSite(pack) {
     ])
   };
   const pages = [home, services, areas, contact];
-  return pages.map(function (page) { return { path: page.path ? page.path : (page.slug === "home" ? "index.html" : page.slug + "/index.html"), content: pageShell(pack, page) }; });
+  return pages.map(function (page) { return { path: page.path ? page.path : (page.slug === "home" ? "index.html" : page.slug + "/index.html"), content: labelSynthetic(pack, pageShell(pack, page)) }; });
 }
 
 const CSS = [
@@ -422,6 +441,10 @@ export function buildSitepackSite(pack, outDir, options) {
     sitemap: pack.seo.sitemap,
     lead_mode: validation.lead_mode,
     source_sha: sourceSha || "UNPINNED",
+    synthetic: String(pack.verification_status || "SYNTHETIC_UNVERIFIED") !== "VERIFIED",
+    verification_status: String(pack.verification_status || "SYNTHETIC_UNVERIFIED"),
+    artifact_digest_algorithm: "sha256",
+    digest_scope: "sorted emitted file list, each entry path:sha256, newline joined, trailing newline",
     gates: {
       noindex_enforced: true,
       preview_target_enforced: true,
@@ -430,7 +453,9 @@ export function buildSitepackSite(pack, outDir, options) {
       structured_data_present: true,
       source_sha_pinned: Boolean(sourceSha),
       independent_qa_required: Boolean(pack.gates.independent_qa_required),
-      guardian_receipt_required_before_promotion: Boolean(pack.gates.guardian_receipt_required_before_promotion)
+      guardian_receipt_required_before_promotion: Boolean(pack.gates.guardian_receipt_required_before_promotion),
+      synthetic_label_required: true,
+      example_business_synthetic: String(pack.verification_status || "SYNTHETIC_UNVERIFIED") !== "VERIFIED"
     },
     artifact_digest: sha256(digestInput),
     files: manifestFiles
