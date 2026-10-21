@@ -143,3 +143,91 @@ test("a staging lead endpoint is allowed and recorded as staging", () => {
   assert.equal(manifest.lead_mode, "STAGING");
   assert.equal(manifest.noindex, true);
 });
+
+
+test("rebuilds twice and compares every output hash, not just the artifact digest", () => {
+  const first = buildSitepackSite(pack, OUT_A, { env: {}, source_sha: SHA });
+  const second = buildSitepackSite(pack, OUT_B, { env: { X1_SOURCE_SHA: SHA } });
+  assert.deepEqual(first.files, second.files, "the per-file hash lists differ between builds");
+  assert.equal(first.artifact_digest, second.artifact_digest);
+  tree(OUT_A).forEach(function (rel) {
+    assert.equal(readFileSync(join(OUT_A, rel), "utf8"), readFileSync(join(OUT_B, rel), "utf8"), rel + " differs between the two builds");
+  });
+  first.files.forEach(function (file) {
+    assert.equal(createHash("sha256").update(readFileSync(join(OUT_A, file.path), "utf8"), "utf8").digest("hex"), file.sha256, file.path + " hash mismatch");
+  });
+  const third = buildSitepackSite(pack, OUT_A, { env: { GITHUB_SHA: SHA }, write: false });
+  assert.equal(third.artifact_digest, first.artifact_digest, "the same SHA from another environment variable must produce the same digest");
+});
+
+test("no emitted byte carries a timestamp", () => {
+  buildSitepackSite(pack, OUT_A, { env: {}, source_sha: SHA });
+  tree(OUT_A).forEach(function (rel) {
+    assert.ok(!/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:/.test(readFileSync(join(OUT_A, rel), "utf8")), rel + " carries a timestamp");
+  });
+});
+
+test("the example business is labelled synthetic on every page and in the manifest", () => {
+  const manifest = buildSitepackSite(pack, OUT_A, { env: {}, source_sha: SHA });
+  assert.equal(manifest.synthetic, true);
+  assert.equal(manifest.verification_status, "SYNTHETIC_UNVERIFIED");
+  assert.equal(manifest.gates.synthetic_label_required, true);
+  assert.equal(manifest.gates.example_business_synthetic, true);
+  htmlFiles(OUT_A).forEach(function (rel) {
+    const html = readFileSync(join(OUT_A, rel), "utf8");
+    assert.match(html, /class="synthetic-banner"/, rel + " carries no synthetic label");
+    assert.match(html, /Synthetic example - not a real business/, rel + " does not name the example as synthetic");
+  });
+  const contact = readFileSync(join(OUT_A, "contact/index.html"), "utf8");
+  assert.match(contact, /cobalt-hoodworks\.invalid/, "the example must not carry a live contact address");
+  assert.match(contact, /555-0142/, "the example must keep a reserved fictional phone number");
+});
+
+test("a sitepack that drops the synthetic label or claims verification is refused", () => {
+  const unlabelled = JSON.parse(JSON.stringify(pack));
+  delete unlabelled.synthetic;
+  assert.throws(function () { validateSitepack(unlabelled); }, function (error) { return error.code === "GATE_SYNTHETIC_LABEL_REQUIRED"; });
+  const verified = JSON.parse(JSON.stringify(pack));
+  verified.synthetic = false;
+  verified.verification_status = "VERIFIED";
+  const manifest = buildSitepackSite(verified, OUT_B, { env: {}, source_sha: SHA, write: false });
+  assert.equal(manifest.synthetic, false);
+});
+
+test("the synthetic label changes nothing about noindex, the disabled form or staging-only behaviour", () => {
+  const manifest = buildSitepackSite(pack, OUT_A, { env: {}, source_sha: SHA });
+  assert.equal(manifest.noindex, true);
+  assert.equal(manifest.lead_mode, "DISABLED");
+  assert.equal(manifest.sitemap, "OMITTED_WHILE_NOINDEX");
+  const contact = readFileSync(join(OUT_A, "contact/index.html"), "utf8");
+  assert.match(contact, /<meta name="robots" content="noindex, nofollow" \/>/);
+  assert.match(contact, /data-endpoint="DISABLED"/);
+  assert.ok(!/action="https?:\/\//.test(contact), "the preview form must not post to a live endpoint");
+  const staging = JSON.parse(JSON.stringify(pack));
+  staging.lead_form.endpoint = "https://staging.cobalt-hoodworks.example/api/lead";
+  const stagingManifest = buildSitepackSite(staging, OUT_B, { env: {}, source_sha: SHA, write: false });
+  assert.equal(stagingManifest.lead_mode, "STAGING");
+  assert.equal(stagingManifest.noindex, true);
+});
+
+test("the manifest conforms to the shared cross-repo contract the runtime enforces", () => {
+  const bytes = readFileSync("contracts/PREVIEW_PIPELINE_CONTRACT.json", "utf8");
+  const contract = JSON.parse(bytes);
+  assert.equal(createHash("sha256").update(bytes, "utf8").digest("hex"), readFileSync("contracts/PREVIEW_PIPELINE_CONTRACT.sha256", "utf8").trim());
+  const manifest = buildSitepackSite(pack, OUT_A, { env: {}, source_sha: SHA });
+  assert.equal(manifest.schema, contract.build_manifest.schema);
+  contract.build_manifest.required_keys.forEach(function (key) {
+    assert.ok(Object.prototype.hasOwnProperty.call(manifest, key), "the manifest is missing " + key);
+  });
+  assert.match(manifest.artifact_digest, new RegExp(contract.build_manifest.artifact_digest.pattern));
+  assert.match(manifest.source_sha, new RegExp(contract.build_manifest.source_sha.pattern));
+  contract.build_manifest.required_gates.forEach(function (key) {
+    assert.equal(manifest.gates[key], true, "the manifest does not record the " + key + " gate");
+  });
+  manifest.files.forEach(function (file) {
+    contract.build_manifest.files_entry.required_keys.forEach(function (key) {
+      assert.ok(Object.prototype.hasOwnProperty.call(file, key), "an artifact file entry is missing " + key);
+    });
+    assert.match(file.sha256, new RegExp(contract.build_manifest.files_entry.sha256_pattern));
+  });
+});
