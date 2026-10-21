@@ -5,6 +5,9 @@
   "target_environment": "preview",
   "noindex": true,
   "production_promotion": "NOT_AUTHORIZED",
+  "synthetic": true,
+  "verification_status": "SYNTHETIC_UNVERIFIED",
+  "synthetic_notice": "Synthetic example for preview validation only. The business name, phone, email, city coverage and every service claim on these pages are placeholders, not verified facts about a real operating company. They are replaced by verified client data before any production promotion.",
   "industry": "Commercial Kitchen Exhaust and Grease Duct Cleaning",
   "industry_slug": "commercial-kitchen-exhaust-cleaning",
   "vertical": "Fire and Life Safety Compliance Services",
@@ -250,6 +253,7 @@
     "require_source_sha": true,
     "require_structured_data": true,
     "independent_qa_required": true,
-    "guardian_receipt_required_before_promotion": true
+    "guardian_receipt_required_before_promotion": true,
+    "require_synthetic_label": true
   }
 }
