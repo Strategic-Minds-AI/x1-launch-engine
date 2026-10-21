@@ -1,0 +1,10 @@
+# Prepared compatibility config only. No Railway service was created or changed.
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile.legal-preview"
+
+[deploy]
+healthcheckPath = "/healthz"
+healthcheckTimeout = 30
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 2

@@ -1,0 +1,16 @@
+FROM node:24.14.0-alpine3.23@sha256:7fddd9ddeae8196abf4a3ef2de34e11f7b1a722119f91f28ddf1e99dcafdf114 AS build
+WORKDIR /app
+COPY tools/build-legal-study.mjs tools/build-legal-study.mjs
+COPY sitepacks/florida-legal-study sitepacks/florida-legal-study
+ARG X1_SOURCE_SHA
+RUN X1_SOURCE_SHA="$X1_SOURCE_SHA" node tools/build-legal-study.mjs sitepacks/florida-legal-study/mission.json /artifact
+
+FROM node:24.14.0-alpine3.23@sha256:7fddd9ddeae8196abf4a3ef2de34e11f7b1a722119f91f28ddf1e99dcafdf114
+WORKDIR /app
+ENV NODE_ENV=production HOST=0.0.0.0 PORT=8080 STUDY_ROOT=/app/public
+COPY --from=build --chown=node:node /artifact /app/public
+COPY --chown=node:node tools/serve-legal-study.mjs /app/server.mjs
+USER node
+EXPOSE 8080
+HEALTHCHECK --interval=15s --timeout=5s --start-period=5s --retries=3 CMD node -e "fetch('http://127.0.0.1:'+process.env.PORT+'/healthz').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"
+CMD ["node","server.mjs"]
