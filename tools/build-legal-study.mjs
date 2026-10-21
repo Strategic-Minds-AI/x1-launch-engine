@@ -7,7 +7,7 @@ export const esc = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&am
 const hash = value => createHash('sha256').update(value).digest('hex');
 export function validate(pack) {
   if(pack.schema!=='x1uf.legal-study.v1'||pack.noindex!==true||pack.production_approved!==false||pack.lead_mode!=='DISABLED'||pack.advertiser!==null) throw Error('GATE: unbranded preview only; verified advertiser requires a separately reviewed build');
-  if(pack.concepts?.length!==10||new Set(pack.concepts.map(c=>c.layout)).size!==10) throw Error('GATE: ten distinct layouts required');
+  if(pack.concepts?.length!==10||new Set(pack.concepts.map(c=>c.layout)).size!==10||new Set(pack.concepts.map(c=>c.id)).size!==10) throw Error('GATE: ten distinct layouts and IDs required');
   const allowed = new Set(['cinematic','editorial','modern','journal','horizon','noir','warm','resource','minimal','atelier']);
   const ids = new Set(pack.sources.map(s=>s.id));
   for(const c of pack.concepts) if(!/^\d{2}$/.test(c.id)||!allowed.has(c.layout)||!/^#[\da-f]{6}$/i.test(c.ink)||!/^#[\da-f]{6}$/i.test(c.paper)||!/^#[\da-f]{6}$/i.test(c.accent)) throw Error('GATE: invalid design tokens');
@@ -57,6 +57,7 @@ function dialog(){return `<dialog id="review-dialog" aria-labelledby="dialog-tit
 export function build(pack,outDir,sourceSha) {
   validate(pack);
   if(!/^[a-f\d]{40}$/.test(sourceSha))throw Error('GATE: exact source SHA required');
+  if(existsSync(outDir)&&readdirSync(outDir).length)throw Error('GATE: output directory must be empty; use a fresh versioned artifact directory');
   mkdirSync(join(outDir,'assets'),{recursive:true});mkdirSync(join(outDir,'concepts'),{recursive:true});mkdirSync(join(outDir,'resources'),{recursive:true});
   const asset=resolve('sitepacks/florida-legal-study/assets/coast.png');
   if(!existsSync(asset))throw Error('GATE: original illustrative image asset missing');

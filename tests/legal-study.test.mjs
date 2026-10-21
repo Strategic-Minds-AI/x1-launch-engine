@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,mkdtempSync,rmSync} from 'node:fs';
+import {readFileSync,writeFileSync,mkdtempSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {build,validate,esc} from '../tools/build-legal-study.mjs';
@@ -12,6 +12,11 @@ test('unsafe preview states and source-less content fail closed',()=>{
   assert.throws(()=>validate({...pack,resources:[{...pack.resources[0],source_ids:['MISSING']}]}),/GATE/);
 });
 test('all external text is escaped',()=>assert.equal(esc('<script a="x">&\''),'&lt;script a=&quot;x&quot;&gt;&amp;&#39;'));
+test('reused output folders cannot publish stray files',()=>{
+  const root=mkdtempSync(join(tmpdir(),'x1-output-'));
+  try{writeFileSync(join(root,'stray-document.txt'),'innocuous fixture');assert.throws(()=>build(pack,root,sha),/output directory must be empty/);assert.equal(readFileSync(join(root,'stray-document.txt'),'utf8'),'innocuous fixture');}
+  finally{rmSync(root,{recursive:true,force:true});}
+});
 test('artifact build is byte deterministic, linked and noindex',()=>{
   const root=mkdtempSync(join(tmpdir(),'x1-legal-'));
   try{

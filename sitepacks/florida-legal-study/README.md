@@ -14,7 +14,7 @@ Use Node 24.14.0. From the repo root, set X1_SOURCE_SHA to the exact 40-characte
     node --test tests/*.test.mjs
     node tools/serve-legal-study.mjs work/legal-dist
 
-Default loopback port is 8080. The container binds 0.0.0.0 and honors PORT. The build fails without the original image or source SHA. No dependency installation is required for this module.
+Default loopback port is 8080. The container binds 0.0.0.0 and honors PORT. The build fails without the original image or source SHA. The output directory must be empty; use a fresh versioned path for every build and link Vercel only after generation. Existing files are never silently incorporated or deleted. No dependency installation is required for this module.
 
 The static preview has no backend API. Vercel applies noindex and restrictive headers. robots.txt excludes every path. There is no sitemap or production canonical, legal business schema or analytics tag. The local /api/legal-intake endpoint deliberately returns 503 without processing the body. The sample browser journey accepts only enumerated topics, stays in memory and resets on close. This is not a live funnel or CRM persistence test.
 
