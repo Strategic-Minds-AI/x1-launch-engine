@@ -1,0 +1,255 @@
+{
+  "schema": "strategic-minds/sitepack/v1",
+  "sitepack_id": "cobalt-hoodworks-tampa-20261021",
+  "phase": "preview",
+  "target_environment": "preview",
+  "noindex": true,
+  "production_promotion": "NOT_AUTHORIZED",
+  "industry": "Commercial Kitchen Exhaust and Grease Duct Cleaning",
+  "industry_slug": "commercial-kitchen-exhaust-cleaning",
+  "vertical": "Fire and Life Safety Compliance Services",
+  "brand": {
+    "name": "Cobalt Hoodworks",
+    "tagline": "NFPA 96 exhaust systems kept clean, documented and inspection-ready",
+    "phone": "(813) 555-0142",
+    "email": "service@cobalt-hoodworks.invalid",
+    "hours": "Dispatch 6:00 AM - 10:00 PM, overnight cleaning crews on request",
+    "primary": "#0b2a3a",
+    "accent": "#0f8f8f",
+    "surface": "#f6f9fb",
+    "ink": "#111c24"
+  },
+  "market": {
+    "region": "Tampa - St. Petersburg - Clearwater, FL",
+    "state": "FL",
+    "country": "US",
+    "cities": [
+      "Tampa",
+      "St. Petersburg",
+      "Clearwater",
+      "Brandon",
+      "Riverview",
+      "Largo",
+      "Pinellas Park",
+      "Wesley Chapel",
+      "Plant City",
+      "Lakeland"
+    ]
+  },
+  "services": [
+    {
+      "slug": "hood-cleaning",
+      "name": "Kitchen Exhaust Hood Cleaning",
+      "summary": "Full hood, plenum and duct-face cleaning that removes the grease load an inspector looks for, scheduled around your service hours.",
+      "bullets": [
+        "Hood, filters, plenum and duct face cleaned to bare metal",
+        "Grease-police scrape, degrease, rinse and shine finish",
+        "Painted yellow access panels and photo set for each cleaning"
+      ]
+    },
+    {
+      "slug": "grease-duct-cleaning",
+      "name": "Horizontal and Vertical Grease Duct Cleaning",
+      "summary": "Rotary-brushed duct cleaning through every access panel, with before-and-after documentation of each run.",
+      "bullets": [
+        "Rooftop-to-hood brushing on every duct section",
+        "Access panel inspection, reseal and gasket replacement",
+        "Duct-by-duct photo record with grease-thickness notes"
+      ]
+    },
+    {
+      "slug": "fan-motor-service",
+      "name": "Rooftop Fan and Motor Service",
+      "summary": "Upblast and utility fan service that keeps air moving and keeps the roof clean while it does.",
+      "bullets": [
+        "Fan cleaning, belt inspection and hinge lubrication",
+        "Motor, bearing and disconnect checked under load",
+        "Hinge kit and grease guard repair or replacement"
+      ]
+    },
+    {
+      "slug": "filter-baffle-programs",
+      "name": "Filter and Baffle Programs",
+      "summary": "A standing filter and baffle program so weekly and monthly cleaning obligations never depend on memory.",
+      "bullets": [
+        "Baffle filters cleaned, swapped and returned on cadence",
+        "Spare set program with tagged rotation schedule",
+        "Weekly and monthly log sheets issued to the operator"
+      ]
+    },
+    {
+      "slug": "inspection-compliance-reports",
+      "name": "Compliance Inspection and Reports",
+      "summary": "Documentation built for the fire marshal, the health inspector and the insurance carrier, not for the file cabinet.",
+      "bullets": [
+        "NFPA 96 cleaning frequency assessment by cooking volume",
+        "Certificates, photo set and grease-thickness report issued within 24 hours",
+        "Deficiency list with severity and recommended correction date"
+      ]
+    },
+    {
+      "slug": "grease-containment",
+      "name": "Grease Containment and Roof Protection",
+      "summary": "Containment that protects the roof membrane, the drain path and the warranty from the grease your kitchen makes.",
+      "bullets": [
+        "Grease guard and containment tray cleaning and reset",
+        "Roof membrane inspection under the fan curbing",
+        "Drain path and spill response recommendation"
+      ]
+    }
+  ],
+  "process": [
+    {
+      "step": "Scope and schedule",
+      "detail": "We confirm cooking volume, hood length, duct length, access panel count and the window that keeps your kitchen running."
+    },
+    {
+      "step": "Clean to bare metal",
+      "detail": "Crews work the hood, plenum, duct runs and fans to bare metal, including overnight shifts when the line cannot stop."
+    },
+    {
+      "step": "Document everything",
+      "detail": "Photographs of each surface before and after, grease thickness recorded by location, access panels resealed and painted."
+    },
+    {
+      "step": "File the proof",
+      "detail": "Certificate, photo set and deficiency list issued within 24 hours, with the next cleaning date set to your cooking volume."
+    }
+  ],
+  "assurance": [
+    {
+      "title": "NFPA 96 cleaning frequency",
+      "detail": "Frequency is set by cooking volume and hours of operation, from monthly on high-volume charbroiling to annually on low-volume equipment, and we document the basis for the schedule we recommend."
+    },
+    {
+      "title": "Trained, insured crews",
+      "detail": "Field crews are trained on hood and duct cleaning practice, carry current insurance certificates and are bonded for commercial kitchen work."
+    },
+    {
+      "title": "Proof an inspector accepts",
+      "detail": "Every visit produces cleaning certificates, a dated photo set, grease-thickness readings and a signed service report retained for five years."
+    },
+    {
+      "title": "No-surprise pricing",
+      "detail": "The written scope lists hood, duct, fan and containment work line by line, so the invoice matches the quote and the schedule does not drift."
+    }
+  ],
+  "faq": [
+    {
+      "q": "How often does NFPA 96 require kitchen exhaust cleaning?",
+      "a": "Cleaning frequency follows cooking volume and hours of operation: monthly for solid-fuel and high-volume charbroiling, quarterly for moderate-volume cooking, semiannually for low-volume cooking and annually for equipment that is seldom used. We assess your line and put the basis for the frequency in writing."
+    },
+    {
+      "q": "Can you clean without shutting down service?",
+      "a": "Yes. Most of our work runs overnight or between service periods. Cleaning windows are booked around your prep schedule and, when the line cannot stop, the crew works section by section."
+    },
+    {
+      "q": "What documentation do we receive after each visit?",
+      "a": "A cleaning certificate, a dated photo set of the hood, plenum, duct and fan, grease-thickness readings by location, and a deficiency list with severity and recommended correction dates. Everything is issued within 24 hours of the visit."
+    },
+    {
+      "q": "Do you work with multi-unit operators and franchise groups?",
+      "a": "Yes. Location lists, standing schedules and consolidated reporting are standard for multi-unit operators, and each site keeps its own certificate history."
+    },
+    {
+      "q": "What happens after a fire marshal or insurance inspection notice?",
+      "a": "Send the notice and the inspection report. We schedule the corrective cleaning, document each cited item, and issue the follow-up certificate set your inspector needs to close the file."
+    }
+  ],
+  "lead_form": {
+    "funnel_type": "quote_request",
+    "endpoint": "DISABLED",
+    "submit_mode": "preview_disabled",
+    "notice": "This is a noindex preview build. Form submission stays disabled until the staging endpoint and independent Guardian QA are approved.",
+    "fields": [
+      {
+        "name": "name",
+        "label": "Your name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "company",
+        "label": "Business name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "phone",
+        "label": "Phone",
+        "type": "tel",
+        "required": true
+      },
+      {
+        "name": "email",
+        "label": "Email",
+        "type": "email",
+        "required": true
+      },
+      {
+        "name": "property_type",
+        "label": "Property type",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Restaurant",
+          "Hotel or resort",
+          "Hospital or care facility",
+          "School or university",
+          "Grocery or commissary",
+          "Other commercial kitchen"
+        ]
+      },
+      {
+        "name": "service",
+        "label": "Service needed",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Kitchen exhaust hood cleaning",
+          "Grease duct cleaning",
+          "Rooftop fan and motor service",
+          "Filter and baffle program",
+          "Compliance inspection and reports",
+          "Grease containment"
+        ]
+      },
+      {
+        "name": "window",
+        "label": "Preferred service window",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "message",
+        "label": "Tell us about the hood, duct and last cleaning date",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "consent": "We use this information only to scope and schedule the requested service."
+  },
+  "seo": {
+    "title_template": "{service} in {city} | {brand}",
+    "default_title": "Commercial Kitchen Exhaust and Grease Duct Cleaning in Tampa, FL | Cobalt Hoodworks",
+    "description": "NFPA 96 commercial kitchen exhaust hood and grease duct cleaning across Tampa, St. Petersburg and Clearwater, with photo documentation, certificates and inspection-ready reporting issued within 24 hours.",
+    "canonical_base": null,
+    "jsonld_types": [
+      "LocalBusiness",
+      "Service",
+      "FAQPage",
+      "BreadcrumbList"
+    ],
+    "robots": "noindex, nofollow",
+    "sitemap": "OMITTED_WHILE_NOINDEX"
+  },
+  "gates": {
+    "require_noindex": true,
+    "require_preview_target": true,
+    "require_staging_lead_endpoint": true,
+    "require_source_sha": true,
+    "require_structured_data": true,
+    "independent_qa_required": true,
+    "guardian_receipt_required_before_promotion": true
+  }
+}
