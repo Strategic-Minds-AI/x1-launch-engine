@@ -302,7 +302,7 @@ export function renderSite(pack) {
   return pages.map(function (page) { return { path: page.slug === "home" ? "index.html" : page.slug + "/index.html", content: pageShell(pack, page) }; });
 }
 
-const CSS = lines([
+const CSS = [
   ":root{--primary:#0b2a3a;--accent:#0f8f8f;--surface:#f6f9fb;--ink:#111c24;--muted:#4a5b66;--line:#d7e2e8;--radius:14px}",
   "*,*::before,*::after{box-sizing:border-box}",
   "html{-webkit-text-size-adjust:100%}",
@@ -366,7 +366,7 @@ const CSS = lines([
   "@media print{.site-header,.lead-form,.nav-toggle{display:none}}"
 ]);
 
-const JS = lines([
+const JS = [
   "// Preview-build behaviour only: no network calls, no tracking.",
   "(function () {",
   '  var toggle = document.querySelector(".nav-toggle");',
